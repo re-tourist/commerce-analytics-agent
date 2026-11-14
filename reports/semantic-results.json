@@ -1,0 +1,487 @@
+{
+  "candidate_freeze": "16ee3965bba92f83b75c48a108445e6b251fea6a",
+  "archived_arms_commit": "69833ffc9ad7683d6b356bc7bc6dadb319a68307",
+  "model": "Qwen2.5-Coder-3B-Instruct Q4_K_M",
+  "gguf_sha256": "724fb256bec1ff062b2f65e4569e871ad2e95ab2a3989723d1769c54294730b7",
+  "data_revision": "e75d53add267d2f9cfa32efd65ad77f0807adfad",
+  "runtime": "llama.cpp b12383",
+  "scorer": "databench-eval==4.0.1",
+  "temperature": 0,
+  "seed": 741,
+  "max_output_tokens": 384,
+  "max_model_attempts": 2,
+  "sql_limits": {
+    "timeout_seconds": 4,
+    "duckdb_memory_limit": "128MB",
+    "threads": 1,
+    "max_output_rows": 200,
+    "max_output_bytes": 100000,
+    "read_only": true,
+    "external_access": false,
+    "disk_spill": false
+  },
+  "development": {
+    "tasks_per_variant": 24,
+    "variants": {
+      "full_schema_grounded": {
+        "tasks": 24,
+        "metrics": {
+          "success": 0.375,
+          "sql_correct": 0.375,
+          "sql_executed": 1.0,
+          "numerical_correct": 0.5555555555555556,
+          "tool_correct": 1.0,
+          "retrieval_hit": null,
+          "citation_precision": null
+        },
+        "sql_attempts": 24,
+        "eligible_numerical_tasks": 9,
+        "p50_ms": 660.2,
+        "p95_ms": 820.42,
+        "failure_counts": {
+          "answer_mismatch": 15
+        },
+        "model_calls_reporting_usage": 24,
+        "input_tokens": 6262,
+        "output_tokens": 638,
+        "metered_api_cost_usd": 0.0
+      },
+      "full_semantic": {
+        "tasks": 24,
+        "metrics": {
+          "success": 0.4166666666666667,
+          "sql_correct": 0.4166666666666667,
+          "sql_executed": 1.0,
+          "numerical_correct": 0.5555555555555556,
+          "tool_correct": 1.0,
+          "retrieval_hit": null,
+          "citation_precision": null
+        },
+        "sql_attempts": 24,
+        "eligible_numerical_tasks": 9,
+        "p50_ms": 680.06,
+        "p95_ms": 818.58,
+        "failure_counts": {
+          "answer_mismatch": 14
+        },
+        "model_calls_reporting_usage": 24,
+        "input_tokens": 8830,
+        "output_tokens": 642,
+        "metered_api_cost_usd": 0.0
+      }
+    },
+    "outcomes": {
+      "full_schema_grounded": {
+        "answer_mismatch": 15,
+        "pass": 9
+      },
+      "full_semantic": {
+        "answer_mismatch": 14,
+        "pass": 10
+      }
+    },
+    "paired": {
+      "full_schema_grounded vs full_semantic": {
+        "gained": 1,
+        "lost": 0,
+        "transitions": {
+          "answer_mismatch -> answer_mismatch": 14,
+          "answer_mismatch -> pass": 1,
+          "pass -> pass": 9
+        }
+      }
+    },
+    "per_table_success": {
+      "051_Pokemon": {
+        "full_schema_grounded": 6,
+        "full_semantic": 6
+      },
+      "060_Bakery": {
+        "full_schema_grounded": 3,
+        "full_semantic": 4
+      }
+    }
+  },
+  "exposed_factorial": {
+    "tasks_per_variant": 80,
+    "variants": {
+      "full": {
+        "tasks": 80,
+        "metrics": {
+          "success": 0.3625,
+          "sql_correct": 0.3625,
+          "sql_executed": 0.625,
+          "numerical_correct": 0.4,
+          "tool_correct": 1.0,
+          "retrieval_hit": null,
+          "citation_precision": null
+        },
+        "sql_attempts": 80,
+        "eligible_numerical_tasks": 40,
+        "p50_ms": 872.11,
+        "p95_ms": 1657.78,
+        "failure_counts": {
+          "tool_error": 30,
+          "answer_mismatch": 21
+        },
+        "model_calls_reporting_usage": 114,
+        "input_tokens": 30121,
+        "output_tokens": 3048,
+        "metered_api_cost_usd": 0.0
+      },
+      "full_ddl_only": {
+        "tasks": 80,
+        "metrics": {
+          "success": 0.525,
+          "sql_correct": 0.525,
+          "sql_executed": 0.925,
+          "numerical_correct": 0.625,
+          "tool_correct": 1.0,
+          "retrieval_hit": null,
+          "citation_precision": null
+        },
+        "sql_attempts": 80,
+        "eligible_numerical_tasks": 40,
+        "p50_ms": 670.73,
+        "p95_ms": 1306.34,
+        "failure_counts": {
+          "answer_mismatch": 32,
+          "tool_error": 6
+        },
+        "model_calls_reporting_usage": 87,
+        "input_tokens": 31018,
+        "output_tokens": 2363,
+        "metered_api_cost_usd": 0.0
+      },
+      "full_retry_only": {
+        "tasks": 80,
+        "metrics": {
+          "success": 0.375,
+          "sql_correct": 0.375,
+          "sql_executed": 0.65,
+          "numerical_correct": 0.425,
+          "tool_correct": 0.9875,
+          "retrieval_hit": null,
+          "citation_precision": null
+        },
+        "sql_attempts": 80,
+        "eligible_numerical_tasks": 40,
+        "p50_ms": 760.12,
+        "p95_ms": 1495.75,
+        "failure_counts": {
+          "routing": 1,
+          "answer_mismatch": 22,
+          "tool_error": 27
+        },
+        "model_calls_reporting_usage": 114,
+        "input_tokens": 31057,
+        "output_tokens": 3056,
+        "metered_api_cost_usd": 0.0
+      },
+      "full_schema_grounded": {
+        "tasks": 80,
+        "metrics": {
+          "success": 0.5375,
+          "sql_correct": 0.5375,
+          "sql_executed": 0.95,
+          "numerical_correct": 0.65,
+          "tool_correct": 1.0,
+          "retrieval_hit": null,
+          "citation_precision": null
+        },
+        "sql_attempts": 80,
+        "eligible_numerical_tasks": 40,
+        "p50_ms": 1446.82,
+        "p95_ms": 1980.03,
+        "failure_counts": {
+          "answer_mismatch": 33,
+          "tool_error": 4
+        },
+        "model_calls_reporting_usage": 87,
+        "input_tokens": 31163,
+        "output_tokens": 2363,
+        "metered_api_cost_usd": 0.0
+      }
+    },
+    "outcomes": {
+      "full": {
+        "answer_mismatch": 21,
+        "binding": 12,
+        "pass": 29,
+        "relation_policy": 17,
+        "sql_parse": 1
+      },
+      "full_schema_grounded": {
+        "answer_mismatch": 33,
+        "binding": 2,
+        "pass": 43,
+        "sql_parse": 2
+      },
+      "full_ddl_only": {
+        "answer_mismatch": 32,
+        "binding": 4,
+        "pass": 42,
+        "sql_parse": 2
+      },
+      "full_retry_only": {
+        "answer_mismatch": 22,
+        "binding": 10,
+        "pass": 30,
+        "relation_policy": 16,
+        "routing": 1,
+        "sql_parse": 1
+      }
+    },
+    "paired": {
+      "full vs full_ddl_only": {
+        "gained": 14,
+        "lost": 1,
+        "transitions": {
+          "answer_mismatch -> answer_mismatch": 20,
+          "answer_mismatch -> pass": 1,
+          "binding -> answer_mismatch": 4,
+          "binding -> binding": 4,
+          "binding -> pass": 3,
+          "binding -> sql_parse": 1,
+          "pass -> answer_mismatch": 1,
+          "pass -> pass": 28,
+          "relation_policy -> answer_mismatch": 7,
+          "relation_policy -> pass": 9,
+          "relation_policy -> sql_parse": 1,
+          "sql_parse -> pass": 1
+        }
+      },
+      "full vs full_retry_only": {
+        "gained": 1,
+        "lost": 0,
+        "transitions": {
+          "answer_mismatch -> answer_mismatch": 21,
+          "binding -> answer_mismatch": 1,
+          "binding -> binding": 10,
+          "binding -> pass": 1,
+          "pass -> pass": 29,
+          "relation_policy -> relation_policy": 16,
+          "relation_policy -> routing": 1,
+          "sql_parse -> sql_parse": 1
+        }
+      },
+      "full_ddl_only vs full_schema_grounded": {
+        "gained": 1,
+        "lost": 0,
+        "transitions": {
+          "answer_mismatch -> answer_mismatch": 32,
+          "binding -> answer_mismatch": 1,
+          "binding -> binding": 2,
+          "binding -> pass": 1,
+          "pass -> pass": 42,
+          "sql_parse -> sql_parse": 2
+        }
+      },
+      "full_retry_only vs full_schema_grounded": {
+        "gained": 14,
+        "lost": 1,
+        "transitions": {
+          "answer_mismatch -> answer_mismatch": 21,
+          "answer_mismatch -> pass": 1,
+          "binding -> answer_mismatch": 4,
+          "binding -> binding": 2,
+          "binding -> pass": 3,
+          "binding -> sql_parse": 1,
+          "pass -> answer_mismatch": 1,
+          "pass -> pass": 29,
+          "relation_policy -> answer_mismatch": 6,
+          "relation_policy -> pass": 9,
+          "relation_policy -> sql_parse": 1,
+          "routing -> answer_mismatch": 1,
+          "sql_parse -> pass": 1
+        }
+      }
+    },
+    "per_table_success": {
+      "066_IBM_HR": {
+        "full": 2,
+        "full_schema_grounded": 8,
+        "full_ddl_only": 8,
+        "full_retry_only": 2
+      },
+      "072_Admissions": {
+        "full": 4,
+        "full_schema_grounded": 9,
+        "full_ddl_only": 8,
+        "full_retry_only": 5
+      },
+      "073_Med_Cost": {
+        "full": 8,
+        "full_schema_grounded": 8,
+        "full_ddl_only": 8,
+        "full_retry_only": 8
+      },
+      "076_NBA": {
+        "full": 11,
+        "full_schema_grounded": 10,
+        "full_ddl_only": 10,
+        "full_retry_only": 11
+      },
+      "079_Coffee": {
+        "full": 4,
+        "full_schema_grounded": 8,
+        "full_ddl_only": 8,
+        "full_retry_only": 4
+      }
+    }
+  },
+  "independent_holdout": {
+    "tasks_per_variant": 48,
+    "variants": {
+      "full": {
+        "tasks": 48,
+        "metrics": {
+          "success": 0.0625,
+          "sql_correct": 0.0625,
+          "sql_executed": 0.3125,
+          "numerical_correct": 0.047619047619047616,
+          "tool_correct": 1.0,
+          "retrieval_hit": null,
+          "citation_precision": null
+        },
+        "sql_attempts": 48,
+        "eligible_numerical_tasks": 21,
+        "p50_ms": 1341.62,
+        "p95_ms": 2760.51,
+        "failure_counts": {
+          "answer_mismatch": 12,
+          "tool_error": 33
+        },
+        "model_calls_reporting_usage": 82,
+        "input_tokens": 15638,
+        "output_tokens": 2399,
+        "metered_api_cost_usd": 0.0
+      },
+      "full_schema_grounded": {
+        "tasks": 48,
+        "metrics": {
+          "success": 0.3125,
+          "sql_correct": 0.3125,
+          "sql_executed": 0.6875,
+          "numerical_correct": 0.38095238095238093,
+          "tool_correct": 1.0,
+          "retrieval_hit": null,
+          "citation_precision": null
+        },
+        "sql_attempts": 48,
+        "eligible_numerical_tasks": 21,
+        "p50_ms": 738.19,
+        "p95_ms": 1562.5,
+        "failure_counts": {
+          "answer_mismatch": 18,
+          "tool_error": 15
+        },
+        "model_calls_reporting_usage": 65,
+        "input_tokens": 17072,
+        "output_tokens": 1917,
+        "metered_api_cost_usd": 0.0
+      },
+      "full_semantic": {
+        "tasks": 48,
+        "metrics": {
+          "success": 0.25,
+          "sql_correct": 0.25,
+          "sql_executed": 0.625,
+          "numerical_correct": 0.3333333333333333,
+          "tool_correct": 1.0,
+          "retrieval_hit": null,
+          "citation_precision": null
+        },
+        "sql_attempts": 48,
+        "eligible_numerical_tasks": 21,
+        "p50_ms": 792.14,
+        "p95_ms": 1606.64,
+        "failure_counts": {
+          "answer_mismatch": 18,
+          "tool_error": 18
+        },
+        "model_calls_reporting_usage": 67,
+        "input_tokens": 24803,
+        "output_tokens": 1969,
+        "metered_api_cost_usd": 0.0
+      }
+    },
+    "outcomes": {
+      "full": {
+        "answer_mismatch": 12,
+        "binding": 5,
+        "pass": 3,
+        "relation_policy": 9,
+        "sql_parse": 19
+      },
+      "full_schema_grounded": {
+        "answer_mismatch": 18,
+        "binding": 2,
+        "pass": 15,
+        "sql_parse": 13
+      },
+      "full_semantic": {
+        "answer_mismatch": 18,
+        "binding": 4,
+        "pass": 12,
+        "sql_parse": 14
+      }
+    },
+    "paired": {
+      "full vs full_schema_grounded": {
+        "gained": 12,
+        "lost": 0,
+        "transitions": {
+          "answer_mismatch -> answer_mismatch": 10,
+          "answer_mismatch -> pass": 2,
+          "binding -> binding": 1,
+          "binding -> pass": 2,
+          "binding -> sql_parse": 2,
+          "pass -> pass": 3,
+          "relation_policy -> answer_mismatch": 3,
+          "relation_policy -> pass": 6,
+          "sql_parse -> answer_mismatch": 5,
+          "sql_parse -> binding": 1,
+          "sql_parse -> pass": 2,
+          "sql_parse -> sql_parse": 11
+        }
+      },
+      "full_schema_grounded vs full_semantic": {
+        "gained": 0,
+        "lost": 3,
+        "transitions": {
+          "answer_mismatch -> answer_mismatch": 16,
+          "answer_mismatch -> binding": 1,
+          "answer_mismatch -> sql_parse": 1,
+          "binding -> binding": 2,
+          "pass -> answer_mismatch": 2,
+          "pass -> binding": 1,
+          "pass -> pass": 12,
+          "sql_parse -> sql_parse": 13
+        }
+      }
+    },
+    "per_table_success": {
+      "071_COL": {
+        "full": 1,
+        "full_schema_grounded": 2,
+        "full_semantic": 2
+      },
+      "074_Lift": {
+        "full": 0,
+        "full_schema_grounded": 5,
+        "full_semantic": 5
+      },
+      "075_Mortality": {
+        "full": 2,
+        "full_schema_grounded": 5,
+        "full_semantic": 4
+      },
+      "080_Books": {
+        "full": 0,
+        "full_schema_grounded": 3,
+        "full_semantic": 1
+      }
+    }
+  }
+}
