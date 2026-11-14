@@ -1,5 +1,9 @@
 # CommerceLens MVP acceptance
 
+**Status: `ENGINEERING_COMPLETE / PENDING_HUMAN_REVIEW`**
+
+The engineering scope is complete on the open [MVP pull request](https://github.com/re-tourist/commerce-analytics-agent/pull/6). Formal Olist benchmark acceptance requires an independent human review of the reference set. The review is deferred while engineering continues. The acceptance evidence below records automated checks and measured results.
+
 ## Data and live scenarios
 
 Two builds from the publisher archive each selected 15,000 of 99,441 source orders. Both produced the same order ID digest, monthly allocations, linked record counts and monetary totals. The databases were 7.09 and 7.61 MB. The build found zero checked relationship or key violations. It retained 16,894 items, 15,704 payments, 14,982 reviews, 9,122 products and 1,913 sellers. It materialized 15,065 seller-order pairs. It found 150 sampled products without an English category translation and used the Portuguese category where present.
@@ -53,4 +57,15 @@ The Olist suite informed development changes and its numbers measure regression 
 | Deterministic engineering | 25 tests passed on the development Windows host, including the archive-to-database build. Cross-platform CI evidence is available on the MVP PR. |
 | Interactive showcase | Local Streamlit health returned OK. Natural-language interactions exercised with Streamlit AppTest. |
 | Documentation | README, architecture, evaluation and reproduction instructions checked against the implementation. |
-| Independent human gold audit | Pending. Implementation audit and correction history are recorded in the evaluation protocol. |
+| Independent human gold audit | `PENDING_HUMAN_REVIEW`. The 45-case review packet and correction history remain available. |
+
+## Roadmap and issue handoff
+
+| Milestone | Engineering scope | Disposition |
+| --- | --- | --- |
+| M1 Data Foundation | Pinned archive, repeatable sample, retained-record audit and metric registry | Implemented in MVP PR. [Issue #1](https://github.com/re-tourist/commerce-analytics-agent/issues/1) |
+| M2 Agent MVP | Read-only SQL, knowledge retrieval, metric investigations and execution trace | Implemented in MVP PR. [Issue #2](https://github.com/re-tourist/commerce-analytics-agent/issues/2), [issue #3](https://github.com/re-tourist/commerce-analytics-agent/issues/3) |
+| M3 Evaluation | Four real Olist variants, fixed DataBench subset, deterministic judging and published results | Engineering implemented. Review of Olist references remains a formal acceptance gate. [Issue #4](https://github.com/re-tourist/commerce-analytics-agent/issues/4) |
+| M4 Showcase | Streamlit live scenarios, JSON export, documentation and clean-install CI | Implemented in MVP PR. [Issue #5](https://github.com/re-tourist/commerce-analytics-agent/issues/5) |
+
+The next research question is whether schema-grounded repair reduces execution failures on unfamiliar tables. The DataBench run recorded 29 relation-policy or binding failures, alongside 21 queries with mismatched results. A follow-up experiment should freeze the MVP baseline and keep the published test subset separate from development.

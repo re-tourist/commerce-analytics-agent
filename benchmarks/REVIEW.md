@@ -4,7 +4,9 @@ Automated checks verified that reference SQL executes on the pinned sample and t
 
 ## Human review
 
-Status: pending. Record reviewer, date, sample digest, case IDs, discrepancies, corrected references and the run used for retesting in the review on the MVP PR.
+Status: `PENDING_HUMAN_REVIEW`. Independent human review remains a gate for formal Olist benchmark acceptance. Engineering and experiments may proceed while the review is open. No case has been signed off by an independent human reviewer.
+
+Record reviewer, date, sample digest, case IDs, discrepancies, corrected references and the run used for retesting in the review on the MVP PR.
 
 Generate the local review packet after building Olist. It verifies the pinned order ID digest and includes the question, reference SQL and computed rows, abstention rubric or nominated knowledge excerpt for all 45 cases. Keep the generated packet in ignored local storage. Share only reviewer findings and case IDs in the PR.
 
