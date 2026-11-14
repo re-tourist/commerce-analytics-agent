@@ -12,9 +12,12 @@ def test_rate_eligibility_and_contributions(analytical_data):
         "late_rate", "customer_state", date(2018, 7, 1), date(2018, 8, 1),
         date(2018, 6, 1), date(2018, 7, 1), 1,
     )
-    result = investigate(analytical_data, spec).calculations
+    evidence = investigate(analytical_data, spec)
+    result = evidence.calculations
     assert (result["current"], result["baseline"], result["delta"]) == (1, Decimal("0.5"), Decimal("0.5"))
     assert result["current_population"] == result["baseline_population"] == 2
+    assert (result["current_numerator"], result["baseline_numerator"]) == (2, 1)
+    assert evidence.assumptions
     assert result["groups"][0]["group"] == "RJ"
     assert result["groups"][0]["delta_contribution"] + result["omitted_delta_contribution"] == result["delta"]
 

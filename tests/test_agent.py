@@ -43,6 +43,18 @@ def test_retrieval_returns_citations_and_sends_excerpts(analytical_data):
     assert "[delivery-eligibility]" in planner.prompts[0]
 
 
+def test_abstention_separates_explanation_from_evidence(analytical_data):
+    question = "How much did a carrier change affect late deliveries?"
+    reason = "Carrier history is unavailable."
+    agent = Agent(analytical_data, ScriptedPlanner(Plan("unsupported", reason=reason)), VARIANTS["full"])
+    answer = agent.run(question)
+    assert answer.status == "unsupported"
+    assert answer.model_explanation == reason
+    assert answer.unconfirmed == [question]
+    assert answer.evidence.result is None
+    assert reason not in answer.limits
+
+
 def test_http_uses_graph_and_metrics(monkeypatch, analytical_data):
     planner = ScriptedPlanner(Plan("sql", "SELECT count(*) FROM orders"))
     agent = Agent(analytical_data, planner, VARIANTS["sql"])

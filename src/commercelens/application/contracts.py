@@ -67,6 +67,7 @@ class Evidence:
     result: Query | None = None
     calculations: dict = field(default_factory=dict)
     citations: list[Citation] = field(default_factory=list)
+    assumptions: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -79,3 +80,5 @@ class Answer:
     trace: list[dict] = field(default_factory=list)
     model_usage: list[dict] = field(default_factory=list)
     failure: str | None = None
+    model_explanation: str | None = None
+    unconfirmed: list[str] = field(default_factory=list)

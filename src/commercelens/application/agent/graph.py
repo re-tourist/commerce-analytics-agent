@@ -215,13 +215,13 @@ class Agent:
     def _render(self, state: State) -> dict:
         plan, evidence, failure = state["plan"], state["evidence"], state["failure"]
         status = "ok"
+        unconfirmed = []
         limits = ["Results describe the sampled orders and the requested cohort."] if self.olist else []
         if failure:
             status, summary = "error", failure
         elif plan.tool == "unsupported":
             status, summary = "unsupported", "The available data or tools cannot answer this question."
-            if plan.reason:
-                limits.append(f"Model explanation: {plan.reason[:400]}")
+            unconfirmed.append(state["question"])
         elif plan.tool == "knowledge":
             summary = "See the retrieved business definitions in the cited excerpts."
         elif evidence.calculations:
@@ -234,7 +234,7 @@ class Agent:
             if result["delta"] is not None:
                 summary += f" Change from baseline: {result['delta']:+.4f} {metric.unit}."
             if result["group_by"] == "seller_id" or result["metric"] == "review_score":
-                limits.append("Group differences in this data cannot establish causation.")
+                unconfirmed.append("Whether the observed group differences were caused by the measured factors.")
         elif evidence.result is not None:
             count = len(evidence.result.rows)
             status = "empty" if not count else "ok"
@@ -244,5 +244,8 @@ class Agent:
         else:
             status, summary = "error", "No evidence was produced"
         trace = [*state["trace"], {"step": "render", "outcome": status}]
-        return {"answer": Answer(status, plan.tool, summary, evidence, limits, trace,
-                                 state["model_usage"], failure or None)}
+        return {"answer": Answer(
+            status, plan.tool, summary, evidence, limits, trace, state["model_usage"], failure or None,
+            model_explanation=plan.reason[:400] if status == "unsupported" and plan.reason else None,
+            unconfirmed=unconfirmed,
+        )}

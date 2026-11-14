@@ -108,7 +108,9 @@ def investigate(data: DataTool, spec: Investigation) -> Evidence:
     calculation = {
         "metric": spec.metric, "definition": metric.definition, "unit": metric.unit,
         "group_by": spec.group, "current": current, "baseline": baseline, "delta": delta,
+        "current_numerator": totals["current"][0],
         "current_population": totals["current"][1],
+        "baseline_numerator": totals["baseline"][0] if comparison else None,
         "baseline_population": totals["baseline"][1] if comparison else None,
         "groups": retained, "omitted_groups": max(len(entries) - spec.limit, 0),
         "omitted_delta_contribution": omitted_contribution,
@@ -117,4 +119,5 @@ def investigate(data: DataTool, spec: Investigation) -> Evidence:
             "baseline": [spec.baseline_start, spec.baseline_end] if comparison else None,
         },
     }
-    return Evidence(sql=sql, result=result, calculations=calculation)
+    assumptions = ["Interpreting the change as a business trend assumes the purchase cohorts are comparable."]
+    return Evidence(sql=sql, result=result, calculations=calculation, assumptions=assumptions if comparison else [])

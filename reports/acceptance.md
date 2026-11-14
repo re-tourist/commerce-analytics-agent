@@ -7,12 +7,15 @@ Two builds from the publisher archive each selected 15,000 of 99,441 source orde
 - Olist archive SHA-256 `967e41e04fc306fe604e2a693f488995a8b41e5047418f8a5c8e4abd6deca784`
 - Sorted sample order ID SHA-256 `93e5d327a4b40f9017d09c0e1648f0142fbc499fac7e2217816d2edde7dce175`
 
-Streamlit's Natural language mode was exercised with the local model and actual Olist sample. Both reports returned calculated comparisons and execution traces. Independent queries against the source tables confirmed the numerical outcomes.
+Streamlit's Natural language mode was exercised with the local model and actual Olist sample. The logistics and commerce reports returned calculated comparisons and execution traces. Independent queries against the source tables confirmed the numerical outcomes.
 
 | Scenario | June 2018 | July 2018 | Change |
 | --- | ---: | ---: | ---: |
 | Eligible late deliveries | 15 / 917 (1.64%) | 30 / 936 (3.21%) | +1.57 pp |
 | Merchandise value proxy | R$139,360.38 | R$141,625.90 | +R$2,265.52 |
+| Recorded payment value proxy | R$162,715.53 | R$166,395.04 | +R$3,679.51 |
+
+The showcase separates calculated results, provisional business assumptions and conclusions the available data cannot confirm. For example, the warehouse inventory question displayed an unconfirmed conclusion. The JSON report includes query inputs, SQL, citations and the trace.
 
 The initial merchandise demo excluded the end of each calendar month and showed a change of −R$1,759.03. The graph now supplies the whole-month convention and repairs a proposed last-day exclusive bound for an explicitly named whole month. Regression tests cover inclusion of the final day and preservation of explicit exclusive dates. Both Streamlit paths were rerun after the fix.
 
@@ -45,7 +48,7 @@ The Olist suite informed development changes and its numbers measure regression 
 | SQL, RAG and evidence | Read-only DuckDB policy and integration tests, retrieval citations and timed graph traces. |
 | Benchmark harness | Machine-readable task JSONL and aggregate JSON for both tracks. |
 | Real baselines and error analysis | Local four-variant Olist ablation and 80-question DataBench adapted subset. |
-| Deterministic engineering | 21 tests passed on the development Windows host. Cross-platform CI evidence is available on the MVP PR. |
+| Deterministic engineering | 22 tests passed on the development Windows host. Cross-platform CI evidence is available on the MVP PR. |
 | Interactive showcase | Local Streamlit health returned OK. Natural-language interactions exercised with Streamlit AppTest. |
 | Documentation | README, architecture, evaluation and reproduction instructions checked against the implementation. |
 | Independent human gold audit | Pending. Implementation audit and correction history are recorded in the evaluation protocol. |
