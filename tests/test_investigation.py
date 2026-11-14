@@ -28,3 +28,10 @@ def test_absent_and_overlapping_periods(analytical_data):
             "late_rate", start=date(2018, 7, 1), end=date(2018, 8, 1),
             baseline_start=date(2018, 6, 1), baseline_end=date(2018, 7, 2),
         ))
+
+
+def test_review_comparison_excludes_unknown_delivery_status(analytical_data):
+    evidence = investigate(analytical_data, Investigation("review_score", "is_late"))
+    assert {row["group"]: row["current_value"] for row in evidence.calculations["groups"]} == {
+        "true": 3, "false": Decimal("4.5"),
+    }

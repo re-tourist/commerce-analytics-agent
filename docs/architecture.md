@@ -32,7 +32,7 @@ Olist's Kaggle v2 archive is SHA-256 pinned. Monthly integer quotas follow large
 | --- | --- | --- |
 | `orders` | One sampled order | Purchase date, state, status, payment value, eligible lateness, delivery days, per-order mean review score |
 | `items` | One sampled order item | Purchase date, product category, customer state, seller, item price and freight |
-| `seller_orders` | One order and seller | Purchase date, seller state and order-level lateness |
+| `seller_orders` | One order and seller | Purchase date, customer state, seller state and order-level lateness. Materialized during the build to keep grouped analysis within the query memory budget. |
 
 ## Metric registry
 

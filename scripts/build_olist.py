@@ -66,9 +66,10 @@ SELECT i.order_id, i.order_item_id::INTEGER AS order_item_id, i.product_id, i.se
 FROM source.items i JOIN orders o USING(order_id)
 JOIN source.sellers s USING(seller_id) JOIN source.products p USING(product_id)
 LEFT JOIN source.categories t USING(product_category_name);
-CREATE VIEW seller_orders AS
-SELECT DISTINCT i.order_id, i.seller_id, i.seller_state, o.purchase_date, o.is_late
-FROM items i JOIN orders o USING(order_id);
+CREATE TABLE seller_orders AS
+WITH participants AS (SELECT DISTINCT order_id, seller_id FROM source.items)
+SELECT i.order_id, i.seller_id, s.seller_state, o.purchase_date, o.customer_state, o.is_late
+FROM participants i JOIN orders o USING(order_id) JOIN source.sellers s USING(seller_id);
 """
 
 
@@ -152,6 +153,10 @@ def validate(db: duckdb.DuckDBPyConnection, size: int) -> dict:
     for view in ("orders", "items"):
         if db.execute(f"SELECT count(*) FROM {view}").fetchone()[0] != counts[view]:
             raise ValueError(f"Unexpected join fanout in {view}")
+    if db.execute("SELECT count(*) FROM seller_orders").fetchone()[0] != db.execute(
+        "SELECT count(DISTINCT (order_id, seller_id)) FROM source.items"
+    ).fetchone()[0]:
+        raise ValueError("Seller participation grain does not reconcile")
     totals = db.execute("""
         SELECT (SELECT sum(payment_value) FROM orders),
                (SELECT sum(payment_value::DECIMAL(18,2)) FROM source.payments),

@@ -88,6 +88,7 @@ class ReadOnlyDuckDB:
             "autoinstall_known_extensions": "false",
             "threads": "1",
             "memory_limit": "128MB",
+            "temp_directory": "",
             "max_temp_directory_size": "0B",
             "lock_configuration": "true",
         })

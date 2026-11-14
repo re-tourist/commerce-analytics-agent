@@ -62,5 +62,6 @@ RELATIONS = {
               "already aggregated per order; is_late is NULL outside the eligible delivery population.",
     "items": "One row per order item. Use price for seller/category monetary attribution. "
              "Use count(distinct order_id) to count orders within a group.",
-    "seller_orders": "One row per order and seller. Order-level lateness can be shared across sellers.",
+    "seller_orders": "One row per order and seller, with customer_state for the order. "
+                     "Order-level lateness can be shared across sellers.",
 }

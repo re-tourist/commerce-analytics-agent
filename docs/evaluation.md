@@ -16,4 +16,4 @@ The harness uses the official `databench-eval==4.0.1` comparison for boolean, nu
 
 ## Audit record
 
-Reference SQL, test coverage and sample calculations received an implementation audit against source tables. The first live demo exposed month windows that ended before the last calendar day. Independent raw-table queries found a sign reversal in the merchandise change. The calendar repair and exact-date regression tests were added and the model runs repeated. See the [acceptance report](../reports/acceptance.md) for initial and final observations. An independent human review of the authored Olist gold set remains pending.
+Reference SQL, test coverage and sample calculations received an implementation audit against source tables. The first live demo exposed month windows that ended before the last calendar day. Independent raw-table queries found a sign reversal in the merchandise change. The calendar repair and exact-date regression tests were added and the model runs repeated. See the [acceptance report](../reports/acceptance.md) for initial and final observations and the [Olist reference review](../benchmarks/REVIEW.md) for the pending human audit.

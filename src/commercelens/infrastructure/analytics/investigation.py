@@ -38,10 +38,11 @@ def investigate(data: DataTool, spec: Investigation) -> Evidence:
         raise ToolError("Choose a group limit from 1 to 25")
     periods = _periods(spec)
     group = f"COALESCE(CAST({spec.group} AS VARCHAR), 'unknown')" if spec.group else "'all'"
+    eligibility = " AND is_late IS NOT NULL" if spec.metric == "review_score" and spec.group == "is_late" else ""
     statements = [
         f"SELECT '{period}' AS period, {group} AS segment, "
         f"COALESCE(SUM({metric.value}), 0) AS numerator, COALESCE(SUM({metric.weight}), 0) AS population "
-        f"FROM {metric.relation} WHERE {condition}" + (" GROUP BY 2" if spec.group else "")
+        f"FROM {metric.relation} WHERE {condition}{eligibility}" + (" GROUP BY 2" if spec.group else "")
         for period, condition in periods
     ]
     # Aggregate before taking the display top N. The lists retain all groups for reconciliation.

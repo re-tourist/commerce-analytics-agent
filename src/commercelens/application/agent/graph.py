@@ -101,6 +101,8 @@ class Agent:
                 "\nFor Olist: payment_value is already aggregated at order grain. "
                 "For seller/category monetary questions use item price. BRL is the currency, never a state filter. "
                 "For late rate use AVG(CAST(is_late AS INT)) to exclude NULL. "
+                "For review-score comparisons between on-time and late orders, filter is_late IS NOT NULL "
+                "and review_score IS NOT NULL, then GROUP BY is_late. "
                 "For distinct seller counts by customer state use items.customer_state. "
                 "For delivered orders filter order_status = 'delivered'. "
                 "Causal questions and unavailable fields (profit, refunds, inventory, carrier) are unsupported."
@@ -120,6 +122,8 @@ class Agent:
                 "the next month as end. Omit unrequested filters and group limits. "
                 "Use SQL for other questions and specific population conditions. Copy the metric key and group "
                 "name exactly. For category merchandise value use metric merchandise_value and group category. "
+                "For comparing on-time and late reviews, use review_score grouped by is_late without a "
+                "date window unless the question specifies dates. "
                 "Available metric keys and groups: "
                 + "; ".join(f"{key} [{', '.join(metric.dimensions)}]" for key, metric in METRICS.items())
             )
