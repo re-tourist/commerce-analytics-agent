@@ -7,6 +7,8 @@ Two builds from the publisher archive each selected 15,000 of 99,441 source orde
 - Olist archive SHA-256 `967e41e04fc306fe604e2a693f488995a8b41e5047418f8a5c8e4abd6deca784`
 - Sorted sample order ID SHA-256 `93e5d327a4b40f9017d09c0e1648f0142fbc499fac7e2217816d2edde7dce175`
 
+A separate validation read the publisher ZIP with Python's CSV reader, filtered each source table by the corresponding retained relationship keys, and compared complete row multisets with all eight retained DuckDB source tables. Every table matched, including the multiplicity of reviews and payments. A fresh build reproduced the same sample digest and integrity checks. The CI suite also builds a synthetic archive twice to exercise monthly selection, linked-row retention, checksums, monetary grain, and rejection of null or duplicate payment keys.
+
 Streamlit's Natural language mode was exercised with the local model and actual Olist sample. The logistics and commerce reports returned calculated comparisons and execution traces. Independent queries against the source tables confirmed the numerical outcomes.
 
 | Scenario | June 2018 | July 2018 | Change |
@@ -48,7 +50,7 @@ The Olist suite informed development changes and its numbers measure regression 
 | SQL, RAG and evidence | Read-only DuckDB policy and integration tests, retrieval citations and timed graph traces. |
 | Benchmark harness | Machine-readable task JSONL and aggregate JSON for both tracks. |
 | Real baselines and error analysis | Local four-variant Olist ablation and 80-question DataBench adapted subset. |
-| Deterministic engineering | 22 tests passed on the development Windows host. Cross-platform CI evidence is available on the MVP PR. |
+| Deterministic engineering | 25 tests passed on the development Windows host, including the archive-to-database build. Cross-platform CI evidence is available on the MVP PR. |
 | Interactive showcase | Local Streamlit health returned OK. Natural-language interactions exercised with Streamlit AppTest. |
 | Documentation | README, architecture, evaluation and reproduction instructions checked against the implementation. |
 | Independent human gold audit | Pending. Implementation audit and correction history are recorded in the evaluation protocol. |

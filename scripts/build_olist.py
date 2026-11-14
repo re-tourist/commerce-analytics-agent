@@ -138,16 +138,17 @@ def validate(db: duckdb.DuckDBPyConnection, size: int) -> dict:
         for child, parent, column in edges
     }
     keys = {
-        "orders": "(order_id)", "items": "(order_id, order_item_id)",
-        "payments": "(order_id, payment_sequential)", "customers": "(customer_id)",
-        "products": "(product_id)", "sellers": "(seller_id)", "categories": "(product_category_name)",
+        "orders": ("order_id",), "items": ("order_id", "order_item_id"),
+        "payments": ("order_id", "payment_sequential"), "customers": ("customer_id",),
+        "products": ("product_id",), "sellers": ("seller_id",), "categories": ("product_category_name",),
     }
-    duplicates = {
-        table: db.execute(
-            f"SELECT count(*) - count(DISTINCT {key}) FROM source.{table}"
+    duplicates = {}
+    for table, columns in keys.items():
+        key = ", ".join(columns)
+        complete = " AND ".join(f"{column} IS NOT NULL" for column in columns)
+        duplicates[table] = db.execute(
+            f"SELECT count(*) - count(DISTINCT ({key})) FILTER (WHERE {complete}) FROM source.{table}"
         ).fetchone()[0]
-        for table, key in keys.items()
-    }
     if counts["orders"] != size or any(orphans.values()) or any(duplicates.values()):
         raise ValueError(f"Sample integrity failed: {counts=}, {orphans=}, {duplicates=}")
     for view in ("orders", "items"):
