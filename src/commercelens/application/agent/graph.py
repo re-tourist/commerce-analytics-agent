@@ -7,7 +7,9 @@ from typing import Callable, TypedDict
 
 from langgraph.graph import END, START, StateGraph
 
-from commercelens.application.contracts import Answer, Citation, DataTool, Evidence, Investigation, Plan, Planner, ToolError
+from commercelens.application.contracts import (
+    Answer, Citation, DataTool, Evidence, Investigation, Plan, Planner, SchemaBindingError, ToolError,
+)
 from commercelens.domain.calendar import calendar_cohorts, repair_month_end
 from commercelens.domain.metrics import METRICS, RELATIONS
 
@@ -26,6 +28,17 @@ VARIANTS = {
     "full": Features(retrieval=True, investigation=True, verification=True),
 }
 
+SCHEMA_REPAIR_HINTS = {
+    "relation": "Use the exact relation name shown in the schema, without a schema or catalog prefix. "
+                "The subject of the question does not name a table.",
+    "bind": "Check that every column is copied exactly from the schema and quoted with double quotes. "
+            "Check the column's source alias, grouping and function input types.",
+}
+
+
+def quote_identifier(name: str) -> str:
+    return '"' + name.replace('"', '""') + '"'
+
 
 class State(TypedDict, total=False):
     question: str
@@ -38,6 +51,7 @@ class State(TypedDict, total=False):
     model_usage: list[dict]
     failure: str
     feedback: str
+    repair_hint: str
     answer: Answer
 
 
@@ -47,6 +61,7 @@ class Agent:
         retrieve: Callable[[str], list[Citation]] | None = None,
         analyze: Callable[[DataTool, Investigation], Evidence] | None = None,
         olist: bool = True,
+        schema_grounding: bool = False,
     ):
         self.data = data
         self.planner = planner
@@ -54,6 +69,7 @@ class Agent:
         self.retrieve = retrieve if features.retrieval and olist else None
         self.analyze = analyze if features.investigation and olist else None
         self.olist = olist
+        self.schema_grounding = schema_grounding
         graph = StateGraph(State)
         for node in ("context", "plan", "execute", "verify", "render"):
             graph.add_node(node, getattr(self, f"_{node}"))
@@ -73,8 +89,20 @@ class Agent:
     def _context(self, state: State) -> dict:
         started = perf_counter()
         schema = self.data.schema()
-        context = "\n".join(f"{name}({', '.join(f'{col} {dtype}' for col, dtype in columns)})"
-                            for name, columns in schema.items())
+        if self.schema_grounding:
+            context = "Available SQL schema (copy the identifiers exactly):\n" + "\n".join(
+                f"CREATE TABLE {quote_identifier(name)} (\n  "
+                + ",\n  ".join(f"{quote_identifier(col)} {dtype}" for col, dtype in columns)
+                + "\n)"
+                for name, columns in schema.items()
+            )
+            context += (
+                "\nUse the quoted table name above in FROM. Qualify column references with its alias if needed. "
+                "Only use columns listed for that table, including punctuation and spaces as shown."
+            )
+        else:
+            context = "\n".join(f"{name}({', '.join(f'{col} {dtype}' for col, dtype in columns)})"
+                                for name, columns in schema.items())
         if self.olist:
             context += "\nHistorical Olist sample. Grouping/dates are by purchase_date.\n" + "\n".join(
                 f"{name}: {RELATIONS[name]}" for name in schema if name in RELATIONS
@@ -133,6 +161,8 @@ class Agent:
                 prompt += "\nExplicit purchase months: " + ", ".join(str(month)[:7] for month in months) + "."
         if state.get("feedback"):
             prompt += f"\nPrevious attempt failed verification: {state['feedback']}. Return a corrected plan."
+            if state.get("repair_hint"):
+                prompt += f" {state['repair_hint']}"
         failure = ""
         usage = list(state["model_usage"])
         try:
@@ -160,6 +190,7 @@ class Agent:
         plan = state["plan"]
         evidence = Evidence(citations=list(state["citations"]))
         failure = state["failure"]
+        repair_hint = ""
         try:
             if failure:
                 pass
@@ -183,7 +214,9 @@ class Agent:
                 raise ToolError("Selected tool is unavailable or missing parameters")
         except ToolError as exc:
             failure = str(exc)
-        return {"evidence": evidence, "failure": failure, "trace": [*state["trace"], {
+            if self.schema_grounding and isinstance(exc, SchemaBindingError):
+                repair_hint = SCHEMA_REPAIR_HINTS[exc.phase]
+        return {"evidence": evidence, "failure": failure, "repair_hint": repair_hint, "trace": [*state["trace"], {
             "step": "execute", "tool": plan.tool, "outcome": "error" if failure else "ok",
             "duration_ms": round((perf_counter() - started) * 1000, 2),
         }]}

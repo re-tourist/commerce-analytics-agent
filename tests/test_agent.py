@@ -1,11 +1,14 @@
 from collections import deque
 from datetime import date
 
+import duckdb
 from fastapi.testclient import TestClient
+import pytest
 
 from commercelens.application.agent.graph import Agent, VARIANTS
 from commercelens.application.contracts import Investigation, ModelCall, Plan
 from commercelens.infrastructure.analytics.investigation import investigate
+from commercelens.infrastructure.data.readonly import ReadOnlyDuckDB
 from commercelens.infrastructure.retrieval.knowledge import Knowledge
 from commercelens.interfaces import http
 
@@ -53,6 +56,28 @@ def test_abstention_separates_explanation_from_evidence(analytical_data):
     assert answer.unconfirmed == [question]
     assert answer.evidence.result is None
     assert reason not in answer.limits
+
+
+@pytest.mark.parametrize(("first_sql", "hint"), [
+    ("SELECT count(*) FROM undisclosed_relation", "The subject of the question does not name a table"),
+    ('SELECT "Retail Price" FROM data_table', "Check that every column is copied exactly"),
+])
+def test_schema_grounding_retries_with_safe_hints(tmp_path, first_sql, hint):
+    database = tmp_path / "table.duckdb"
+    with duckdb.connect(str(database)) as connection:
+        connection.execute('CREATE TABLE data_table AS SELECT 20 AS "Retail ""Price"""')
+        connection.execute("CREATE TABLE undisclosed_relation AS SELECT 42 AS secret_value")
+    data = ReadOnlyDuckDB(database, ("data_table",))
+    corrected_sql = 'SELECT "Retail ""Price""" FROM "data_table"'
+    planner = ScriptedPlanner(Plan("sql", first_sql), Plan("sql", corrected_sql))
+    agent = Agent(data, planner, VARIANTS["full"], olist=False, schema_grounding=True)
+    answer = agent.run("What is the retail price?")
+    assert answer.evidence.result.rows == [[20]]
+    assert 'CREATE TABLE "data_table"' in planner.prompts[0]
+    assert '"Retail ""Price""" INTEGER' in planner.prompts[0]
+    assert hint in planner.prompts[1]
+    assert all("undisclosed_relation" not in prompt and "secret_value" not in prompt for prompt in planner.prompts)
+    assert [step["outcome"] for step in answer.trace if step["step"] == "verify"] == ["failed", "passed"]
 
 
 def test_http_uses_graph_and_metrics(monkeypatch, analytical_data):

@@ -11,41 +11,50 @@ import pyarrow.parquet as parquet
 
 from commercelens.infrastructure.data.readonly import encode_value
 
-REVISION = "e75d53add267d2f9cfa32efd65ad77f0807adfad"
-TABLES = ("066_IBM_HR", "072_Admissions", "073_Med_Cost", "076_NBA", "079_Coffee")
-SEED = 741
-PER_TABLE = 16
-PINNED_MANIFEST = Path(__file__).resolve().parents[1] / "docs" / "databench-subset.json"
+DOCS = Path(__file__).resolve().parents[1] / "docs"
+SUBSET_FILES = {"test": "databench-subset.json", "dev": "databench-dev-subset.json"}
+SUBSET_ROOTS = {"test": Path("data/databench"), "dev": Path("data/databench-dev")}
 
 
-def selected_cases(root: Path) -> dict:
-    pinned = json.loads(PINNED_MANIFEST.read_text(encoding="utf-8"))
+def pinned_manifest(split: str) -> dict:
+    return json.loads((DOCS / SUBSET_FILES[split]).read_text(encoding="utf-8"))
+
+
+def verify_hash(file: Path, expected: str) -> None:
+    with file.open("rb") as stream:
+        if hashlib.file_digest(stream, "sha256").hexdigest() != expected:
+            raise ValueError(f"{file.parent.name}/{file.name} does not match the pinned official SHA-256")
+
+
+def selected_cases(root: Path, split: str = "test") -> dict:
+    pinned = pinned_manifest(split)
+    seed = pinned["seed"]
     result = {}
-    for name in TABLES:
+    for name, reference in pinned["tables"].items():
         source = root / "raw" / name / "qa.parquet"
+        verify_hash(source, reference["files"]["qa.parquet"])
+        question_ids = reference["question_ids"]
         rows = parquet.read_table(source, columns=["dataset", "question", "type", "answer"]).to_pylist()
-        if len(rows) < PER_TABLE or any(row["dataset"] != name for row in rows):
+        if len(rows) < len(question_ids) or any(row["dataset"] != name for row in rows):
             raise ValueError(f"Unexpected official QA rows in {name}")
         for index, row in enumerate(rows):
             row["id"] = f"{name}:{index:03}"
-        ranked = sorted(rows, key=lambda row: hashlib.sha256(f"{SEED}:{row['id']}".encode()).digest())
-        result[name] = sorted(ranked[:PER_TABLE], key=lambda row: row["id"])
+        ranked = sorted(rows, key=lambda row: hashlib.sha256(f"{seed}:{row['id']}".encode()).digest())
+        result[name] = sorted(ranked[:len(question_ids)], key=lambda row: row["id"])
         ids = [row["id"] for row in result[name]]
-        if ids != pinned["tables"][name]["question_ids"]:
+        if ids != question_ids:
             raise ValueError(f"Selected question IDs differ from the pinned manifest for {name}")
     return result
 
 
-def prepare(root: Path, fetch: bool) -> None:
+def prepare(root: Path, fetch: bool, split: str = "test") -> None:
     (root / "db").mkdir(parents=True, exist_ok=True)
-    base = f"https://huggingface.co/datasets/cardiffnlp/databench/resolve/{REVISION}/data"
-    manifest = {}
-    pinned = json.loads(PINNED_MANIFEST.read_text(encoding="utf-8"))
-    for table in TABLES:
+    pinned = pinned_manifest(split)
+    base = f"{pinned['source']}/resolve/{pinned['revision']}/data"
+    for table, reference in pinned["tables"].items():
         directory = root / "raw" / table
         directory.mkdir(parents=True, exist_ok=True)
-        manifest[table] = {"files": {}}
-        for filename in ("all.parquet", "qa.parquet"):
+        for filename, digest in reference["files"].items():
             target = directory / filename
             if fetch and not target.exists():
                 partial = target.with_suffix(".part")
@@ -54,26 +63,16 @@ def prepare(root: Path, fetch: bool) -> None:
                     partial.replace(target)
                 finally:
                     partial.unlink(missing_ok=True)
-            with target.open("rb") as stream:
-                manifest[table]["files"][filename] = hashlib.file_digest(stream, "sha256").hexdigest()
-            if manifest[table]["files"][filename] != pinned["tables"][table]["files"][filename]:
-                raise ValueError(f"{table}/{filename} does not match the pinned official SHA-256")
+            verify_hash(target, digest)
         source = directory / "all.parquet"
         target = root / "db" / f"{table}.duckdb"
         with duckdb.connect(str(target.resolve()), config={"threads": "1"}) as db:
             db.execute("CREATE OR REPLACE TABLE data_table AS SELECT * FROM read_parquet(?)", [str(source)])
             rows = db.execute("SELECT count(*) FROM data_table").fetchone()[0]
-        if rows != parquet.read_metadata(source).num_rows:
+        if rows != parquet.read_metadata(source).num_rows or rows != reference["rows"]:
             raise ValueError(f"Row count mismatch in {table}")
-        manifest[table]["rows"] = rows
-    for table, cases in selected_cases(root).items():
-        manifest[table]["question_ids"] = [row["id"] for row in cases]
-    (root / "manifest.json").write_text(json.dumps({
-        "source": "https://huggingface.co/datasets/cardiffnlp/databench", "revision": REVISION,
-        "track": "SemEval 2025 Task 8 adapted subset (test, full tables)", "seed": SEED,
-        "sampling": "Five preselected official test tables; 16 lowest SHA-256(seed:table:row) per table",
-        "tables": manifest,
-    }, indent=2) + "\n", encoding="utf-8")
+    selected_cases(root, split)
+    (root / "manifest.json").write_text(json.dumps(pinned, indent=2) + "\n", encoding="utf-8")
 
 
 def score(answer, case):
@@ -105,7 +104,8 @@ def score(answer, case):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=Path("data/databench"))
+    parser.add_argument("--split", choices=SUBSET_FILES, default="test")
+    parser.add_argument("--root", type=Path)
     parser.add_argument("--fetch", action="store_true")
     options = parser.parse_args()
-    prepare(options.root, options.fetch)
+    prepare(options.root or SUBSET_ROOTS[options.split], options.fetch, options.split)

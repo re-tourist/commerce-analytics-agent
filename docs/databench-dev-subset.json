@@ -1,0 +1,51 @@
+{
+  "source": "https://huggingface.co/datasets/cardiffnlp/databench",
+  "revision": "e75d53add267d2f9cfa32efd65ad77f0807adfad",
+  "track": "SemEval 2025 Task 8 adapted subset (dev, full tables)",
+  "seed": 741,
+  "sampling": "Two preselected official development tables; 12 lowest SHA-256(seed:table:row) per table",
+  "tables": {
+    "051_Pokemon": {
+      "files": {
+        "all.parquet": "4a6dc37d63274142ea3a0beaf0494a009a238421c3f9f3d030cd84db24349bc8",
+        "qa.parquet": "c840caa522bc8843102ad21d06e2c8ee81e7baeb9868616614bbd720c966e14d"
+      },
+      "rows": 1072,
+      "question_ids": [
+        "051_Pokemon:001",
+        "051_Pokemon:003",
+        "051_Pokemon:004",
+        "051_Pokemon:005",
+        "051_Pokemon:006",
+        "051_Pokemon:007",
+        "051_Pokemon:008",
+        "051_Pokemon:010",
+        "051_Pokemon:012",
+        "051_Pokemon:013",
+        "051_Pokemon:014",
+        "051_Pokemon:019"
+      ]
+    },
+    "060_Bakery": {
+      "files": {
+        "all.parquet": "6eb16eb621ffd77b4b4f802146486bb52dae358c58f2c7e7159871e5a8dfa14a",
+        "qa.parquet": "67c9c8c956ed41bfb0ed15d3611411968049f6f663c19e8e4ea3e6812427d330"
+      },
+      "rows": 20507,
+      "question_ids": [
+        "060_Bakery:000",
+        "060_Bakery:002",
+        "060_Bakery:005",
+        "060_Bakery:007",
+        "060_Bakery:008",
+        "060_Bakery:011",
+        "060_Bakery:012",
+        "060_Bakery:013",
+        "060_Bakery:014",
+        "060_Bakery:015",
+        "060_Bakery:017",
+        "060_Bakery:018"
+      ]
+    }
+  }
+}
