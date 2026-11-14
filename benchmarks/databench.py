@@ -15,9 +15,11 @@ REVISION = "e75d53add267d2f9cfa32efd65ad77f0807adfad"
 TABLES = ("066_IBM_HR", "072_Admissions", "073_Med_Cost", "076_NBA", "079_Coffee")
 SEED = 741
 PER_TABLE = 16
+PINNED_MANIFEST = Path(__file__).resolve().parents[1] / "docs" / "databench-subset.json"
 
 
 def selected_cases(root: Path) -> dict:
+    pinned = json.loads(PINNED_MANIFEST.read_text(encoding="utf-8"))
     result = {}
     for name in TABLES:
         source = root / "raw" / name / "qa.parquet"
@@ -28,6 +30,9 @@ def selected_cases(root: Path) -> dict:
             row["id"] = f"{name}:{index:03}"
         ranked = sorted(rows, key=lambda row: hashlib.sha256(f"{SEED}:{row['id']}".encode()).digest())
         result[name] = sorted(ranked[:PER_TABLE], key=lambda row: row["id"])
+        ids = [row["id"] for row in result[name]]
+        if ids != pinned["tables"][name]["question_ids"]:
+            raise ValueError(f"Selected question IDs differ from the pinned manifest for {name}")
     return result
 
 
@@ -35,6 +40,7 @@ def prepare(root: Path, fetch: bool) -> None:
     (root / "db").mkdir(parents=True, exist_ok=True)
     base = f"https://huggingface.co/datasets/cardiffnlp/databench/resolve/{REVISION}/data"
     manifest = {}
+    pinned = json.loads(PINNED_MANIFEST.read_text(encoding="utf-8"))
     for table in TABLES:
         directory = root / "raw" / table
         directory.mkdir(parents=True, exist_ok=True)
@@ -50,6 +56,8 @@ def prepare(root: Path, fetch: bool) -> None:
                     partial.unlink(missing_ok=True)
             with target.open("rb") as stream:
                 manifest[table]["files"][filename] = hashlib.file_digest(stream, "sha256").hexdigest()
+            if manifest[table]["files"][filename] != pinned["tables"][table]["files"][filename]:
+                raise ValueError(f"{table}/{filename} does not match the pinned official SHA-256")
         source = directory / "all.parquet"
         target = root / "db" / f"{table}.duckdb"
         with duckdb.connect(str(target.resolve()), config={"threads": "1"}) as db:

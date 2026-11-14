@@ -35,6 +35,8 @@ python -m uvicorn commercelens.interfaces.http:app
 
 The LangGraph workflow gives the model analytical schemas and optional retrieved metric notes. The model proposes a SQL, metric investigation, knowledge or abstention plan. DuckDB runs in read-only mode with external access disabled. The investigation tool calculates totals and group contributions in Python, and verification checks result bounds and reconciliation. The response includes SQL, evidence and the tools that ran.
 
+In the 45-question Olist regression benchmark, the SQL baseline passed 28 cases, SQL + RAG passed 41, and the full agent passed 40. All used the same local Qwen model. See the report for the adapted DataBench subset, error analysis and latency.
+
 - [Architecture and metric contracts](docs/architecture.md)
 - [Reproduction and model setup](docs/reproduction.md)
 - [Evaluation protocol](docs/evaluation.md)

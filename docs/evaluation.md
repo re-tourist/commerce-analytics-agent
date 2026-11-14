@@ -8,6 +8,8 @@ The graph sees only the question, analytical schema and configured metric inform
 
 The ablation holds model weights, decoding settings and task IDs fixed across SQL, SQL + RAG, SQL + RAG + investigation, and full with verification. P50/P95 use nearest rank and include planning, query and graph work on the same local machine. The benchmark records reported usage and metered API cost. Errors are classified as model errors, tool errors, routing, retrieval or answer mismatches. Results are single local runs. Differences of a few tasks should be interpreted with the case mix and small sample in mind.
 
+The Olist suite was used during development to diagnose date, schema and eligibility errors. Its scores describe regression coverage on these fixed questions. An untouched Olist holdout would be needed to measure generalization. The DataBench subset stays within the official test split, and its answers were used for scoring only.
+
 ## DataBench adapted subset
 
 This is an adapted test subset of SemEval 2025 Task 8 full-table QA. It uses five tables from the organizers' test declaration at revision `e75d53add267d2f9cfa32efd65ad77f0807adfad`. Each table is loaded in full. The selection takes 16 rows per table by rank of SHA-256 over seed 741 and the table-qualified zero-based QA row position. The file digests, row counts and frozen IDs are in the [subset manifest](databench-subset.json). The benchmark uses no train or development questions. [Official DataBench dataset and split declarations](https://huggingface.co/datasets/cardiffnlp/databench/tree/e75d53add267d2f9cfa32efd65ad77f0807adfad), [task paper](https://aclanthology.org/2025.semeval-1.324/)
