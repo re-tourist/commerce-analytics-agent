@@ -1,0 +1,11 @@
+/.venv/
+/data/
+/.env
+/.streamlit/secrets.toml
+__pycache__/
+*.egg-info/
+.pytest_cache/
+*.duckdb
+*.duckdb.wal
+.coverage
+/reports/runs/
