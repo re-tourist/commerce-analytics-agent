@@ -35,6 +35,15 @@ SCHEMA_REPAIR_HINTS = {
             "Check the column's source alias, grouping and function input types.",
 }
 
+SEMANTIC_GUIDANCE = (
+    "\nBefore writing SQL, identify the requested measure, eligible rows, grouping grain and answer type. "
+    "Use a SQL boolean for a yes-or-no question: evaluate existence or the requested comparison. "
+    "When a threshold describes an aggregate, calculate that aggregate over the eligible rows before comparing. "
+    "Rank using the requested measure at the requested grain. In the final SELECT project only the requested "
+    "answer, excluding helper columns used to rank or calculate it. Preserve duplicate list values unless the "
+    "question asks for distinct values. Compare and sort values using the requested units and data type."
+)
+
 
 def quote_identifier(name: str) -> str:
     return '"' + name.replace('"', '""') + '"'
@@ -62,6 +71,8 @@ class Agent:
         analyze: Callable[[DataTool, Investigation], Evidence] | None = None,
         olist: bool = True,
         schema_grounding: bool = False,
+        targeted_retry: bool | None = None,
+        semantic_guidance: bool = False,
     ):
         self.data = data
         self.planner = planner
@@ -70,6 +81,8 @@ class Agent:
         self.analyze = analyze if features.investigation and olist else None
         self.olist = olist
         self.schema_grounding = schema_grounding
+        self.targeted_retry = schema_grounding if targeted_retry is None else targeted_retry
+        self.semantic_guidance = semantic_guidance
         graph = StateGraph(State)
         for node in ("context", "plan", "execute", "verify", "render"):
             graph.add_node(node, getattr(self, f"_{node}"))
@@ -137,6 +150,8 @@ class Agent:
             )
         else:
             prompt += "\nUse a single row and column for scalar answers and a single column for lists."
+        if self.semantic_guidance:
+            prompt += SEMANTIC_GUIDANCE
         if self.retrieve:
             prompt += '\nFor business definitions emit {"tool":"knowledge"}. Reference context follows.'
             for citation in state["citations"]:
@@ -214,7 +229,7 @@ class Agent:
                 raise ToolError("Selected tool is unavailable or missing parameters")
         except ToolError as exc:
             failure = str(exc)
-            if self.schema_grounding and isinstance(exc, SchemaBindingError):
+            if self.targeted_retry and isinstance(exc, SchemaBindingError):
                 repair_hint = SCHEMA_REPAIR_HINTS[exc.phase]
         return {"evidence": evidence, "failure": failure, "repair_hint": repair_hint, "trace": [*state["trace"], {
             "step": "execute", "tool": plan.tool, "outcome": "error" if failure else "ok",

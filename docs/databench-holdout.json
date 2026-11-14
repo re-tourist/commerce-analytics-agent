@@ -1,0 +1,93 @@
+{
+  "source": "https://huggingface.co/datasets/cardiffnlp/databench",
+  "revision": "e75d53add267d2f9cfa32efd65ad77f0807adfad",
+  "track": "SemEval 2025 Task 8 adapted subset (official test, independent holdout, full tables)",
+  "seed": 741,
+  "sampling": "Four previously unused official test tables; 12 lowest SHA-256(seed:table:row) per table",
+  "tables": {
+    "071_COL": {
+      "files": {
+        "all.parquet": "ac682c8bfad5cc25ef1c4fbb9c3810ef91ad833aa5020844ddde378693f26dcd",
+        "qa.parquet": "620e3bfa773a835752450c76d38d547500b7afed1092e61fc5eef4c6efec49d2"
+      },
+      "rows": 121,
+      "question_ids": [
+        "071_COL:001",
+        "071_COL:003",
+        "071_COL:005",
+        "071_COL:009",
+        "071_COL:010",
+        "071_COL:013",
+        "071_COL:016",
+        "071_COL:019",
+        "071_COL:020",
+        "071_COL:023",
+        "071_COL:029",
+        "071_COL:030"
+      ]
+    },
+    "074_Lift": {
+      "files": {
+        "all.parquet": "c5f682127fc9d732acc98f6892007b087e0fff2f6702aa36b28f258e47fb3fe7",
+        "qa.parquet": "6688e7a274b94d389fe77962cbb0a6e08ae4aebc339377d7a94bd2db90c20aad"
+      },
+      "rows": 3000,
+      "question_ids": [
+        "074_Lift:001",
+        "074_Lift:002",
+        "074_Lift:005",
+        "074_Lift:014",
+        "074_Lift:015",
+        "074_Lift:018",
+        "074_Lift:021",
+        "074_Lift:023",
+        "074_Lift:026",
+        "074_Lift:028",
+        "074_Lift:032",
+        "074_Lift:034"
+      ]
+    },
+    "075_Mortality": {
+      "files": {
+        "all.parquet": "85766b91f1a19bdc1243c84ad1ddf6d2e809b2400ff639af8e6e40ee6dcdaea1",
+        "qa.parquet": "d9c1f3bba0f714f22cc34ec8075af5c5f9ce594019a56442f3e5d51d95d4d579"
+      },
+      "rows": 400,
+      "question_ids": [
+        "075_Mortality:000",
+        "075_Mortality:001",
+        "075_Mortality:006",
+        "075_Mortality:008",
+        "075_Mortality:009",
+        "075_Mortality:014",
+        "075_Mortality:016",
+        "075_Mortality:017",
+        "075_Mortality:020",
+        "075_Mortality:025",
+        "075_Mortality:026",
+        "075_Mortality:027"
+      ]
+    },
+    "080_Books": {
+      "files": {
+        "all.parquet": "c19a1f36126e483209716373874cd918dd31d4ee429bec2b2563d3b2efb01a3d",
+        "qa.parquet": "976ad92b59e0b36e87faa248ffe3a5c799e5117b1c36c247fa7981c8972e986b"
+      },
+      "rows": 40,
+      "question_ids": [
+        "080_Books:002",
+        "080_Books:004",
+        "080_Books:007",
+        "080_Books:012",
+        "080_Books:013",
+        "080_Books:016",
+        "080_Books:019",
+        "080_Books:022",
+        "080_Books:023",
+        "080_Books:026",
+        "080_Books:035",
+        "080_Books:037"
+      ]
+    }
+  }
+}

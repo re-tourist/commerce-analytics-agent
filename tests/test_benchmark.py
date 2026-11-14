@@ -1,9 +1,27 @@
+import json
+from pathlib import Path
+
 import pytest
 
 from benchmarks.compare_grounding import compare
 from benchmarks.olist_cases import cases
 from benchmarks.run import same_rows, score_olist
 from commercelens.application.contracts import Answer, Evidence, Query
+
+
+def test_databench_holdout_manifest_is_disjoint_by_table():
+    docs = Path(__file__).resolve().parents[1] / "docs"
+    def load(name):
+        return json.loads((docs / name).read_text(encoding="utf-8"))
+    test = load("databench-subset.json")
+    dev = load("databench-dev-subset.json")
+    holdout = load("databench-holdout.json")
+    assert holdout["revision"] == test["revision"] == dev["revision"]
+    assert not set(holdout["tables"]) & (set(test["tables"]) | set(dev["tables"]))
+    assert len(holdout["tables"]) == 4
+    for table, entry in holdout["tables"].items():
+        assert len(set(entry["question_ids"])) == 12
+        assert all(case.startswith(f"{table}:") for case in entry["question_ids"])
 
 
 def test_suite_boundaries():

@@ -12,8 +12,10 @@ import pyarrow.parquet as parquet
 from commercelens.infrastructure.data.readonly import encode_value
 
 DOCS = Path(__file__).resolve().parents[1] / "docs"
-SUBSET_FILES = {"test": "databench-subset.json", "dev": "databench-dev-subset.json"}
-SUBSET_ROOTS = {"test": Path("data/databench"), "dev": Path("data/databench-dev")}
+SUBSET_FILES = {"test": "databench-subset.json", "dev": "databench-dev-subset.json",
+                "holdout": "databench-holdout.json"}
+SUBSET_ROOTS = {"test": Path("data/databench"), "dev": Path("data/databench-dev"),
+                "holdout": Path("data/databench-holdout")}
 
 
 def pinned_manifest(split: str) -> dict:
