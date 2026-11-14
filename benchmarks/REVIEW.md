@@ -6,6 +6,12 @@ Automated checks verified that reference SQL executes on the pinned sample and t
 
 Status: pending. Record reviewer, date, sample digest, case IDs, discrepancies, corrected references and the run used for retesting in the review on the MVP PR.
 
+Generate the local review packet after building Olist. It verifies the pinned order ID digest and includes the question, reference SQL and computed rows, abstention rubric or nominated knowledge excerpt for all 45 cases. Keep the generated packet in ignored local storage. Share only reviewer findings and case IDs in the PR.
+
+```sh
+python -m benchmarks.review_olist
+```
+
 | Cases | Verify against source records |
 | --- | --- |
 | O001–O015 | Purchase windows, all-status counts and payments, and the eligible delivery denominator. |
@@ -18,3 +24,5 @@ Status: pending. Record reviewer, date, sample digest, case IDs, discrepancies, 
 ## Recorded correction
 
 The first model run proposed last-of-month exclusive bounds in the investigation tool. Direct source SQL showed a sign reversal in the showcase merchandise comparison. The agent's calendar interpretation was corrected and the cases rerun. The reference grouping and time windows remained the same.
+
+Preparing the review packet uncovered that O036 used a literal zero as its reference. It now counts matching raw orders through the customer join. The current pinned sample still returns zero. The prior model outputs can be checked for scoring parity without another model run.

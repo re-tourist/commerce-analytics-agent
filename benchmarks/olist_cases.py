@@ -79,7 +79,9 @@ def cases() -> list[Case]:
         "GROUP BY 1 ORDER BY 1", ordered=True)
     add("empty", "Return the IDs of up to five orders purchased in 2025 in the sample.",
         "SELECT order_id FROM source.orders o WHERE " + window("2025") + " ORDER BY order_id LIMIT 5")
-    add("empty", "How many orders have customer state XX?", "SELECT 0")
+    add("empty", "How many orders have customer state XX?",
+        "SELECT count(*) FROM source.orders o JOIN source.customers c ON o.customer_id=c.customer_id "
+        "WHERE c.customer_state='XX'")
     for question in (
         "What was aggregate profit margin after cost of goods sold in 2018?",
         "Which warehouse had the highest inventory shortage in July 2018?",
