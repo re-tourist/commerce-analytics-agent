@@ -1,0 +1,2339 @@
+{
+  "DB:051_Pokemon:001": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:051_Pokemon:003": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:051_Pokemon:004": {
+    "answer": "20",
+    "official_type": "number"
+  },
+  "DB:051_Pokemon:005": {
+    "answer": "1125",
+    "official_type": "number"
+  },
+  "DB:051_Pokemon:006": {
+    "answer": "160",
+    "official_type": "number"
+  },
+  "DB:051_Pokemon:007": {
+    "answer": "80.94",
+    "official_type": "number"
+  },
+  "DB:051_Pokemon:008": {
+    "answer": "Poison",
+    "official_type": "category"
+  },
+  "DB:051_Pokemon:010": {
+    "answer": "Psychic",
+    "official_type": "category"
+  },
+  "DB:051_Pokemon:012": {
+    "answer": "['Eternamax Eternatus', 'Mega Mewtwo X', 'Mega Mewtwo Y']",
+    "official_type": "list[category]"
+  },
+  "DB:051_Pokemon:013": {
+    "answer": "['Shedinja', 'Diglett', 'Alolan Diglett', 'Magikarp', 'Pichu']",
+    "official_type": "list[category]"
+  },
+  "DB:051_Pokemon:014": {
+    "answer": "['Water', 'Normal']",
+    "official_type": "list[category]"
+  },
+  "DB:051_Pokemon:019": {
+    "answer": "[175, 180, 180, 185, 190, 194]",
+    "official_type": "list[number]"
+  },
+  "DB:060_Bakery:000": {
+    "answer": "False",
+    "official_type": "boolean"
+  },
+  "DB:060_Bakery:002": {
+    "answer": "False",
+    "official_type": "boolean"
+  },
+  "DB:060_Bakery:005": {
+    "answer": "159",
+    "official_type": "number"
+  },
+  "DB:060_Bakery:007": {
+    "answer": "2478",
+    "official_type": "number"
+  },
+  "DB:060_Bakery:008": {
+    "answer": "morning",
+    "official_type": "category"
+  },
+  "DB:060_Bakery:011": {
+    "answer": " afternoon",
+    "official_type": "category"
+  },
+  "DB:060_Bakery:012": {
+    "answer": "['Coffee', 'Bread', 'Pastry']",
+    "official_type": "list[category]"
+  },
+  "DB:060_Bakery:013": {
+    "answer": "['Coffee', 'Bread']",
+    "official_type": "list[category]"
+  },
+  "DB:060_Bakery:014": {
+    "answer": "['Coffee', 'Bread']",
+    "official_type": "list[category]"
+  },
+  "DB:060_Bakery:015": {
+    "answer": "['Art Tray', 'Mighty Protein', 'Mortimer', 'Vegan mincepie']",
+    "official_type": "list[category]"
+  },
+  "DB:060_Bakery:017": {
+    "answer": "[9680, 9681, 9682, 9683, 9684]",
+    "official_type": "list[number]"
+  },
+  "DB:060_Bakery:018": {
+    "answer": "[9680, 9679, 9673, 9671]",
+    "official_type": "list[number]"
+  },
+  "DB:066_IBM_HR:000": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:066_IBM_HR:003": {
+    "answer": "False",
+    "official_type": "boolean"
+  },
+  "DB:066_IBM_HR:005": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:066_IBM_HR:007": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:066_IBM_HR:010": {
+    "answer": "Sales",
+    "official_type": "category"
+  },
+  "DB:066_IBM_HR:011": {
+    "answer": "Divorced",
+    "official_type": "category"
+  },
+  "DB:066_IBM_HR:013": {
+    "answer": "Travel_Rarely",
+    "official_type": "category"
+  },
+  "DB:066_IBM_HR:014": {
+    "answer": "Male",
+    "official_type": "category"
+  },
+  "DB:066_IBM_HR:018": {
+    "answer": "9.0",
+    "official_type": "number"
+  },
+  "DB:066_IBM_HR:021": {
+    "answer": "13513",
+    "official_type": "number"
+  },
+  "DB:066_IBM_HR:022": {
+    "answer": "11.10",
+    "official_type": "number"
+  },
+  "DB:066_IBM_HR:025": {
+    "answer": "15.0",
+    "official_type": "number"
+  },
+  "DB:066_IBM_HR:029": {
+    "answer": "[25, 25, 25, 25, 25]",
+    "official_type": "list[number]"
+  },
+  "DB:066_IBM_HR:033": {
+    "answer": "['Single', 'Married', 'Divorced']",
+    "official_type": "list[category]"
+  },
+  "DB:066_IBM_HR:035": {
+    "answer": "['Travel_Rarely', 'Travel_Frequently', 'Non-Travel']",
+    "official_type": "list[category]"
+  },
+  "DB:066_IBM_HR:038": {
+    "answer": "[1, 2, 3]",
+    "official_type": "list[number]"
+  },
+  "DB:071_COL:001": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:071_COL:003": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:071_COL:005": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:071_COL:009": {
+    "answer": "Pakistan",
+    "official_type": "category"
+  },
+  "DB:071_COL:010": {
+    "answer": "Pakistan",
+    "official_type": "category"
+  },
+  "DB:071_COL:013": {
+    "answer": "Singapore",
+    "official_type": "category"
+  },
+  "DB:071_COL:016": {
+    "answer": "46.5",
+    "official_type": "number"
+  },
+  "DB:071_COL:019": {
+    "answer": "84.2",
+    "official_type": "number"
+  },
+  "DB:071_COL:020": {
+    "answer": "72.1",
+    "official_type": "number"
+  },
+  "DB:071_COL:023": {
+    "answer": "[46.5, 36.7, 39.2, 67.2, 19.0]",
+    "official_type": "list[number]"
+  },
+  "DB:071_COL:029": {
+    "answer": "[99.4, 101.1, 102.4, 102.4, 102.8]",
+    "official_type": "list[number]"
+  },
+  "DB:071_COL:030": {
+    "answer": "['Switzerland', 'Bahamas', 'Iceland', 'Singapore', 'Barbados']",
+    "official_type": "list[category]"
+  },
+  "DB:072_Admissions:000": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:072_Admissions:002": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:072_Admissions:003": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:072_Admissions:004": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:072_Admissions:007": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:072_Admissions:009": {
+    "answer": "4.0",
+    "official_type": "number"
+  },
+  "DB:072_Admissions:010": {
+    "answer": "4.0",
+    "official_type": "number"
+  },
+  "DB:072_Admissions:011": {
+    "answer": "2",
+    "official_type": "number"
+  },
+  "DB:072_Admissions:016": {
+    "answer": "340.0",
+    "official_type": "number"
+  },
+  "DB:072_Admissions:017": {
+    "answer": "109.70",
+    "official_type": "number"
+  },
+  "DB:072_Admissions:020": {
+    "answer": "1.5",
+    "official_type": "number"
+  },
+  "DB:072_Admissions:021": {
+    "answer": "0.6048128003332054",
+    "official_type": "number"
+  },
+  "DB:072_Admissions:023": {
+    "answer": "108.0",
+    "official_type": "number"
+  },
+  "DB:072_Admissions:026": {
+    "answer": "42",
+    "official_type": "number"
+  },
+  "DB:072_Admissions:036": {
+    "answer": "[4.0, 4.5, 4.5, 4.0]",
+    "official_type": "list[number]"
+  },
+  "DB:072_Admissions:038": {
+    "answer": "[2.0, 2.0, 3.0, 4.0, 2.0]",
+    "official_type": "list[number]"
+  },
+  "DB:073_Med_Cost:000": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:073_Med_Cost:001": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:073_Med_Cost:002": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:073_Med_Cost:003": {
+    "answer": "False",
+    "official_type": "boolean"
+  },
+  "DB:073_Med_Cost:005": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:073_Med_Cost:010": {
+    "answer": "male",
+    "official_type": "category"
+  },
+  "DB:073_Med_Cost:014": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:073_Med_Cost:015": {
+    "answer": "0",
+    "official_type": "number"
+  },
+  "DB:073_Med_Cost:017": {
+    "answer": "no",
+    "official_type": "category"
+  },
+  "DB:073_Med_Cost:018": {
+    "answer": "53.13",
+    "official_type": "number"
+  },
+  "DB:073_Med_Cost:021": {
+    "answer": "17755824.99",
+    "official_type": "number"
+  },
+  "DB:073_Med_Cost:022": {
+    "answer": "18",
+    "official_type": "number"
+  },
+  "DB:073_Med_Cost:026": {
+    "answer": "[53.13, 52.58]",
+    "official_type": "list[number]"
+  },
+  "DB:073_Med_Cost:029": {
+    "answer": "[18, 18, 18]",
+    "official_type": "list[number]"
+  },
+  "DB:073_Med_Cost:030": {
+    "answer": "['yes', 'no']",
+    "official_type": "list[category]"
+  },
+  "DB:073_Med_Cost:031": {
+    "answer": "['southeast', 'southeast', 'southeast']",
+    "official_type": "list[category]"
+  },
+  "DB:074_Lift:001": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:074_Lift:002": {
+    "answer": "False",
+    "official_type": "boolean"
+  },
+  "DB:074_Lift:005": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:074_Lift:014": {
+    "answer": "5",
+    "official_type": "number"
+  },
+  "DB:074_Lift:015": {
+    "answer": "5",
+    "official_type": "number"
+  },
+  "DB:074_Lift:018": {
+    "answer": "Sarah Thomas",
+    "official_type": "category"
+  },
+  "DB:074_Lift:021": {
+    "answer": "299.0",
+    "official_type": "number"
+  },
+  "DB:074_Lift:023": {
+    "answer": "[399, 399, 399]",
+    "official_type": "list[number]"
+  },
+  "DB:074_Lift:026": {
+    "answer": "[46, 46, 46]",
+    "official_type": "list[number]"
+  },
+  "DB:074_Lift:028": {
+    "answer": "[399, 399, 399]",
+    "official_type": "list[number]"
+  },
+  "DB:074_Lift:032": {
+    "answer": "['Laura Taylor', 'Sarah Thomas', 'Matthew Anderson', 'Jane Smith', 'Laura Taylor']",
+    "official_type": "list[category]"
+  },
+  "DB:074_Lift:034": {
+    "answer": "['Deadlift', 'Bench Press', 'Squat']",
+    "official_type": "list[category]"
+  },
+  "DB:075_Mortality:000": {
+    "answer": "False",
+    "official_type": "boolean"
+  },
+  "DB:075_Mortality:001": {
+    "answer": "False",
+    "official_type": "boolean"
+  },
+  "DB:075_Mortality:006": {
+    "answer": "False",
+    "official_type": "boolean"
+  },
+  "DB:075_Mortality:008": {
+    "answer": "HHS Region 04",
+    "official_type": "category"
+  },
+  "DB:075_Mortality:009": {
+    "answer": "Suicide",
+    "official_type": "category"
+  },
+  "DB:075_Mortality:014": {
+    "answer": "0.1",
+    "official_type": "number"
+  },
+  "DB:075_Mortality:016": {
+    "answer": "22762.7",
+    "official_type": "number"
+  },
+  "DB:075_Mortality:017": {
+    "answer": "0.640",
+    "official_type": "number"
+  },
+  "DB:075_Mortality:020": {
+    "answer": "273.0",
+    "official_type": "number"
+  },
+  "DB:075_Mortality:025": {
+    "answer": "[0.4, 0.4, 0.4, 0.5, 0.5]",
+    "official_type": "list[number]"
+  },
+  "DB:075_Mortality:026": {
+    "answer": "['Heart disease', 'Cancer', 'Lower respiratory', 'Unintentional injuries', 'Cerebrovascular diseases', 'Alzheimers', 'Diabetes', 'Flu and pneumonia', 'Suicide', 'Nephritis']",
+    "official_type": "list[category]"
+  },
+  "DB:075_Mortality:027": {
+    "answer": "['HHS Region 04', 'HHS Region 06', 'HHS Region 03']",
+    "official_type": "list[category]"
+  },
+  "DB:076_NBA:000": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:076_NBA:002": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:076_NBA:003": {
+    "answer": "False",
+    "official_type": "boolean"
+  },
+  "DB:076_NBA:005": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:076_NBA:012": {
+    "answer": "GSW",
+    "official_type": "category"
+  },
+  "DB:076_NBA:014": {
+    "answer": "Ricky Rubio",
+    "official_type": "category"
+  },
+  "DB:076_NBA:016": {
+    "answer": "1348034",
+    "official_type": "number"
+  },
+  "DB:076_NBA:017": {
+    "answer": "320686",
+    "official_type": "number"
+  },
+  "DB:076_NBA:019": {
+    "answer": "82",
+    "official_type": "number"
+  },
+  "DB:076_NBA:021": {
+    "answer": "0",
+    "official_type": "number"
+  },
+  "DB:076_NBA:022": {
+    "answer": "0",
+    "official_type": "number"
+  },
+  "DB:076_NBA:023": {
+    "answer": "269",
+    "official_type": "number"
+  },
+  "DB:076_NBA:024": {
+    "answer": "[1247, 1232, 1226]",
+    "official_type": "list[number]"
+  },
+  "DB:076_NBA:028": {
+    "answer": "[269, 254, 242]",
+    "official_type": "list[number]"
+  },
+  "DB:076_NBA:031": {
+    "answer": "['GSW', 'LAC', 'BOS', 'MIL', 'MIA']",
+    "official_type": "list[category]"
+  },
+  "DB:076_NBA:034": {
+    "answer": "['Hassan Whiteside', 'Victor Wembanyama', 'Serge Ibaka']",
+    "official_type": "list[category]"
+  },
+  "DB:079_Coffee:002": {
+    "answer": "False",
+    "official_type": "boolean"
+  },
+  "DB:079_Coffee:005": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:079_Coffee:009": {
+    "answer": "Flavours",
+    "official_type": "category"
+  },
+  "DB:079_Coffee:010": {
+    "answer": "Sat",
+    "official_type": "category"
+  },
+  "DB:079_Coffee:011": {
+    "answer": "Premium Beans",
+    "official_type": "category"
+  },
+  "DB:079_Coffee:013": {
+    "answer": "20",
+    "official_type": "number"
+  },
+  "DB:079_Coffee:015": {
+    "answer": "Coffee",
+    "official_type": "category"
+  },
+  "DB:079_Coffee:018": {
+    "answer": "698812.33",
+    "official_type": "number"
+  },
+  "DB:079_Coffee:020": {
+    "answer": "3.38",
+    "official_type": "number"
+  },
+  "DB:079_Coffee:021": {
+    "answer": "21096",
+    "official_type": "number"
+  },
+  "DB:079_Coffee:024": {
+    "answer": "35352.0",
+    "official_type": "number"
+  },
+  "DB:079_Coffee:026": {
+    "answer": "[5, 8, 3]",
+    "official_type": "list[number]"
+  },
+  "DB:079_Coffee:027": {
+    "answer": "[0.8, 0.8, 0.8, 0.8]",
+    "official_type": "list[number]"
+  },
+  "DB:079_Coffee:028": {
+    "answer": "[360.0, 72.0, 56.0]",
+    "official_type": "list[number]"
+  },
+  "DB:079_Coffee:032": {
+    "answer": "['Brewed Chai tea', 'Gourmet brewed coffee', 'Barista Espresso']",
+    "official_type": "list[category]"
+  },
+  "DB:079_Coffee:035": {
+    "answer": "[8, 3]",
+    "official_type": "list[number]"
+  },
+  "DB:080_Books:002": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:080_Books:004": {
+    "answer": "False",
+    "official_type": "boolean"
+  },
+  "DB:080_Books:007": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:080_Books:012": {
+    "answer": "Ernest Hemingway",
+    "official_type": "category"
+  },
+  "DB:080_Books:013": {
+    "answer": "80",
+    "official_type": "number"
+  },
+  "DB:080_Books:016": {
+    "answer": "Islamic Books",
+    "official_type": "category"
+  },
+  "DB:080_Books:019": {
+    "answer": "5",
+    "official_type": "number"
+  },
+  "DB:080_Books:022": {
+    "answer": "498",
+    "official_type": "number"
+  },
+  "DB:080_Books:023": {
+    "answer": "2",
+    "official_type": "number"
+  },
+  "DB:080_Books:026": {
+    "answer": "[498, 640, 80, 512, 492]",
+    "official_type": "list[number]"
+  },
+  "DB:080_Books:035": {
+    "answer": "['Harish Bhat , B.S. Badan', 'Leil Lowndes', 'Dr. Joseph Murphy']",
+    "official_type": "list[category]"
+  },
+  "DB:080_Books:037": {
+    "answer": "['History and Tradition', ' Business, Investment and Economics', 'Novel', 'Novel', 'Novel', 'Novel', 'Novel', 'Novel', 'Self-help and meditation', 'Self-help and meditation', 'Self-help and meditation', 'Self-help and meditation', 'Self-help and meditation', 'Self-help and meditation', ' Mystery, Detective, Thriller and Adventure']",
+    "official_type": "list[category]"
+  },
+  "O001": {
+    "rows": [
+      [
+        558
+      ]
+    ],
+    "sql": "SELECT count(*) FROM source.orders o WHERE starts_with(o.order_purchase_timestamp, '2017-05')"
+  },
+  "O002": {
+    "rows": [
+      [
+        {
+          "decimal": "90566.19"
+        }
+      ]
+    ],
+    "sql": "SELECT sum(cast(p.payment_value AS DECIMAL(18,2))) FROM source.payments p JOIN source.orders o ON p.order_id=o.order_id WHERE starts_with(o.order_purchase_timestamp, '2017-05')"
+  },
+  "O003": {
+    "rows": [
+      [
+        0.026666667
+      ]
+    ],
+    "sql": "SELECT avg((left(order_delivered_customer_date,10)>left(order_estimated_delivery_date,10))::INT) FROM source.orders o WHERE order_status='delivered' AND order_delivered_customer_date IS NOT NULL AND starts_with(o.order_purchase_timestamp, '2017-05')"
+  },
+  "O004": {
+    "rows": [
+      [
+        1138
+      ]
+    ],
+    "sql": "SELECT count(*) FROM source.orders o WHERE starts_with(o.order_purchase_timestamp, '2017-11')"
+  },
+  "O005": {
+    "rows": [
+      [
+        {
+          "decimal": "174676.85"
+        }
+      ]
+    ],
+    "sql": "SELECT sum(cast(p.payment_value AS DECIMAL(18,2))) FROM source.payments p JOIN source.orders o ON p.order_id=o.order_id WHERE starts_with(o.order_purchase_timestamp, '2017-11')"
+  },
+  "O006": {
+    "rows": [
+      [
+        0.126363636
+      ]
+    ],
+    "sql": "SELECT avg((left(order_delivered_customer_date,10)>left(order_estimated_delivery_date,10))::INT) FROM source.orders o WHERE order_status='delivered' AND order_delivered_customer_date IS NOT NULL AND starts_with(o.order_purchase_timestamp, '2017-11')"
+  },
+  "O007": {
+    "rows": [
+      [
+        1096
+      ]
+    ],
+    "sql": "SELECT count(*) FROM source.orders o WHERE starts_with(o.order_purchase_timestamp, '2018-01')"
+  },
+  "O008": {
+    "rows": [
+      [
+        {
+          "decimal": "170454.90"
+        }
+      ]
+    ],
+    "sql": "SELECT sum(cast(p.payment_value AS DECIMAL(18,2))) FROM source.payments p JOIN source.orders o ON p.order_id=o.order_id WHERE starts_with(o.order_purchase_timestamp, '2018-01')"
+  },
+  "O009": {
+    "rows": [
+      [
+        0.046992481
+      ]
+    ],
+    "sql": "SELECT avg((left(order_delivered_customer_date,10)>left(order_estimated_delivery_date,10))::INT) FROM source.orders o WHERE order_status='delivered' AND order_delivered_customer_date IS NOT NULL AND starts_with(o.order_purchase_timestamp, '2018-01')"
+  },
+  "O010": {
+    "rows": [
+      [
+        1037
+      ]
+    ],
+    "sql": "SELECT count(*) FROM source.orders o WHERE starts_with(o.order_purchase_timestamp, '2018-05')"
+  },
+  "O011": {
+    "rows": [
+      [
+        {
+          "decimal": "186553.89"
+        }
+      ]
+    ],
+    "sql": "SELECT sum(cast(p.payment_value AS DECIMAL(18,2))) FROM source.payments p JOIN source.orders o ON p.order_id=o.order_id WHERE starts_with(o.order_purchase_timestamp, '2018-05')"
+  },
+  "O012": {
+    "rows": [
+      [
+        0.053149606
+      ]
+    ],
+    "sql": "SELECT avg((left(order_delivered_customer_date,10)>left(order_estimated_delivery_date,10))::INT) FROM source.orders o WHERE order_status='delivered' AND order_delivered_customer_date IS NOT NULL AND starts_with(o.order_purchase_timestamp, '2018-05')"
+  },
+  "O013": {
+    "rows": [
+      [
+        982
+      ]
+    ],
+    "sql": "SELECT count(*) FROM source.orders o WHERE starts_with(o.order_purchase_timestamp, '2018-08')"
+  },
+  "O014": {
+    "rows": [
+      [
+        {
+          "decimal": "153819.97"
+        }
+      ]
+    ],
+    "sql": "SELECT sum(cast(p.payment_value AS DECIMAL(18,2))) FROM source.payments p JOIN source.orders o ON p.order_id=o.order_id WHERE starts_with(o.order_purchase_timestamp, '2018-08')"
+  },
+  "O015": {
+    "rows": [
+      [
+        0.058638743
+      ]
+    ],
+    "sql": "SELECT avg((left(order_delivered_customer_date,10)>left(order_estimated_delivery_date,10))::INT) FROM source.orders o WHERE order_status='delivered' AND order_delivered_customer_date IS NOT NULL AND starts_with(o.order_purchase_timestamp, '2018-08')"
+  },
+  "O016": {
+    "rows": [
+      [
+        3539
+      ]
+    ],
+    "sql": "SELECT count(*) FROM source.orders o INNER JOIN source.customers c ON o.customer_id=c.customer_id WHERE c.customer_state='SP' AND starts_with(o.order_purchase_timestamp, '2018')"
+  },
+  "O017": {
+    "rows": [
+      [
+        1021
+      ]
+    ],
+    "sql": "SELECT count(DISTINCT i.seller_id) FROM source.items i JOIN source.orders o ON i.order_id=o.order_id JOIN source.customers c ON o.customer_id=c.customer_id WHERE c.customer_state='SP' AND starts_with(o.order_purchase_timestamp, '2018')"
+  },
+  "O018": {
+    "rows": [
+      [
+        950
+      ]
+    ],
+    "sql": "SELECT count(*) FROM source.orders o INNER JOIN source.customers c ON o.customer_id=c.customer_id WHERE c.customer_state='RJ' AND starts_with(o.order_purchase_timestamp, '2018')"
+  },
+  "O019": {
+    "rows": [
+      [
+        483
+      ]
+    ],
+    "sql": "SELECT count(DISTINCT i.seller_id) FROM source.items i JOIN source.orders o ON i.order_id=o.order_id JOIN source.customers c ON o.customer_id=c.customer_id WHERE c.customer_state='RJ' AND starts_with(o.order_purchase_timestamp, '2018')"
+  },
+  "O020": {
+    "rows": [
+      [
+        994
+      ]
+    ],
+    "sql": "SELECT count(*) FROM source.orders o INNER JOIN source.customers c ON o.customer_id=c.customer_id WHERE c.customer_state='MG' AND starts_with(o.order_purchase_timestamp, '2018')"
+  },
+  "O021": {
+    "rows": [
+      [
+        484
+      ]
+    ],
+    "sql": "SELECT count(DISTINCT i.seller_id) FROM source.items i JOIN source.orders o ON i.order_id=o.order_id JOIN source.customers c ON o.customer_id=c.customer_id WHERE c.customer_state='MG' AND starts_with(o.order_purchase_timestamp, '2018')"
+  },
+  "O022": {
+    "rows": [
+      [
+        248
+      ]
+    ],
+    "sql": "SELECT count(*) FROM source.orders o INNER JOIN source.customers c ON o.customer_id=c.customer_id WHERE c.customer_state='BA' AND starts_with(o.order_purchase_timestamp, '2018')"
+  },
+  "O023": {
+    "rows": [
+      [
+        163
+      ]
+    ],
+    "sql": "SELECT count(DISTINCT i.seller_id) FROM source.items i JOIN source.orders o ON i.order_id=o.order_id JOIN source.customers c ON o.customer_id=c.customer_id WHERE c.customer_state='BA' AND starts_with(o.order_purchase_timestamp, '2018')"
+  },
+  "O024": {
+    "rows": [
+      [
+        {
+          "decimal": "78080.55"
+        }
+      ]
+    ],
+    "sql": "SELECT sum(i.price::DECIMAL(18,2)) FROM source.items i JOIN source.orders o ON i.order_id=o.order_id JOIN source.products p ON i.product_id=p.product_id JOIN source.categories t ON p.product_category_name=t.product_category_name WHERE t.product_category_name_english='bed_bath_table' AND starts_with(o.order_purchase_timestamp, '2018')"
+  },
+  "O025": {
+    "rows": [
+      [
+        {
+          "decimal": "126934.46"
+        }
+      ]
+    ],
+    "sql": "SELECT sum(i.price::DECIMAL(18,2)) FROM source.items i JOIN source.orders o ON i.order_id=o.order_id JOIN source.products p ON i.product_id=p.product_id JOIN source.categories t ON p.product_category_name=t.product_category_name WHERE t.product_category_name_english='health_beauty' AND starts_with(o.order_purchase_timestamp, '2018')"
+  },
+  "O026": {
+    "rows": [
+      [
+        {
+          "decimal": "83417.39"
+        }
+      ]
+    ],
+    "sql": "SELECT sum(i.price::DECIMAL(18,2)) FROM source.items i JOIN source.orders o ON i.order_id=o.order_id JOIN source.products p ON i.product_id=p.product_id JOIN source.categories t ON p.product_category_name=t.product_category_name WHERE t.product_category_name_english='sports_leisure' AND starts_with(o.order_purchase_timestamp, '2018')"
+  },
+  "O027": {
+    "rows": [
+      [
+        {
+          "decimal": "76206.12"
+        }
+      ]
+    ],
+    "sql": "SELECT sum(i.price::DECIMAL(18,2)) FROM source.items i JOIN source.orders o ON i.order_id=o.order_id JOIN source.products p ON i.product_id=p.product_id JOIN source.categories t ON p.product_category_name=t.product_category_name WHERE t.product_category_name_english='computers_accessories' AND starts_with(o.order_purchase_timestamp, '2018')"
+  },
+  "O028": {
+    "rows": [
+      [
+        "bed_bath_table",
+        {
+          "decimal": "-6190.74"
+        }
+      ],
+      [
+        "computers_accessories",
+        {
+          "decimal": "4149.85"
+        }
+      ],
+      [
+        "stationery",
+        {
+          "decimal": "-3431.57"
+        }
+      ]
+    ],
+    "sql": "WITH price_change AS (SELECT coalesce(t.product_category_name_english,p.product_category_name,'unknown') AS category, SUM(i.price::DECIMAL(18,2) * CASE WHEN starts_with(o.order_purchase_timestamp, '2018-02') THEN 1 ELSE -1 END) AS delta FROM source.orders o JOIN source.items i ON i.order_id=o.order_id JOIN source.products p ON i.product_id=p.product_id LEFT JOIN source.categories t ON p.product_category_name=t.product_category_name WHERE starts_with(o.order_purchase_timestamp, '2018-02') OR starts_with(o.order_purchase_timestamp, '2018-01') GROUP BY 1) SELECT category,delta FROM price_change ORDER BY abs(delta) DESC, category LIMIT 3"
+  },
+  "O029": {
+    "rows": [
+      [
+        "computers_accessories",
+        {
+          "decimal": "-3987.90"
+        }
+      ],
+      [
+        "home_appliances_2",
+        {
+          "decimal": "3134.00"
+        }
+      ],
+      [
+        "furniture_decor",
+        {
+          "decimal": "3069.21"
+        }
+      ]
+    ],
+    "sql": "WITH price_change AS (SELECT coalesce(t.product_category_name_english,p.product_category_name,'unknown') AS category, SUM(i.price::DECIMAL(18,2) * CASE WHEN starts_with(o.order_purchase_timestamp, '2018-04') THEN 1 ELSE -1 END) AS delta FROM source.orders o JOIN source.items i ON i.order_id=o.order_id JOIN source.products p ON i.product_id=p.product_id LEFT JOIN source.categories t ON p.product_category_name=t.product_category_name WHERE starts_with(o.order_purchase_timestamp, '2018-04') OR starts_with(o.order_purchase_timestamp, '2018-03') GROUP BY 1) SELECT category,delta FROM price_change ORDER BY abs(delta) DESC, category LIMIT 3"
+  },
+  "O030": {
+    "rows": [
+      [
+        "small_appliances_home_oven_and_coffee",
+        {
+          "decimal": "-3407.90"
+        }
+      ],
+      [
+        "small_appliances",
+        {
+          "decimal": "-3197.18"
+        }
+      ],
+      [
+        "signaling_and_security",
+        {
+          "decimal": "3163.69"
+        }
+      ]
+    ],
+    "sql": "WITH price_change AS (SELECT coalesce(t.product_category_name_english,p.product_category_name,'unknown') AS category, SUM(i.price::DECIMAL(18,2) * CASE WHEN starts_with(o.order_purchase_timestamp, '2018-06') THEN 1 ELSE -1 END) AS delta FROM source.orders o JOIN source.items i ON i.order_id=o.order_id JOIN source.products p ON i.product_id=p.product_id LEFT JOIN source.categories t ON p.product_category_name=t.product_category_name WHERE starts_with(o.order_purchase_timestamp, '2018-06') OR starts_with(o.order_purchase_timestamp, '2018-05') GROUP BY 1) SELECT category,delta FROM price_change ORDER BY abs(delta) DESC, category LIMIT 3"
+  },
+  "O031": {
+    "rows": [
+      [
+        "watches_gifts",
+        {
+          "decimal": "-6950.00"
+        }
+      ],
+      [
+        "sports_leisure",
+        {
+          "decimal": "2747.32"
+        }
+      ],
+      [
+        "costruction_tools_tools",
+        {
+          "decimal": "-2664.50"
+        }
+      ]
+    ],
+    "sql": "WITH price_change AS (SELECT coalesce(t.product_category_name_english,p.product_category_name,'unknown') AS category, SUM(i.price::DECIMAL(18,2) * CASE WHEN starts_with(o.order_purchase_timestamp, '2018-08') THEN 1 ELSE -1 END) AS delta FROM source.orders o JOIN source.items i ON i.order_id=o.order_id JOIN source.products p ON i.product_id=p.product_id LEFT JOIN source.categories t ON p.product_category_name=t.product_category_name WHERE starts_with(o.order_purchase_timestamp, '2018-08') OR starts_with(o.order_purchase_timestamp, '2018-07') GROUP BY 1) SELECT category,delta FROM price_change ORDER BY abs(delta) DESC, category LIMIT 3"
+  },
+  "O032": {
+    "rows": [
+      [
+        1
+      ]
+    ],
+    "sql": "SELECT count(*) FROM source.orders WHERE order_status='delivered' AND (order_delivered_customer_date IS NULL OR order_delivered_customer_date < order_purchase_timestamp)"
+  },
+  "O033": {
+    "rows": [
+      [
+        7978
+      ]
+    ],
+    "sql": "SELECT count(*) FROM source.orders o WHERE starts_with(o.order_purchase_timestamp, '2018') AND order_status='delivered'"
+  },
+  "O034": {
+    "rows": [
+      [
+        false,
+        4.29301912
+      ],
+      [
+        true,
+        2.389528796
+      ]
+    ],
+    "sql": "WITH r AS (SELECT order_id, avg(review_score::INTEGER) AS score FROM source.reviews GROUP BY order_id) SELECT left(o.order_delivered_customer_date,10)>left(o.order_estimated_delivery_date,10) AS late, avg(score) FROM source.orders o JOIN r ON o.order_id=r.order_id WHERE o.order_status='delivered' AND o.order_delivered_customer_date IS NOT NULL AND o.order_estimated_delivery_date IS NOT NULL GROUP BY 1 ORDER BY 1"
+  },
+  "O035": {
+    "rows": [],
+    "sql": "SELECT order_id FROM source.orders o WHERE starts_with(o.order_purchase_timestamp, '2025') ORDER BY order_id LIMIT 5"
+  },
+  "O036": {
+    "rows": [
+      [
+        0
+      ]
+    ],
+    "sql": "SELECT count(*) FROM source.orders o JOIN source.customers c ON o.customer_id=c.customer_id WHERE c.customer_state='XX'"
+  },
+  "O037": {
+    "citations": [],
+    "criteria": [
+      "Check that cost of goods sold and net revenue are unavailable. Recorded payments and item prices cannot establish profit margin.",
+      "Do not fabricate unavailable evidence or a numerical causal result.",
+      "Any descriptive proxy must be labelled and must not be passed off as the requested metric."
+    ],
+    "excerpts": {}
+  },
+  "O038": {
+    "citations": [],
+    "criteria": [
+      "Check that warehouse inventory and shortage events are unavailable. The seller and shipping fields cannot establish a warehouse shortage.",
+      "Do not fabricate unavailable evidence or a numerical causal result.",
+      "Any descriptive proxy must be labelled and must not be passed off as the requested metric."
+    ],
+    "excerpts": {}
+  },
+  "O039": {
+    "citations": [],
+    "criteria": [
+      "Check that the carrier and a control or other causal comparison are unavailable. The observations can support a descriptive late rate in SP.",
+      "Do not fabricate unavailable evidence or a numerical causal result.",
+      "Any descriptive proxy must be labelled and must not be passed off as the requested metric."
+    ],
+    "excerpts": {}
+  },
+  "O040": {
+    "citations": [],
+    "criteria": [
+      "Check that refund transactions, amounts and reasons are unavailable. Payment records cannot establish refunds by reason.",
+      "Do not fabricate unavailable evidence or a numerical causal result.",
+      "Any descriptive proxy must be labelled and must not be passed off as the requested metric."
+    ],
+    "excerpts": {}
+  },
+  "O041": {
+    "citations": [
+      "delivery-eligibility"
+    ],
+    "criteria": [
+      "Answer the requested definition using the nominated business excerpt.",
+      "State the units, grain and eligibility where relevant.",
+      "Citations must substantiate the actual answer, not merely share a topic."
+    ],
+    "excerpts": {
+      "delivery-eligibility": "Filter purchase_date for the cohort. is_late is null for orders outside delivered orders with both delivery dates. Divide late orders by count(is_late). Estimated delivery uses a calendar date. delivery_days measures observed elapsed days from purchase."
+    }
+  },
+  "O042": {
+    "citations": [
+      "payment-grain"
+    ],
+    "criteria": [
+      "Answer the requested definition using the nominated business excerpt.",
+      "State the units, grain and eligibility where relevant.",
+      "Citations must substantiate the actual answer, not merely share a topic."
+    ],
+    "excerpts": {
+      "payment-grain": "orders.payment_value already sums recorded payments to one row per order. Includes all order statuses and any recorded freight. Avoid a sum over joined item rows. The sample cannot establish net revenue, profit, refunds, gross margin or marketing attribution."
+    }
+  },
+  "O043": {
+    "citations": [
+      "seller-attribution"
+    ],
+    "criteria": [
+      "Answer the requested definition using the nominated business excerpt.",
+      "State the units, grain and eligibility where relevant.",
+      "Citations must substantiate the actual answer, not merely share a topic."
+    ],
+    "excerpts": {
+      "seller-attribution": "seller_orders contains one row per order and seller. Multi-seller orders can appear for several sellers. Changes in late-delivery contribution are accounting comparisons. Order-level delivery cannot identify the seller responsible or establish causation."
+    }
+  },
+  "O044": {
+    "citations": [
+      "category-value"
+    ],
+    "criteria": [
+      "Answer the requested definition using the nominated business excerpt.",
+      "State the units, grain and eligibility where relevant.",
+      "Citations must substantiate the actual answer, not merely share a topic."
+    ],
+    "excerpts": {
+      "category-value": "Use sum(items.price) for product category or seller value. Freight is excluded. Use count(distinct order_id) for orders within a category. Categories may overlap at order grain."
+    }
+  },
+  "O045": {
+    "citations": [
+      "change-contribution"
+    ],
+    "criteria": [
+      "Answer the requested definition using the nominated business excerpt.",
+      "State the units, grain and eligibility where relevant.",
+      "Citations must substantiate the actual answer, not merely share a topic."
+    ],
+    "excerpts": {
+      "change-contribution": "Use comparable half-open purchase windows. Additive contribution is current minus baseline group value. For rate change contributions divide each group's numerator by the overall eligible population in each period, then subtract baseline from current. A group contribution is not a causal effect."
+    }
+  },
+  "O046": {
+    "rows": [
+      [
+        "delivered",
+        14541
+      ],
+      [
+        "shipped",
+        165
+      ],
+      [
+        "unavailable",
+        98
+      ],
+      [
+        "canceled",
+        94
+      ],
+      [
+        "invoiced",
+        52
+      ],
+      [
+        "processing",
+        48
+      ],
+      [
+        "approved",
+        1
+      ],
+      [
+        "created",
+        1
+      ]
+    ],
+    "sql": "SELECT order_status, count(*) AS orders FROM source.orders GROUP BY 1 ORDER BY orders DESC, order_status"
+  },
+  "O047": {
+    "rows": [
+      [
+        16.141566907
+      ]
+    ],
+    "sql": "SELECT 100.0*sum(freight_value::DECIMAL(18,2))/nullif(sum(price::DECIMAL(18,2)),0) FROM source.items"
+  },
+  "O048": {
+    "rows": [
+      [
+        0.097082157
+      ]
+    ],
+    "sql": "WITH i AS (SELECT order_id, sum(price::DECIMAL(18,2)) AS merchandise, sum(freight_value::DECIMAL(18,2)) AS freight, count(*) AS item_count, count(DISTINCT seller_id) AS sellers FROM source.items GROUP BY order_id) SELECT avg((item_count>1)::INT) FROM i"
+  },
+  "O049": {
+    "rows": [
+      [
+        "boleto",
+        {
+          "decimal": "425053.72"
+        },
+        0.174350199
+      ],
+      [
+        "credit_card",
+        {
+          "decimal": "1926562.91"
+        },
+        0.790245117
+      ],
+      [
+        "debit_card",
+        {
+          "decimal": "27897.44"
+        },
+        0.011443081
+      ],
+      [
+        "voucher",
+        {
+          "decimal": "58416.73"
+        },
+        0.023961603
+      ]
+    ],
+    "sql": "SELECT payment_type, sum(payment_value::DECIMAL(18,2)) AS amount, amount/sum(amount) OVER () AS share FROM source.payments GROUP BY 1 ORDER BY payment_type"
+  },
+  "O050": {
+    "rows": [
+      [
+        1,
+        2475
+      ],
+      [
+        2,
+        2428
+      ],
+      [
+        3,
+        2324
+      ],
+      [
+        4,
+        2176
+      ],
+      [
+        5,
+        2173
+      ],
+      [
+        7,
+        1786
+      ],
+      [
+        6,
+        1638
+      ]
+    ],
+    "sql": "SELECT isodow(order_purchase_timestamp::TIMESTAMP) AS weekday, count(*) AS n FROM source.orders GROUP BY 1 ORDER BY n DESC, weekday"
+  },
+  "O051": {
+    "rows": [
+      [
+        {
+          "decimal": "20659.79"
+        },
+        94
+      ]
+    ],
+    "sql": "WITH p AS (SELECT order_id, sum(payment_value::DECIMAL(18,2)) AS paid, count(*) AS payment_rows FROM source.payments GROUP BY order_id) SELECT sum(paid), count(*) FROM source.orders o JOIN p USING(order_id) WHERE order_status='canceled'"
+  },
+  "O052": {
+    "rows": [
+      [
+        9120,
+        2126.315460526,
+        40425.0
+      ]
+    ],
+    "sql": "SELECT count(*), avg(product_weight_g::DOUBLE), max(product_weight_g::DOUBLE) FROM source.products WHERE product_weight_g::DOUBLE>0"
+  },
+  "O053": {
+    "rows": [
+      [
+        21
+      ]
+    ],
+    "sql": "SELECT count(DISTINCT seller_state) FROM source.sellers"
+  },
+  "O054": {
+    "rows": [
+      [
+        "weekday",
+        1.138736383
+      ],
+      [
+        "weekend",
+        1.125919388
+      ]
+    ],
+    "sql": "WITH i AS (SELECT order_id, sum(price::DECIMAL(18,2)) AS merchandise, sum(freight_value::DECIMAL(18,2)) AS freight, count(*) AS item_count, count(DISTINCT seller_id) AS sellers FROM source.items GROUP BY order_id) SELECT CASE WHEN isodow(order_purchase_timestamp::TIMESTAMP)>=6 THEN 'weekend' ELSE 'weekday' END AS group_name, avg(item_count) FROM source.orders JOIN i USING(order_id) GROUP BY 1 ORDER BY 1"
+  },
+  "O055": {
+    "rows": [
+      [
+        "multiple",
+        200.437324833
+      ],
+      [
+        "single",
+        96.1494081
+      ]
+    ],
+    "sql": "SELECT CASE WHEN payment_installments::INT=1 THEN 'single' ELSE 'multiple' END AS group_name, avg(payment_value::DECIMAL(18,2)) FROM source.payments WHERE payment_type='credit_card' AND payment_installments::INT>=1 GROUP BY 1 ORDER BY 1"
+  },
+  "O056": {
+    "rows": [
+      [
+        false,
+        23.463914365
+      ],
+      [
+        true,
+        13.364920451
+      ]
+    ],
+    "sql": "SELECT c.customer_state=s.seller_state AS same_state, avg(i.freight_value::DECIMAL(18,2)) FROM source.items i JOIN source.orders o USING(order_id) JOIN source.customers c USING(customer_id) JOIN source.sellers s USING(seller_id) GROUP BY 1 ORDER BY 1"
+  },
+  "O057": {
+    "rows": [
+      [
+        2204,
+        6213,
+        181.896551724
+      ]
+    ],
+    "sql": "WITH a AS (SELECT count(*) FILTER(WHERE order_purchase_timestamp>='2017-01-01' AND order_purchase_timestamp<'2017-07-01') AS baseline, count(*) FILTER(WHERE order_purchase_timestamp>='2018-01-01' AND order_purchase_timestamp<'2018-07-01') AS current FROM source.orders) SELECT baseline,current,100.0*(current-baseline)/nullif(baseline,0) FROM a"
+  },
+  "O058": {
+    "rows": [
+      [
+        "high",
+        11.118304415
+      ],
+      [
+        "low",
+        19.855473901
+      ]
+    ],
+    "sql": "WITH r AS (SELECT order_id, avg(review_score::INTEGER) AS score FROM source.reviews WHERE try_cast(review_score AS INTEGER) BETWEEN 1 AND 5 GROUP BY order_id) SELECT CASE WHEN score<=2 THEN 'low' ELSE 'high' END AS group_name, avg(epoch(order_delivered_customer_date::TIMESTAMP-order_purchase_timestamp::TIMESTAMP)/86400.0) FROM source.orders JOIN r USING(order_id) WHERE order_status='delivered' AND order_delivered_customer_date>=order_purchase_timestamp AND (score<=2 OR score>=4) GROUP BY 1 ORDER BY 1"
+  },
+  "O059": {
+    "rows": [
+      [
+        "multiple",
+        0.021978022
+      ],
+      [
+        "single",
+        0.067488508
+      ]
+    ],
+    "sql": "WITH i AS (SELECT order_id, sum(price::DECIMAL(18,2)) AS merchandise, sum(freight_value::DECIMAL(18,2)) AS freight, count(*) AS item_count, count(DISTINCT seller_id) AS sellers FROM source.items GROUP BY order_id) SELECT CASE WHEN sellers=1 THEN 'single' ELSE 'multiple' END AS seller_group, avg((left(order_delivered_customer_date,10)>left(order_estimated_delivery_date,10))::INT) FROM source.orders JOIN i USING(order_id) WHERE order_status='delivered' AND order_delivered_customer_date IS NOT NULL AND order_estimated_delivery_date IS NOT NULL GROUP BY 1 ORDER BY 1"
+  },
+  "O060": {
+    "rows": [
+      [
+        "canceled",
+        24.12117284
+      ],
+      [
+        "delivered",
+        9.995562395
+      ]
+    ],
+    "sql": "SELECT order_status, avg(epoch(order_approved_at::TIMESTAMP-order_purchase_timestamp::TIMESTAMP)/3600.0) FROM source.orders WHERE order_status IN ('delivered','canceled') AND order_approved_at>=order_purchase_timestamp GROUP BY 1 ORDER BY 1"
+  },
+  "O061": {
+    "rows": [
+      [
+        false,
+        163.815483714
+      ],
+      [
+        true,
+        131.699916805
+      ]
+    ],
+    "sql": "WITH p AS (SELECT order_id, sum(payment_value::DECIMAL(18,2)) AS paid, bool_or(payment_type='voucher') AS voucher FROM source.payments GROUP BY order_id) SELECT voucher,avg(paid) FROM p GROUP BY 1 ORDER BY 1"
+  },
+  "O062": {
+    "rows": [
+      [
+        "53243585a1d6dc2643021fd1853d8905",
+        {
+          "decimal": "34353.84"
+        },
+        0.01653018
+      ],
+      [
+        "4869f7a5dfa277a7dca6462dcf3b52b2",
+        {
+          "decimal": "32653.69"
+        },
+        0.015712112
+      ],
+      [
+        "4a3ca9315b744ce9f8e9374361493884",
+        {
+          "decimal": "28496.03"
+        },
+        0.013711554
+      ],
+      [
+        "46dc3b2cc0980fb8ec44634e21d2718e",
+        {
+          "decimal": "25645.06"
+        },
+        0.01233974
+      ],
+      [
+        "da8622b14eb17ae2831f4ac5b9dab84a",
+        {
+          "decimal": "25594.59"
+        },
+        0.012315456
+      ]
+    ],
+    "sql": "WITH s AS (SELECT seller_id,sum(price::DECIMAL(18,2)) AS amount FROM source.items GROUP BY 1) SELECT seller_id,amount,amount/sum(amount) OVER () AS share FROM s ORDER BY amount DESC,seller_id LIMIT 5"
+  },
+  "O063": {
+    "rows": [
+      [
+        "RR",
+        0.309988193
+      ],
+      [
+        "TO",
+        0.286397282
+      ],
+      [
+        "RO",
+        0.258639251
+      ],
+      [
+        "SE",
+        0.239525931
+      ],
+      [
+        "PB",
+        0.232331504
+      ]
+    ],
+    "sql": "SELECT customer_state, sum(freight_value::DECIMAL(18,2))/nullif(sum(price::DECIMAL(18,2)),0) AS ratio FROM source.items JOIN source.orders USING(order_id) JOIN source.customers USING(customer_id) GROUP BY 1 HAVING sum(price::DECIMAL(18,2))>0 ORDER BY ratio DESC,customer_state LIMIT 5"
+  },
+  "O064": {
+    "rows": [
+      [
+        "aca2eb7d00ea1a7b8ebd4e68314663af",
+        68
+      ],
+      [
+        "99a4788cb24856965c36a24e339b6058",
+        61
+      ],
+      [
+        "389d119b48cf3043d311335e499d9c6b",
+        55
+      ],
+      [
+        "368c6c730842d78016ad823897a372db",
+        53
+      ],
+      [
+        "d1c427060a0f73f6b889a5c7c61f2ac4",
+        48
+      ]
+    ],
+    "sql": "SELECT product_id,count(DISTINCT order_id) AS n FROM source.items GROUP BY 1 ORDER BY n DESC,product_id LIMIT 5"
+  },
+  "O065": {
+    "rows": [
+      [
+        6,
+        15,
+        1638,
+        0.009157509
+      ],
+      [
+        1,
+        21,
+        2475,
+        0.008484848
+      ],
+      [
+        7,
+        12,
+        1786,
+        0.006718925
+      ],
+      [
+        3,
+        13,
+        2324,
+        0.005593804
+      ],
+      [
+        2,
+        13,
+        2428,
+        0.005354201
+      ],
+      [
+        5,
+        11,
+        2173,
+        0.005062126
+      ],
+      [
+        4,
+        9,
+        2176,
+        0.004136029
+      ]
+    ],
+    "sql": "SELECT isodow(order_purchase_timestamp::TIMESTAMP) AS weekday, count(*) FILTER(WHERE order_status='canceled') AS cancelled, count(*) AS n, cancelled::DOUBLE/n AS rate FROM source.orders GROUP BY 1 ORDER BY rate DESC,weekday"
+  },
+  "O066": {
+    "rows": [
+      [
+        "dfe5f68118c2576143240b8d78e5940a",
+        186.236770833
+      ],
+      [
+        "df6d8b7768a047c2981bae0a24afbb01",
+        168.181909722
+      ],
+      [
+        "a452fba32eab28a4a62af18eed010c0b",
+        167.601469907
+      ],
+      [
+        "031e7d4e559a1bf08e71a419aa998d0a",
+        166.141736111
+      ],
+      [
+        "a4efaffc506a395c9cea7402b078c1e5",
+        110.357916667
+      ]
+    ],
+    "sql": "SELECT order_id,epoch(order_delivered_customer_date::TIMESTAMP-order_purchase_timestamp::TIMESTAMP)/86400.0 AS days FROM source.orders WHERE order_status='delivered' AND order_delivered_customer_date>=order_purchase_timestamp ORDER BY days DESC,order_id LIMIT 5"
+  },
+  "O067": {
+    "rows": [
+      [
+        "SP",
+        "SP",
+        {
+          "decimal": "541492.61"
+        }
+      ],
+      [
+        "SP",
+        "MG",
+        {
+          "decimal": "160756.37"
+        }
+      ],
+      [
+        "SP",
+        "RJ",
+        {
+          "decimal": "156790.78"
+        }
+      ],
+      [
+        "PR",
+        "SP",
+        {
+          "decimal": "73717.97"
+        }
+      ],
+      [
+        "SP",
+        "RS",
+        {
+          "decimal": "67134.80"
+        }
+      ]
+    ],
+    "sql": "SELECT seller_state,customer_state,sum(price::DECIMAL(18,2)) AS amount FROM source.items JOIN source.orders USING(order_id) JOIN source.customers USING(customer_id) JOIN source.sellers USING(seller_id) GROUP BY 1,2 ORDER BY amount DESC,seller_state,customer_state LIMIT 5"
+  },
+  "O068": {
+    "rows": [
+      [
+        {
+          "decimal": "2414039.84"
+        },
+        {
+          "decimal": "2413711.58"
+        },
+        {
+          "decimal": "328.26"
+        }
+      ]
+    ],
+    "sql": "WITH p AS (SELECT order_id, sum(payment_value::DECIMAL(18,2)) AS paid, count(*) AS payment_rows FROM source.payments GROUP BY order_id), i AS (SELECT order_id, sum(price::DECIMAL(18,2)) AS merchandise, sum(freight_value::DECIMAL(18,2)) AS freight, count(*) AS item_count, count(DISTINCT seller_id) AS sellers FROM source.items GROUP BY order_id) SELECT sum(paid),sum(merchandise+freight),sum(paid-merchandise-freight) FROM p JOIN i USING(order_id)"
+  },
+  "O069": {
+    "rows": [
+      [
+        0.005766394
+      ]
+    ],
+    "sql": "WITH c AS (SELECT customer_unique_id,count(*) AS n FROM source.orders JOIN source.customers USING(customer_id) GROUP BY 1) SELECT avg((n>=2)::INT) FROM c"
+  },
+  "O070": {
+    "rows": [
+      [
+        {
+          "decimal": "152259.52"
+        }
+      ]
+    ],
+    "sql": "WITH i AS (SELECT order_id, sum(price::DECIMAL(18,2)) AS merchandise, sum(freight_value::DECIMAL(18,2)) AS freight, count(*) AS item_count, count(DISTINCT seller_id) AS sellers FROM source.items GROUP BY order_id) SELECT sum(merchandise) FROM source.orders JOIN i USING(order_id) WHERE order_status='delivered' AND order_delivered_customer_date IS NOT NULL AND order_estimated_delivery_date IS NOT NULL AND left(order_delivered_customer_date,10)>left(order_estimated_delivery_date,10)"
+  },
+  "O071": {
+    "rows": [
+      [
+        "agro_industry_and_commerce",
+        32
+      ],
+      [
+        "air_conditioning",
+        42
+      ],
+      [
+        "art",
+        33
+      ],
+      [
+        "arts_and_craftmanship",
+        1
+      ],
+      [
+        "audio",
+        60
+      ],
+      [
+        "auto",
+        633
+      ],
+      [
+        "baby",
+        405
+      ],
+      [
+        "bed_bath_table",
+        1376
+      ],
+      [
+        "books_general_interest",
+        78
+      ],
+      [
+        "books_imported",
+        9
+      ],
+      [
+        "books_technical",
+        49
+      ],
+      [
+        "cds_dvds_musicals",
+        2
+      ],
+      [
+        "christmas_supplies",
+        28
+      ],
+      [
+        "cine_photo",
+        11
+      ],
+      [
+        "computers",
+        27
+      ],
+      [
+        "computers_accessories",
+        975
+      ],
+      [
+        "consoles_games",
+        167
+      ],
+      [
+        "construction_tools_construction",
+        121
+      ],
+      [
+        "construction_tools_lights",
+        28
+      ],
+      [
+        "construction_tools_safety",
+        26
+      ],
+      [
+        "cool_stuff",
+        569
+      ],
+      [
+        "costruction_tools_garden",
+        22
+      ],
+      [
+        "costruction_tools_tools",
+        16
+      ],
+      [
+        "diapers_and_hygiene",
+        4
+      ],
+      [
+        "drinks",
+        41
+      ],
+      [
+        "dvds_blu_ray",
+        4
+      ],
+      [
+        "electronics",
+        404
+      ],
+      [
+        "fashio_female_clothing",
+        7
+      ],
+      [
+        "fashion_bags_accessories",
+        279
+      ],
+      [
+        "fashion_childrens_clothes",
+        1
+      ],
+      [
+        "fashion_male_clothing",
+        20
+      ],
+      [
+        "fashion_shoes",
+        40
+      ],
+      [
+        "fashion_sport",
+        2
+      ],
+      [
+        "fashion_underwear_beach",
+        22
+      ],
+      [
+        "fixed_telephony",
+        32
+      ],
+      [
+        "flowers",
+        3
+      ],
+      [
+        "food",
+        62
+      ],
+      [
+        "food_drink",
+        33
+      ],
+      [
+        "furniture_bedroom",
+        9
+      ],
+      [
+        "furniture_decor",
+        935
+      ],
+      [
+        "furniture_living_room",
+        53
+      ],
+      [
+        "furniture_mattress_and_upholstery",
+        6
+      ],
+      [
+        "garden_tools",
+        519
+      ],
+      [
+        "health_beauty",
+        1376
+      ],
+      [
+        "home_appliances",
+        129
+      ],
+      [
+        "home_appliances_2",
+        37
+      ],
+      [
+        "home_comfort_2",
+        3
+      ],
+      [
+        "home_confort",
+        56
+      ],
+      [
+        "home_construction",
+        64
+      ],
+      [
+        "housewares",
+        882
+      ],
+      [
+        "industry_commerce_and_business",
+        48
+      ],
+      [
+        "kitchen_dining_laundry_garden_furniture",
+        35
+      ],
+      [
+        "la_cuisine",
+        3
+      ],
+      [
+        "luggage_accessories",
+        155
+      ],
+      [
+        "market_place",
+        39
+      ],
+      [
+        "music",
+        8
+      ],
+      [
+        "musical_instruments",
+        93
+      ],
+      [
+        "office_furniture",
+        164
+      ],
+      [
+        "party_supplies",
+        7
+      ],
+      [
+        "perfumery",
+        511
+      ],
+      [
+        "pet_shop",
+        237
+      ],
+      [
+        "signaling_and_security",
+        30
+      ],
+      [
+        "small_appliances",
+        98
+      ],
+      [
+        "small_appliances_home_oven_and_coffee",
+        9
+      ],
+      [
+        "sports_leisure",
+        1152
+      ],
+      [
+        "stationery",
+        329
+      ],
+      [
+        "tablets_printing_image",
+        10
+      ],
+      [
+        "telephony",
+        593
+      ],
+      [
+        "toys",
+        622
+      ],
+      [
+        "watches_gifts",
+        842
+      ]
+    ],
+    "sql": "SELECT t.product_category_name_english,count(DISTINCT c.customer_unique_id) FROM source.items i JOIN source.orders o USING(order_id) JOIN source.customers c USING(customer_id) JOIN source.products p USING(product_id) JOIN source.categories t USING(product_category_name) GROUP BY 1 ORDER BY 1"
+  },
+  "O072": {
+    "rows": [
+      [
+        0.022486969
+      ]
+    ],
+    "sql": "WITH i AS (SELECT order_id, sum(price::DECIMAL(18,2)) AS merchandise, sum(freight_value::DECIMAL(18,2)) AS freight, count(*) AS item_count, count(DISTINCT seller_id) AS sellers FROM source.items GROUP BY order_id), p AS (SELECT order_id,count(DISTINCT payment_type) AS methods FROM source.payments GROUP BY 1) SELECT avg((methods>1)::INT) FROM i JOIN p USING(order_id) WHERE item_count=1"
+  },
+  "O073": {
+    "rows": [
+      [
+        "agro_industry_and_commerce",
+        4
+      ],
+      [
+        "air_conditioning",
+        7
+      ],
+      [
+        "art",
+        4
+      ],
+      [
+        "arts_and_craftmanship",
+        1
+      ],
+      [
+        "audio",
+        4
+      ],
+      [
+        "auto",
+        13
+      ],
+      [
+        "baby",
+        11
+      ],
+      [
+        "bed_bath_table",
+        9
+      ],
+      [
+        "books_general_interest",
+        7
+      ],
+      [
+        "books_imported",
+        1
+      ],
+      [
+        "books_technical",
+        2
+      ],
+      [
+        "cds_dvds_musicals",
+        1
+      ],
+      [
+        "christmas_supplies",
+        4
+      ],
+      [
+        "cine_photo",
+        3
+      ],
+      [
+        "computers",
+        2
+      ],
+      [
+        "computers_accessories",
+        10
+      ],
+      [
+        "consoles_games",
+        7
+      ],
+      [
+        "construction_tools_construction",
+        9
+      ],
+      [
+        "construction_tools_lights",
+        2
+      ],
+      [
+        "construction_tools_safety",
+        4
+      ],
+      [
+        "cool_stuff",
+        11
+      ],
+      [
+        "costruction_tools_garden",
+        4
+      ],
+      [
+        "costruction_tools_tools",
+        4
+      ],
+      [
+        "diapers_and_hygiene",
+        1
+      ],
+      [
+        "drinks",
+        3
+      ],
+      [
+        "dvds_blu_ray",
+        2
+      ],
+      [
+        "electronics",
+        7
+      ],
+      [
+        "fashio_female_clothing",
+        2
+      ],
+      [
+        "fashion_bags_accessories",
+        9
+      ],
+      [
+        "fashion_childrens_clothes",
+        1
+      ],
+      [
+        "fashion_male_clothing",
+        2
+      ],
+      [
+        "fashion_shoes",
+        2
+      ],
+      [
+        "fashion_sport",
+        2
+      ],
+      [
+        "fashion_underwear_beach",
+        1
+      ],
+      [
+        "fixed_telephony",
+        3
+      ],
+      [
+        "flowers",
+        1
+      ],
+      [
+        "food",
+        6
+      ],
+      [
+        "food_drink",
+        4
+      ],
+      [
+        "furniture_bedroom",
+        4
+      ],
+      [
+        "furniture_decor",
+        11
+      ],
+      [
+        "furniture_living_room",
+        5
+      ],
+      [
+        "furniture_mattress_and_upholstery",
+        2
+      ],
+      [
+        "garden_tools",
+        9
+      ],
+      [
+        "health_beauty",
+        14
+      ],
+      [
+        "home_appliances",
+        5
+      ],
+      [
+        "home_appliances_2",
+        5
+      ],
+      [
+        "home_comfort_2",
+        1
+      ],
+      [
+        "home_confort",
+        2
+      ],
+      [
+        "home_construction",
+        4
+      ],
+      [
+        "housewares",
+        9
+      ],
+      [
+        "industry_commerce_and_business",
+        5
+      ],
+      [
+        "kitchen_dining_laundry_garden_furniture",
+        4
+      ],
+      [
+        "la_cuisine",
+        2
+      ],
+      [
+        "luggage_accessories",
+        6
+      ],
+      [
+        "market_place",
+        6
+      ],
+      [
+        "music",
+        4
+      ],
+      [
+        "musical_instruments",
+        6
+      ],
+      [
+        "office_furniture",
+        4
+      ],
+      [
+        "party_supplies",
+        2
+      ],
+      [
+        "perfumery",
+        8
+      ],
+      [
+        "pet_shop",
+        6
+      ],
+      [
+        "signaling_and_security",
+        5
+      ],
+      [
+        "small_appliances",
+        8
+      ],
+      [
+        "small_appliances_home_oven_and_coffee",
+        2
+      ],
+      [
+        "sports_leisure",
+        13
+      ],
+      [
+        "stationery",
+        9
+      ],
+      [
+        "tablets_printing_image",
+        1
+      ],
+      [
+        "telephony",
+        8
+      ],
+      [
+        "toys",
+        8
+      ],
+      [
+        "watches_gifts",
+        8
+      ]
+    ],
+    "sql": "SELECT t.product_category_name_english,count(DISTINCT s.seller_state) FROM source.items i JOIN source.products p USING(product_id) JOIN source.categories t USING(product_category_name) JOIN source.sellers s USING(seller_id) GROUP BY 1 ORDER BY 1"
+  },
+  "O074": {
+    "rows": [
+      [
+        "2016-07-01",
+        0,
+        1,
+        1
+      ],
+      [
+        "2016-10-01",
+        39,
+        5,
+        49
+      ],
+      [
+        "2017-01-01",
+        743,
+        10,
+        794
+      ],
+      [
+        "2017-04-01",
+        1342,
+        8,
+        1410
+      ],
+      [
+        "2017-07-01",
+        1831,
+        8,
+        1906
+      ],
+      [
+        "2017-10-01",
+        2608,
+        13,
+        2693
+      ],
+      [
+        "2018-01-01",
+        3118,
+        18,
+        3199
+      ],
+      [
+        "2018-04-01",
+        2969,
+        10,
+        3014
+      ],
+      [
+        "2018-07-01",
+        1891,
+        20,
+        1933
+      ],
+      [
+        "2018-10-01",
+        0,
+        1,
+        1
+      ]
+    ],
+    "sql": "SELECT date_trunc('quarter',order_purchase_timestamp::TIMESTAMP)::DATE AS q,count(*) FILTER(WHERE order_status='delivered'),count(*) FILTER(WHERE order_status='canceled'),count(*) FROM source.orders GROUP BY 1 ORDER BY 1"
+  },
+  "O075": {
+    "rows": [
+      [
+        "approved",
+        1,
+        1
+      ],
+      [
+        "canceled",
+        94,
+        90
+      ],
+      [
+        "created",
+        1,
+        1
+      ],
+      [
+        "delivered",
+        14541,
+        14450
+      ],
+      [
+        "invoiced",
+        52,
+        52
+      ],
+      [
+        "processing",
+        48,
+        48
+      ],
+      [
+        "shipped",
+        165,
+        155
+      ],
+      [
+        "unavailable",
+        98,
+        97
+      ]
+    ],
+    "sql": "WITH r AS (SELECT order_id, avg(review_score::INTEGER) AS score FROM source.reviews WHERE try_cast(review_score AS INTEGER) BETWEEN 1 AND 5 GROUP BY order_id) SELECT order_status,count(*),count(r.order_id) FROM source.orders o LEFT JOIN r USING(order_id) GROUP BY 1 ORDER BY 1"
+  },
+  "O076": {
+    "rows": [
+      [
+        126
+      ]
+    ],
+    "sql": "SELECT count(*) FROM source.orders o WHERE NOT EXISTS(SELECT 1 FROM source.items i WHERE i.order_id=o.order_id)"
+  },
+  "O077": {
+    "rows": [
+      [
+        0
+      ]
+    ],
+    "sql": "SELECT coalesce(sum(n-1),0) FROM (SELECT order_id,payment_sequential,count(*) AS n FROM source.payments GROUP BY 1,2 HAVING count(*)>1)"
+  },
+  "O078": {
+    "rows": [
+      [
+        252,
+        {
+          "decimal": "32913.98"
+        }
+      ]
+    ],
+    "sql": "SELECT count(*),sum(price::DECIMAL(18,2)) FROM source.items i JOIN source.products p USING(product_id) LEFT JOIN source.categories t USING(product_category_name) WHERE t.product_category_name_english IS NULL"
+  },
+  "O079": {
+    "rows": [
+      [
+        88
+      ]
+    ],
+    "sql": "SELECT count(*)-count(DISTINCT order_id) FROM source.reviews"
+  },
+  "O080": {
+    "rows": [
+      [
+        "2017-12-31",
+        11
+      ],
+      [
+        "2018-01-01",
+        11
+      ]
+    ],
+    "sql": "SELECT order_purchase_timestamp::DATE AS day,count(*) FROM source.orders WHERE order_purchase_timestamp>='2017-12-31' AND order_purchase_timestamp<'2018-01-02' GROUP BY 1 ORDER BY 1"
+  },
+  "O081": {
+    "rows": [
+      [
+        0
+      ]
+    ],
+    "sql": "WITH p AS (SELECT order_id, sum(payment_value::DECIMAL(18,2)) AS paid, count(*) AS payment_rows FROM source.payments GROUP BY order_id) SELECT count(*) FROM p WHERE paid=0"
+  },
+  "O082": {
+    "criteria": [
+      "Reject that interpretation explicitly",
+      "Identify the 15,000-order retained Olist sample and limited platform coverage",
+      "Explain that neither sample totals nor Olist platform totals represent the whole Brazilian market",
+      "Do not invent a market expansion factor"
+    ]
+  },
+  "O083": {
+    "criteria": [
+      "Do not equate voucher tender with marketing discount expense",
+      "Explain payment_type and payment_value represent recorded payment instruments",
+      "State that discount/campaign funding data are unavailable",
+      "Allow a clearly labelled voucher payment total as a descriptive proxy only"
+    ]
+  },
+  "O084": {
+    "criteria": [
+      "State refund amounts and refund transactions are absent",
+      "Distinguish canceled status and recorded payment from confirmed refunds",
+      "Refuse to manufacture a refund total",
+      "May propose recorded payments on canceled orders only with a clear non-refund label"
+    ]
+  },
+  "O085": {
+    "criteria": [
+      "Explain many-to-many multiplication for orders with multiple items or payment rows",
+      "Require independent payment aggregation at order grain before joining",
+      "Explain that DISTINCT payment_value is unsafe when equal legitimate amounts occur",
+      "Preserve full recorded payments without treating them as net revenue"
+    ]
+  }
+}

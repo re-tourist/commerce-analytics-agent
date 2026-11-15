@@ -1,0 +1,339 @@
+{
+  "cross_split_candidates": [],
+  "legacy_development_pairs": [
+    {
+      "cross_split": false,
+      "left": "O001",
+      "reason": "normalized_exact",
+      "right": "O004"
+    },
+    {
+      "cross_split": false,
+      "left": "O002",
+      "reason": "normalized_exact",
+      "right": "O005"
+    },
+    {
+      "cross_split": false,
+      "left": "O003",
+      "reason": "normalized_exact",
+      "right": "O006"
+    },
+    {
+      "cross_split": false,
+      "left": "O001",
+      "reason": "normalized_exact",
+      "right": "O007"
+    },
+    {
+      "cross_split": false,
+      "left": "O004",
+      "reason": "normalized_exact",
+      "right": "O007"
+    },
+    {
+      "cross_split": false,
+      "left": "O002",
+      "reason": "normalized_exact",
+      "right": "O008"
+    },
+    {
+      "cross_split": false,
+      "left": "O005",
+      "reason": "normalized_exact",
+      "right": "O008"
+    },
+    {
+      "cross_split": false,
+      "left": "O003",
+      "reason": "normalized_exact",
+      "right": "O009"
+    },
+    {
+      "cross_split": false,
+      "left": "O006",
+      "reason": "normalized_exact",
+      "right": "O009"
+    },
+    {
+      "cross_split": false,
+      "left": "O001",
+      "reason": "normalized_exact",
+      "right": "O010"
+    },
+    {
+      "cross_split": false,
+      "left": "O004",
+      "reason": "normalized_exact",
+      "right": "O010"
+    },
+    {
+      "cross_split": false,
+      "left": "O007",
+      "reason": "normalized_exact",
+      "right": "O010"
+    },
+    {
+      "cross_split": false,
+      "left": "O002",
+      "reason": "normalized_exact",
+      "right": "O011"
+    },
+    {
+      "cross_split": false,
+      "left": "O005",
+      "reason": "normalized_exact",
+      "right": "O011"
+    },
+    {
+      "cross_split": false,
+      "left": "O008",
+      "reason": "normalized_exact",
+      "right": "O011"
+    },
+    {
+      "cross_split": false,
+      "left": "O003",
+      "reason": "normalized_exact",
+      "right": "O012"
+    },
+    {
+      "cross_split": false,
+      "left": "O006",
+      "reason": "normalized_exact",
+      "right": "O012"
+    },
+    {
+      "cross_split": false,
+      "left": "O009",
+      "reason": "normalized_exact",
+      "right": "O012"
+    },
+    {
+      "cross_split": false,
+      "left": "O001",
+      "reason": "normalized_exact",
+      "right": "O013"
+    },
+    {
+      "cross_split": false,
+      "left": "O004",
+      "reason": "normalized_exact",
+      "right": "O013"
+    },
+    {
+      "cross_split": false,
+      "left": "O007",
+      "reason": "normalized_exact",
+      "right": "O013"
+    },
+    {
+      "cross_split": false,
+      "left": "O010",
+      "reason": "normalized_exact",
+      "right": "O013"
+    },
+    {
+      "cross_split": false,
+      "left": "O002",
+      "reason": "normalized_exact",
+      "right": "O014"
+    },
+    {
+      "cross_split": false,
+      "left": "O005",
+      "reason": "normalized_exact",
+      "right": "O014"
+    },
+    {
+      "cross_split": false,
+      "left": "O008",
+      "reason": "normalized_exact",
+      "right": "O014"
+    },
+    {
+      "cross_split": false,
+      "left": "O011",
+      "reason": "normalized_exact",
+      "right": "O014"
+    },
+    {
+      "cross_split": false,
+      "left": "O003",
+      "reason": "normalized_exact",
+      "right": "O015"
+    },
+    {
+      "cross_split": false,
+      "left": "O006",
+      "reason": "normalized_exact",
+      "right": "O015"
+    },
+    {
+      "cross_split": false,
+      "left": "O009",
+      "reason": "normalized_exact",
+      "right": "O015"
+    },
+    {
+      "cross_split": false,
+      "left": "O012",
+      "reason": "normalized_exact",
+      "right": "O015"
+    },
+    {
+      "cross_split": false,
+      "left": "O016",
+      "reason": "lexical_near",
+      "right": "O018"
+    },
+    {
+      "cross_split": false,
+      "left": "O017",
+      "reason": "lexical_near",
+      "right": "O019"
+    },
+    {
+      "cross_split": false,
+      "left": "O016",
+      "reason": "lexical_near",
+      "right": "O020"
+    },
+    {
+      "cross_split": false,
+      "left": "O018",
+      "reason": "lexical_near",
+      "right": "O020"
+    },
+    {
+      "cross_split": false,
+      "left": "O017",
+      "reason": "lexical_near",
+      "right": "O021"
+    },
+    {
+      "cross_split": false,
+      "left": "O019",
+      "reason": "lexical_near",
+      "right": "O021"
+    },
+    {
+      "cross_split": false,
+      "left": "O016",
+      "reason": "lexical_near",
+      "right": "O022"
+    },
+    {
+      "cross_split": false,
+      "left": "O018",
+      "reason": "lexical_near",
+      "right": "O022"
+    },
+    {
+      "cross_split": false,
+      "left": "O020",
+      "reason": "lexical_near",
+      "right": "O022"
+    },
+    {
+      "cross_split": false,
+      "left": "O017",
+      "reason": "lexical_near",
+      "right": "O023"
+    },
+    {
+      "cross_split": false,
+      "left": "O019",
+      "reason": "lexical_near",
+      "right": "O023"
+    },
+    {
+      "cross_split": false,
+      "left": "O021",
+      "reason": "lexical_near",
+      "right": "O023"
+    },
+    {
+      "cross_split": false,
+      "left": "O024",
+      "reason": "lexical_near",
+      "right": "O025"
+    },
+    {
+      "cross_split": false,
+      "left": "O024",
+      "reason": "lexical_near",
+      "right": "O026"
+    },
+    {
+      "cross_split": false,
+      "left": "O025",
+      "reason": "lexical_near",
+      "right": "O026"
+    },
+    {
+      "cross_split": false,
+      "left": "O024",
+      "reason": "lexical_near",
+      "right": "O027"
+    },
+    {
+      "cross_split": false,
+      "left": "O025",
+      "reason": "semantic_template",
+      "right": "O027"
+    },
+    {
+      "cross_split": false,
+      "left": "O026",
+      "reason": "lexical_near",
+      "right": "O027"
+    },
+    {
+      "cross_split": false,
+      "left": "O028",
+      "reason": "normalized_exact",
+      "right": "O029"
+    },
+    {
+      "cross_split": false,
+      "left": "O028",
+      "reason": "normalized_exact",
+      "right": "O030"
+    },
+    {
+      "cross_split": false,
+      "left": "O029",
+      "reason": "normalized_exact",
+      "right": "O030"
+    },
+    {
+      "cross_split": false,
+      "left": "O028",
+      "reason": "normalized_exact",
+      "right": "O031"
+    },
+    {
+      "cross_split": false,
+      "left": "O029",
+      "reason": "normalized_exact",
+      "right": "O031"
+    },
+    {
+      "cross_split": false,
+      "left": "O030",
+      "reason": "normalized_exact",
+      "right": "O031"
+    }
+  ],
+  "new_sql_template_collisions": [],
+  "rejected_official_candidates": [
+    {
+      "against": [
+        "DB:055_German:010"
+      ],
+      "id": "DB:055_German:009",
+      "reason": "duplicate_question"
+    }
+  ]
+}

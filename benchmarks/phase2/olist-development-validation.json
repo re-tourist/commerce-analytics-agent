@@ -1,0 +1,1509 @@
+[
+  {
+    "task_id": "O046",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "Give operations a breakdown of the sampled orders by order status, with counts, largest group first.",
+    "task_family": "aggregate",
+    "semantic_template_id": "status-composition",
+    "answer_type": "table",
+    "difficulty": "basic",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Order grain; count each source order once; all dates; ties by status."
+    },
+    "reference": {
+      "sql": "SELECT order_status, count(*) AS orders FROM source.orders GROUP BY 1 ORDER BY orders DESC, order_status"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O047",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "Across the sample, what is freight as a percentage of merchandise value? Exclude freight from the merchandise denominator.",
+    "task_family": "aggregate",
+    "semantic_template_id": "freight-to-merchandise-ratio",
+    "answer_type": "number",
+    "difficulty": "basic",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Item grain; ratio of sums in BRL times 100; all item rows; NULL on zero denominator."
+    },
+    "reference": {
+      "sql": "SELECT 100.0*sum(freight_value::DECIMAL(18,2))/nullif(sum(price::DECIMAL(18,2)),0) FROM source.items"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O048",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "What fraction of orders with at least one item contain more than one item line?",
+    "task_family": "aggregate",
+    "semantic_template_id": "multi-item-order-share",
+    "answer_type": "number",
+    "difficulty": "basic",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "One order after item aggregation; denominator is orders with items; fraction 0-1; line count is not distinct product count."
+    },
+    "reference": {
+      "sql": "WITH i AS (SELECT order_id, sum(price::DECIMAL(18,2)) AS merchandise, sum(freight_value::DECIMAL(18,2)) AS freight, count(*) AS item_count, count(DISTINCT seller_id) AS sellers FROM source.items GROUP BY order_id) SELECT avg((item_count>1)::INT) FROM i"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O049",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "Show each payment method, recorded BRL amount, and its fraction of all recorded payments.",
+    "task_family": "aggregate",
+    "semantic_template_id": "payment-method-amount-share",
+    "answer_type": "table",
+    "difficulty": "basic",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Payment-row grain; sum amounts by method; amount divided by total recorded amount; no order-item join."
+    },
+    "reference": {
+      "sql": "SELECT payment_type, sum(payment_value::DECIMAL(18,2)) AS amount, amount/sum(amount) OVER () AS share FROM source.payments GROUP BY 1 ORDER BY payment_type"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O050",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "Which weekdays generate the most orders in the sample? Return ISO weekday number (Monday=1) and order count.",
+    "task_family": "aggregate",
+    "semantic_template_id": "purchase-weekday-mix",
+    "answer_type": "table",
+    "difficulty": "basic",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Order grain; original naive source timestamps; all dates; ISO weekday; ties weekday ascending."
+    },
+    "reference": {
+      "sql": "SELECT isodow(order_purchase_timestamp::TIMESTAMP) AS weekday, count(*) AS n FROM source.orders GROUP BY 1 ORDER BY n DESC, weekday"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O051",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "How much recorded payment value belongs to cancelled orders, and how many cancelled orders have payment records?",
+    "task_family": "aggregate",
+    "semantic_template_id": "cancelled-recorded-payments",
+    "answer_type": "table",
+    "difficulty": "basic",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Cancelled status exact source spelling canceled; payment sums in BRL per order before join; count only matched orders; no claim about refunds."
+    },
+    "reference": {
+      "sql": "WITH p AS (SELECT order_id, sum(payment_value::DECIMAL(18,2)) AS paid, count(*) AS payment_rows FROM source.payments GROUP BY order_id) SELECT sum(paid), count(*) FROM source.orders o JOIN p USING(order_id) WHERE order_status='canceled'"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O052",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "Among sampled products with a positive recorded weight, report the number of products, mean weight and maximum weight in grams.",
+    "task_family": "aggregate",
+    "semantic_template_id": "physical-weight-summary",
+    "answer_type": "table",
+    "difficulty": "basic",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Distinct product-table rows, not sales weighted; positive non-NULL grams only."
+    },
+    "reference": {
+      "sql": "SELECT count(*), avg(product_weight_g::DOUBLE), max(product_weight_g::DOUBLE) FROM source.products WHERE product_weight_g::DOUBLE>0"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O053",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "How many distinct seller states are represented by the sellers linked to this sample?",
+    "task_family": "aggregate",
+    "semantic_template_id": "active-seller-state-diversity",
+    "answer_type": "number",
+    "difficulty": "basic",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Seller dimension retained for sampled items; count distinct non-NULL state codes."
+    },
+    "reference": {
+      "sql": "SELECT count(DISTINCT seller_state) FROM source.sellers"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O054",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "Do weekend purchases have a different average item-line count from weekday purchases? Return the two groups and their means for orders that have items.",
+    "task_family": "comparison",
+    "semantic_template_id": "weekend-vs-weekday-basket",
+    "answer_type": "table",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Order grain; equal order weights; weekdays Monday-Friday; no causal interpretation; item-bearing orders only."
+    },
+    "reference": {
+      "sql": "WITH i AS (SELECT order_id, sum(price::DECIMAL(18,2)) AS merchandise, sum(freight_value::DECIMAL(18,2)) AS freight, count(*) AS item_count, count(DISTINCT seller_id) AS sellers FROM source.items GROUP BY order_id) SELECT CASE WHEN isodow(order_purchase_timestamp::TIMESTAMP)>=6 THEN 'weekend' ELSE 'weekday' END AS group_name, avg(item_count) FROM source.orders JOIN i USING(order_id) GROUP BY 1 ORDER BY 1"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O055",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "For credit-card payment records, compare the mean payment amount for single-installment versus multiple-installment records.",
+    "task_family": "comparison",
+    "semantic_template_id": "installment-versus-single-card-ticket",
+    "answer_type": "table",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Payment-row grain; installments >=1, split 1 vs >1; mean BRL per payment record, not per order."
+    },
+    "reference": {
+      "sql": "SELECT CASE WHEN payment_installments::INT=1 THEN 'single' ELSE 'multiple' END AS group_name, avg(payment_value::DECIMAL(18,2)) FROM source.payments WHERE payment_type='credit_card' AND payment_installments::INT>=1 GROUP BY 1 ORDER BY 1"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O056",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "Compare mean freight per item when the seller and customer are in the same state versus different states.",
+    "task_family": "comparison",
+    "semantic_template_id": "same-state-vs-interstate-item-freight",
+    "answer_type": "table",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Item grain; freight BRL per line; source customer and seller state join; boolean false first."
+    },
+    "reference": {
+      "sql": "SELECT c.customer_state=s.seller_state AS same_state, avg(i.freight_value::DECIMAL(18,2)) FROM source.items i JOIN source.orders o USING(order_id) JOIN source.customers c USING(customer_id) JOIN source.sellers s USING(seller_id) GROUP BY 1 ORDER BY 1"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O057",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "How much did order volume change between January-June 2017 and January-June 2018? Return both counts and the signed percentage growth.",
+    "task_family": "comparison",
+    "semantic_template_id": "h1-yoy-order-growth",
+    "answer_type": "table",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "All-status source orders; half-open naive purchase windows; signed growth / baseline times 100; sample counts not population estimates."
+    },
+    "reference": {
+      "sql": "WITH a AS (SELECT count(*) FILTER(WHERE order_purchase_timestamp>='2017-01-01' AND order_purchase_timestamp<'2017-07-01') AS baseline, count(*) FILTER(WHERE order_purchase_timestamp>='2018-01-01' AND order_purchase_timestamp<'2018-07-01') AS current FROM source.orders) SELECT baseline,current,100.0*(current-baseline)/nullif(baseline,0) FROM a"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O058",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "Compare mean observed delivery days for orders whose mean valid review score is at most 2 versus at least 4.",
+    "task_family": "comparison",
+    "semantic_template_id": "low-review-versus-high-review-delivery",
+    "answer_type": "table",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Delivered orders with nonnegative observed duration; valid review scores 1-5 averaged per order; equal order weights; association only."
+    },
+    "reference": {
+      "sql": "WITH r AS (SELECT order_id, avg(review_score::INTEGER) AS score FROM source.reviews WHERE try_cast(review_score AS INTEGER) BETWEEN 1 AND 5 GROUP BY order_id) SELECT CASE WHEN score<=2 THEN 'low' ELSE 'high' END AS group_name, avg(epoch(order_delivered_customer_date::TIMESTAMP-order_purchase_timestamp::TIMESTAMP)/86400.0) FROM source.orders JOIN r USING(order_id) WHERE order_status='delivered' AND order_delivered_customer_date>=order_purchase_timestamp AND (score<=2 OR score>=4) GROUP BY 1 ORDER BY 1"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O059",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "Is the late-delivery fraction different for single-seller and multi-seller orders? Return seller group and fraction.",
+    "task_family": "comparison",
+    "semantic_template_id": "multi-seller-lateness-gap",
+    "answer_type": "table",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Order grain; distinct sellers per order; eligible delivered orders with both dates; date-only lateness; fraction 0-1."
+    },
+    "reference": {
+      "sql": "WITH i AS (SELECT order_id, sum(price::DECIMAL(18,2)) AS merchandise, sum(freight_value::DECIMAL(18,2)) AS freight, count(*) AS item_count, count(DISTINCT seller_id) AS sellers FROM source.items GROUP BY order_id) SELECT CASE WHEN sellers=1 THEN 'single' ELSE 'multiple' END AS seller_group, avg((left(order_delivered_customer_date,10)>left(order_estimated_delivery_date,10))::INT) FROM source.orders JOIN i USING(order_id) WHERE order_status='delivered' AND order_delivered_customer_date IS NOT NULL AND order_estimated_delivery_date IS NOT NULL GROUP BY 1 ORDER BY 1"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O060",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "For orders with a nonnegative observed approval delay, compare average approval hours between delivered and cancelled statuses.",
+    "task_family": "comparison",
+    "semantic_template_id": "approval-time-status-comparison",
+    "answer_type": "table",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Order grain; hours including partial days; missing or negative delays excluded; exact two statuses."
+    },
+    "reference": {
+      "sql": "SELECT order_status, avg(epoch(order_approved_at::TIMESTAMP-order_purchase_timestamp::TIMESTAMP)/3600.0) FROM source.orders WHERE order_status IN ('delivered','canceled') AND order_approved_at>=order_purchase_timestamp GROUP BY 1 ORDER BY 1"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O061",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "Compare mean total recorded payment per order for orders using any voucher versus orders without a voucher, among orders with payments.",
+    "task_family": "comparison",
+    "semantic_template_id": "voucher-present-order-payment-gap",
+    "answer_type": "table",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Payment rows aggregated to order; any voucher flag; denominator orders with payment rows; mean BRL; false first."
+    },
+    "reference": {
+      "sql": "WITH p AS (SELECT order_id, sum(payment_value::DECIMAL(18,2)) AS paid, bool_or(payment_type='voucher') AS voucher FROM source.payments GROUP BY order_id) SELECT voucher,avg(paid) FROM p GROUP BY 1 ORDER BY 1"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O062",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "List the five sellers with the highest merchandise value and each seller's fraction of total merchandise value.",
+    "task_family": "ranking",
+    "semantic_template_id": "seller-merchandise-concentration",
+    "answer_type": "table",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Item-price BRL excluding freight; all item rows; share of all sellers before top-five limit; ties seller ID."
+    },
+    "reference": {
+      "sql": "WITH s AS (SELECT seller_id,sum(price::DECIMAL(18,2)) AS amount FROM source.items GROUP BY 1) SELECT seller_id,amount,amount/sum(amount) OVER () AS share FROM s ORDER BY amount DESC,seller_id LIMIT 5"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O063",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "Which five customer states have the largest freight-to-merchandise ratio? Show state and ratio as a fraction.",
+    "task_family": "ranking",
+    "semantic_template_id": "customer-state-freight-burden",
+    "answer_type": "table",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Item-weighted ratio of sums; customer state; positive merchandise denominator; top five ties state."
+    },
+    "reference": {
+      "sql": "SELECT customer_state, sum(freight_value::DECIMAL(18,2))/nullif(sum(price::DECIMAL(18,2)),0) AS ratio FROM source.items JOIN source.orders USING(order_id) JOIN source.customers USING(customer_id) GROUP BY 1 HAVING sum(price::DECIMAL(18,2))>0 ORDER BY ratio DESC,customer_state LIMIT 5"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O064",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "Which five products appear in the largest number of distinct orders? Return product ID and distinct order count.",
+    "task_family": "ranking",
+    "semantic_template_id": "products-repeat-order-reach",
+    "answer_type": "table",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Distinct order-product reach; repeated item lines within one order counted once; ties product ID."
+    },
+    "reference": {
+      "sql": "SELECT product_id,count(DISTINCT order_id) AS n FROM source.items GROUP BY 1 ORDER BY n DESC,product_id LIMIT 5"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O065",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "Rank weekdays by cancellation fraction, showing ISO weekday, cancelled count, total orders and fraction.",
+    "task_family": "ranking",
+    "semantic_template_id": "weekday-cancellation-rank",
+    "answer_type": "table",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "All-status order denominator within weekday; exact canceled numerator; 0-1 fraction; ties weekday."
+    },
+    "reference": {
+      "sql": "SELECT isodow(order_purchase_timestamp::TIMESTAMP) AS weekday, count(*) FILTER(WHERE order_status='canceled') AS cancelled, count(*) AS n, cancelled::DOUBLE/n AS rate FROM source.orders GROUP BY 1 ORDER BY rate DESC,weekday"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O066",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "Show the five delivered orders with the longest nonnegative observed delivery times, in days.",
+    "task_family": "ranking",
+    "semantic_template_id": "longest-valid-delivery-orders",
+    "answer_type": "table",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Order grain; continuous timestamp duration in days; missing/negative excluded; ties order ID."
+    },
+    "reference": {
+      "sql": "SELECT order_id,epoch(order_delivered_customer_date::TIMESTAMP-order_purchase_timestamp::TIMESTAMP)/86400.0 AS days FROM source.orders WHERE order_status='delivered' AND order_delivered_customer_date>=order_purchase_timestamp ORDER BY days DESC,order_id LIMIT 5"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O067",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "What are the five largest seller-state to customer-state merchandise corridors? Return both states and merchandise BRL.",
+    "task_family": "ranking",
+    "semantic_template_id": "seller-customer-corridor-value",
+    "answer_type": "table",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Item grain; directed corridor seller->customer; sum price excluding freight; deterministic state ties."
+    },
+    "reference": {
+      "sql": "SELECT seller_state,customer_state,sum(price::DECIMAL(18,2)) AS amount FROM source.items JOIN source.orders USING(order_id) JOIN source.customers USING(customer_id) JOIN source.sellers USING(seller_id) GROUP BY 1,2 ORDER BY amount DESC,seller_state,customer_state LIMIT 5"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O068",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "Across orders having both items and payments, return total payments, total merchandise plus freight, and their signed difference in BRL.",
+    "task_family": "complex",
+    "semantic_template_id": "order-level-payment-basket-reconciliation",
+    "answer_type": "table",
+    "difficulty": "advanced",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Aggregate each many-side to order before joining; matched-order population only; payment minus basket; no refund inference."
+    },
+    "reference": {
+      "sql": "WITH p AS (SELECT order_id, sum(payment_value::DECIMAL(18,2)) AS paid, count(*) AS payment_rows FROM source.payments GROUP BY order_id), i AS (SELECT order_id, sum(price::DECIMAL(18,2)) AS merchandise, sum(freight_value::DECIMAL(18,2)) AS freight, count(*) AS item_count, count(DISTINCT seller_id) AS sellers FROM source.items GROUP BY order_id) SELECT sum(paid),sum(merchandise+freight),sum(paid-merchandise-freight) FROM p JOIN i USING(order_id)"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O069",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "Among unique customers represented in this sample, what fraction placed at least two sampled orders?",
+    "task_family": "complex",
+    "semantic_template_id": "customer-repeat-purchase-rate",
+    "answer_type": "number",
+    "difficulty": "advanced",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Identity is customer_unique_id, not order-specific customer_id; sample-only repeat behavior; one vote per unique customer."
+    },
+    "reference": {
+      "sql": "WITH c AS (SELECT customer_unique_id,count(*) AS n FROM source.orders JOIN source.customers USING(customer_id) GROUP BY 1) SELECT avg((n>=2)::INT) FROM c"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O070",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "How much merchandise value sits in late eligible orders? Count an order's item value once even if it has several payments.",
+    "task_family": "complex",
+    "semantic_template_id": "late-order-merchandise-exposure",
+    "answer_type": "number",
+    "difficulty": "advanced",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Delivered orders with both dates; date-only lateness; sum item price BRL; item-bearing orders; no payment fanout."
+    },
+    "reference": {
+      "sql": "WITH i AS (SELECT order_id, sum(price::DECIMAL(18,2)) AS merchandise, sum(freight_value::DECIMAL(18,2)) AS freight, count(*) AS item_count, count(DISTINCT seller_id) AS sellers FROM source.items GROUP BY order_id) SELECT sum(merchandise) FROM source.orders JOIN i USING(order_id) WHERE order_status='delivered' AND order_delivered_customer_date IS NOT NULL AND order_estimated_delivery_date IS NOT NULL AND left(order_delivered_customer_date,10)>left(order_estimated_delivery_date,10)"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O071",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "For each translated category, how many distinct customer identities bought an item? Sort by category.",
+    "task_family": "complex",
+    "semantic_template_id": "category-distinct-buyer-count",
+    "answer_type": "table",
+    "difficulty": "advanced",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Inner translation join intentionally excludes untranslated products; distinct customer_unique_id per English category; all statuses."
+    },
+    "reference": {
+      "sql": "SELECT t.product_category_name_english,count(DISTINCT c.customer_unique_id) FROM source.items i JOIN source.orders o USING(order_id) JOIN source.customers c USING(customer_id) JOIN source.products p USING(product_id) JOIN source.categories t USING(product_category_name) GROUP BY 1 ORDER BY 1"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O072",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "Among single-item orders with payment records, what fraction used more than one distinct payment method?",
+    "task_family": "complex",
+    "semantic_template_id": "single-item-payment-method-coverage",
+    "answer_type": "number",
+    "difficulty": "advanced",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "One item line exactly, not one product ID; denominator matched payment-bearing orders; methods distinct within order."
+    },
+    "reference": {
+      "sql": "WITH i AS (SELECT order_id, sum(price::DECIMAL(18,2)) AS merchandise, sum(freight_value::DECIMAL(18,2)) AS freight, count(*) AS item_count, count(DISTINCT seller_id) AS sellers FROM source.items GROUP BY order_id), p AS (SELECT order_id,count(DISTINCT payment_type) AS methods FROM source.payments GROUP BY 1) SELECT avg((methods>1)::INT) FROM i JOIN p USING(order_id) WHERE item_count=1"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O073",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "For each English product category, count the distinct seller states supplying its sampled items.",
+    "task_family": "complex",
+    "semantic_template_id": "category-selling-state-reach",
+    "answer_type": "table",
+    "difficulty": "advanced",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Translated categories only; distinct non-NULL seller states per category; no order weighting."
+    },
+    "reference": {
+      "sql": "SELECT t.product_category_name_english,count(DISTINCT s.seller_state) FROM source.items i JOIN source.products p USING(product_id) JOIN source.categories t USING(product_category_name) JOIN source.sellers s USING(seller_id) GROUP BY 1 ORDER BY 1"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O074",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "For every purchase quarter, show the quarter start, delivered count, cancelled count, and all-status order count.",
+    "task_family": "complex",
+    "semantic_template_id": "quarterly-status-pivot",
+    "answer_type": "table",
+    "difficulty": "advanced",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Order grain; all observed purchase quarters, including partial edge quarters; delivered/canceled subsets; chronological."
+    },
+    "reference": {
+      "sql": "SELECT date_trunc('quarter',order_purchase_timestamp::TIMESTAMP)::DATE AS q,count(*) FILTER(WHERE order_status='delivered'),count(*) FILTER(WHERE order_status='canceled'),count(*) FROM source.orders GROUP BY 1 ORDER BY 1"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O075",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "For each order status, show total orders and how many have at least one valid review score.",
+    "task_family": "complex",
+    "semantic_template_id": "review-coverage-by-status",
+    "answer_type": "table",
+    "difficulty": "advanced",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Order denominator; score valid integer1-5; repeated reviews collapse to one order; missing reviews count zero."
+    },
+    "reference": {
+      "sql": "WITH r AS (SELECT order_id, avg(review_score::INTEGER) AS score FROM source.reviews WHERE try_cast(review_score AS INTEGER) BETWEEN 1 AND 5 GROUP BY order_id) SELECT order_status,count(*),count(r.order_id) FROM source.orders o LEFT JOIN r USING(order_id) GROUP BY 1 ORDER BY 1"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O076",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "How many sampled orders have no item records at all?",
+    "task_family": "edge",
+    "semantic_template_id": "no-item-order-count",
+    "answer_type": "number",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Source orders anti-existence over items; includes all statuses; empty match count is numeric zero."
+    },
+    "reference": {
+      "sql": "SELECT count(*) FROM source.orders o WHERE NOT EXISTS(SELECT 1 FROM source.items i WHERE i.order_id=o.order_id)"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O077",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "How many payment rows duplicate an order ID plus payment-sequence key?",
+    "task_family": "edge",
+    "semantic_template_id": "payment-sequence-key-audit",
+    "answer_type": "number",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Count surplus rows beyond first within composite key; not duplicate order IDs alone; zero when no duplicate groups."
+    },
+    "reference": {
+      "sql": "SELECT coalesce(sum(n-1),0) FROM (SELECT order_id,payment_sequential,count(*) AS n FROM source.payments GROUP BY 1,2 HAVING count(*)>1)"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O078",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "How many item lines lack an English category translation, and how much merchandise value do they carry?",
+    "task_family": "edge",
+    "semantic_template_id": "untranslated-item-merchandise",
+    "answer_type": "table",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Item grain; includes NULL source category and absent translation; BRL excludes freight; retain NULL SUM for empty cohort."
+    },
+    "reference": {
+      "sql": "SELECT count(*),sum(price::DECIMAL(18,2)) FROM source.items i JOIN source.products p USING(product_id) LEFT JOIN source.categories t USING(product_category_name) WHERE t.product_category_name_english IS NULL"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O079",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "How many extra review rows are there beyond one per reviewed order?",
+    "task_family": "edge",
+    "semantic_template_id": "review-multiplicity-surplus",
+    "answer_type": "number",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Review-row count minus distinct reviewed order count; no assumption that review_id is unique."
+    },
+    "reference": {
+      "sql": "SELECT count(*)-count(DISTINCT order_id) FROM source.reviews"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O080",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "For purchases from 31 December 2017 through 1 January 2018 inclusive, give each calendar date and its order count.",
+    "task_family": "edge",
+    "semantic_template_id": "year-turn-boundary-reconciliation",
+    "answer_type": "table",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Naive purchase timestamps; full two calendar days via half-open endpoint; omit dates with zero orders."
+    },
+    "reference": {
+      "sql": "SELECT order_purchase_timestamp::DATE AS day,count(*) FROM source.orders WHERE order_purchase_timestamp>='2017-12-31' AND order_purchase_timestamp<'2018-01-02' GROUP BY 1 ORDER BY 1"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O081",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "How many orders have payment records summing to exactly zero BRL?",
+    "task_family": "edge",
+    "semantic_template_id": "zero-paid-order-count",
+    "answer_type": "number",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Payment-bearing orders only; exact DECIMAL sum zero; missing payment records are not zero-valued payments."
+    },
+    "reference": {
+      "sql": "WITH p AS (SELECT order_id, sum(payment_value::DECIMAL(18,2)) AS paid, count(*) AS payment_rows FROM source.payments GROUP BY order_id) SELECT count(*) FROM p WHERE paid=0"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O082",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "Can we treat the sample's total merchandise value as total Brazilian online retail sales? Explain the limitations.",
+    "task_family": "reasoning",
+    "semantic_template_id": "sample-not-market-total",
+    "answer_type": "text",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Reject that interpretation explicitly | Identify the 15,000-order retained Olist sample and limited platform coverage | Explain that neither sample totals nor Olist platform totals represent the whole Brazilian market | Do not invent a market expansion factor"
+    },
+    "reference": {},
+    "grading_rule": {
+      "kind": "human_rubric",
+      "criteria": [
+        "Reject that interpretation explicitly",
+        "Identify the 15,000-order retained Olist sample and limited platform coverage",
+        "Explain that neither sample totals nor Olist platform totals represent the whole Brazilian market",
+        "Do not invent a market expansion factor"
+      ]
+    },
+    "review_status": "PENDING_HUMAN_REVIEW"
+  },
+  {
+    "task_id": "O083",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "The voucher payment total is our marketing discount spend, correct? Explain what can actually be inferred.",
+    "task_family": "reasoning",
+    "semantic_template_id": "voucher-not-discount-estimate",
+    "answer_type": "text",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Do not equate voucher tender with marketing discount expense | Explain payment_type and payment_value represent recorded payment instruments | State that discount/campaign funding data are unavailable | Allow a clearly labelled voucher payment total as a descriptive proxy only"
+    },
+    "reference": {},
+    "grading_rule": {
+      "kind": "human_rubric",
+      "criteria": [
+        "Do not equate voucher tender with marketing discount expense",
+        "Explain payment_type and payment_value represent recorded payment instruments",
+        "State that discount/campaign funding data are unavailable",
+        "Allow a clearly labelled voucher payment total as a descriptive proxy only"
+      ]
+    },
+    "review_status": "PENDING_HUMAN_REVIEW"
+  },
+  {
+    "task_id": "O084",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "Please total the money refunded on cancelled orders. Can this snapshot support that number?",
+    "task_family": "reasoning",
+    "semantic_template_id": "refund-status-unavailability",
+    "answer_type": "text",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "State refund amounts and refund transactions are absent | Distinguish canceled status and recorded payment from confirmed refunds | Refuse to manufacture a refund total | May propose recorded payments on canceled orders only with a clear non-refund label"
+    },
+    "reference": {},
+    "grading_rule": {
+      "kind": "human_rubric",
+      "criteria": [
+        "State refund amounts and refund transactions are absent",
+        "Distinguish canceled status and recorded payment from confirmed refunds",
+        "Refuse to manufacture a refund total",
+        "May propose recorded payments on canceled orders only with a clear non-refund label"
+      ]
+    },
+    "review_status": "PENDING_HUMAN_REVIEW"
+  },
+  {
+    "task_id": "O085",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "development",
+    "question": "A report joins order payments directly to item lines. Why might its payment total be too high, and how should it be calculated?",
+    "task_family": "reasoning",
+    "semantic_template_id": "multi-item-grain-explanation",
+    "answer_type": "text",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Explain many-to-many multiplication for orders with multiple items or payment rows | Require independent payment aggregation at order grain before joining | Explain that DISTINCT payment_value is unsafe when equal legitimate amounts occur | Preserve full recorded payments without treating them as net revenue"
+    },
+    "reference": {},
+    "grading_rule": {
+      "kind": "human_rubric",
+      "criteria": [
+        "Explain many-to-many multiplication for orders with multiple items or payment rows",
+        "Require independent payment aggregation at order grain before joining",
+        "Explain that DISTINCT payment_value is unsafe when equal legitimate amounts occur",
+        "Preserve full recorded payments without treating them as net revenue"
+      ]
+    },
+    "review_status": "PENDING_HUMAN_REVIEW"
+  },
+  {
+    "task_id": "O086",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "validation",
+    "question": "Among eligible delivered orders, what is the median number of calendar days early relative to the promised delivery date? Negative values mean late.",
+    "task_family": "aggregate",
+    "semantic_template_id": "delivery-slack-median",
+    "answer_type": "number",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Eligible delivered order grain; both dates present; promised minus actual calendar days; median includes negatives."
+    },
+    "reference": {
+      "sql": "SELECT median(date_diff('day',order_delivered_customer_date::DATE,order_estimated_delivery_date::DATE)) FROM source.orders WHERE order_status='delivered' AND order_delivered_customer_date IS NOT NULL AND order_estimated_delivery_date IS NOT NULL"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O087",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "validation",
+    "question": "How many orders contain repeated lines for the same product ID?",
+    "task_family": "aggregate",
+    "semantic_template_id": "order-distinct-product-diversity",
+    "answer_type": "number",
+    "difficulty": "basic",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Count orders once where item-line count exceeds distinct product count; all dates/statuses."
+    },
+    "reference": {
+      "sql": "SELECT count(*) FROM (SELECT order_id FROM source.items GROUP BY order_id HAVING count(*)>count(DISTINCT product_id))"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O088",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "validation",
+    "question": "What is the mean promised delivery lead time in calendar days from purchase, excluding missing or negative promises?",
+    "task_family": "aggregate",
+    "semantic_template_id": "mean-promised-lead-time",
+    "answer_type": "number",
+    "difficulty": "basic",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Order grain all statuses; calendar-date promised minus purchase; nonnegative and nonmissing only."
+    },
+    "reference": {
+      "sql": "SELECT avg(date_diff('day',order_purchase_timestamp::DATE,order_estimated_delivery_date::DATE)) FROM source.orders WHERE order_estimated_delivery_date::DATE>=order_purchase_timestamp::DATE"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O089",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "validation",
+    "question": "For positive credit-card payment records, report the payment-value-weighted mean number of installments.",
+    "task_family": "aggregate",
+    "semantic_template_id": "credit-card-weighted-installments",
+    "answer_type": "number",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Payment-row grain; BRL weights; positive card payments and installments>=1; no interest-rate interpretation."
+    },
+    "reference": {
+      "sql": "SELECT sum(payment_value::DECIMAL(18,2)*payment_installments::INT)/sum(payment_value::DECIMAL(18,2)) FROM source.payments WHERE payment_type='credit_card' AND payment_value::DECIMAL(18,2)>0 AND payment_installments::INT>=1"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O090",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "validation",
+    "question": "Compare 2018 purchase months by the fraction of orders that have a recorded customer delivery timestamp, regardless of status.",
+    "task_family": "comparison",
+    "semantic_template_id": "cohort-month-delivery-completeness",
+    "answer_type": "table",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "All-status purchase-month denominator; timestamp presence only, not late eligibility; partial months retained."
+    },
+    "reference": {
+      "sql": "SELECT left(order_purchase_timestamp,7) AS month,avg((order_delivered_customer_date IS NOT NULL)::INT) FROM source.orders WHERE order_purchase_timestamp>='2018-01-01' AND order_purchase_timestamp<'2019-01-01' GROUP BY 1 ORDER BY 1"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O091",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "validation",
+    "question": "For each translated category, show mean item price and mean merchandise per order containing that category, counting only that category's items.",
+    "task_family": "comparison",
+    "semantic_template_id": "category-item-price-vs-order-ticket",
+    "answer_type": "table",
+    "difficulty": "advanced",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Category-order intermediate grain; first metric BRL/item line, second BRL/category-order; no whole-basket attribution."
+    },
+    "reference": {
+      "sql": "WITH x AS (SELECT t.product_category_name_english AS category,i.order_id,sum(price::DECIMAL(18,2)) AS value,count(*) AS n FROM source.items i JOIN source.products p USING(product_id) JOIN source.categories t USING(product_category_name) GROUP BY 1,2) SELECT category,sum(value)/sum(n),avg(value) FROM x GROUP BY 1 ORDER BY 1"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O092",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "validation",
+    "question": "How did freight's share of merchandise-plus-freight change from Q1 to Q2 2018? Return both fractions and the signed percentage-point change.",
+    "task_family": "comparison",
+    "semantic_template_id": "quarter-freight-share-change",
+    "answer_type": "table",
+    "difficulty": "advanced",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Item grain by purchase quarter; denominator merchandise+freight BRL; signed Q2-Q1 difference times100; not percent growth."
+    },
+    "reference": {
+      "sql": "WITH q AS (SELECT extract(quarter FROM order_purchase_timestamp::TIMESTAMP) AS quarter,sum(freight_value::DECIMAL(18,2))/sum(price::DECIMAL(18,2)+freight_value::DECIMAL(18,2)) AS share FROM source.items JOIN source.orders USING(order_id) WHERE order_purchase_timestamp>='2018-01-01' AND order_purchase_timestamp<'2018-07-01' GROUP BY 1) SELECT max(share) FILTER(WHERE quarter=1),max(share) FILTER(WHERE quarter=2),100*(max(share) FILTER(WHERE quarter=2)-max(share) FILTER(WHERE quarter=1)) FROM q"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O093",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "validation",
+    "question": "Among products with at least five item lines, list the five highest mean freight amounts per item.",
+    "task_family": "ranking",
+    "semantic_template_id": "product-weighted-freight-outliers",
+    "answer_type": "table",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Product groups over item lines; support threshold5; mean BRL/item; ties product ID."
+    },
+    "reference": {
+      "sql": "SELECT product_id,count(*) AS n,avg(freight_value::DECIMAL(18,2)) AS mean_freight FROM source.items GROUP BY 1 HAVING count(*)>=5 ORDER BY mean_freight DESC,product_id LIMIT 5"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O094",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "validation",
+    "question": "Among customer states with at least 50 eligible delivered orders, which three have the highest late fraction? Show state, eligible count and fraction.",
+    "task_family": "ranking",
+    "semantic_template_id": "state-lateness-support-threshold",
+    "answer_type": "table",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Order grain; both dates and delivered status; count threshold uses eligible orders; date-only late; ties state."
+    },
+    "reference": {
+      "sql": "SELECT customer_state,count(*) AS n,avg((left(order_delivered_customer_date,10)>left(order_estimated_delivery_date,10))::INT) AS rate FROM source.orders JOIN source.customers USING(customer_id) WHERE order_status='delivered' AND order_delivered_customer_date IS NOT NULL AND order_estimated_delivery_date IS NOT NULL GROUP BY 1 HAVING count(*)>=50 ORDER BY rate DESC,customer_state LIMIT 3"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O095",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "validation",
+    "question": "Which three payment methods contributed most in absolute BRL to the recorded payment change from all of 2017 to all of 2018?",
+    "task_family": "ranking",
+    "semantic_template_id": "top-month-payment-change-contribution",
+    "answer_type": "table",
+    "difficulty": "advanced",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Payment rows joined one-to-one to orders; signed2018-2017; full available annual sample including partial2018 coverage; ties method."
+    },
+    "reference": {
+      "sql": "SELECT payment_type,sum(payment_value::DECIMAL(18,2)*CASE WHEN order_purchase_timestamp>='2018-01-01' THEN 1 ELSE -1 END) AS delta FROM source.payments JOIN source.orders USING(order_id) WHERE order_purchase_timestamp>='2017-01-01' AND order_purchase_timestamp<'2019-01-01' GROUP BY 1 ORDER BY abs(delta) DESC,payment_type LIMIT 3"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O096",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "validation",
+    "question": "For each seller, find the first purchase month represented in the sample and count sellers by that first month.",
+    "task_family": "complex",
+    "semantic_template_id": "seller-month-first-appearance",
+    "answer_type": "table",
+    "difficulty": "advanced",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "First observed sampled purchase, not onboarding date; each seller counted once; chronological month."
+    },
+    "reference": {
+      "sql": "WITH s AS (SELECT seller_id,min(left(order_purchase_timestamp,7)) AS first_month FROM source.items JOIN source.orders USING(order_id) GROUP BY 1) SELECT first_month,count(*) FROM s GROUP BY 1 ORDER BY 1"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O097",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "validation",
+    "question": "How many item-and-payment-bearing orders differ by more than one cent between recorded payments and merchandise plus freight?",
+    "task_family": "complex",
+    "semantic_template_id": "positive-basket-payment-discrepancies",
+    "answer_type": "number",
+    "difficulty": "advanced",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Independent order aggregations; exact DECIMAL BRL; strict >0.01; no inference of accounting errors."
+    },
+    "reference": {
+      "sql": "WITH p AS (SELECT order_id, sum(payment_value::DECIMAL(18,2)) AS paid, count(*) AS payment_rows FROM source.payments GROUP BY order_id), i AS (SELECT order_id, sum(price::DECIMAL(18,2)) AS merchandise, sum(freight_value::DECIMAL(18,2)) AS freight, count(*) AS item_count, count(DISTINCT seller_id) AS sellers FROM source.items GROUP BY order_id) SELECT count(*) FROM p JOIN i USING(order_id) WHERE abs(paid-merchandise-freight)>0.01"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O098",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "validation",
+    "question": "For customer identities with multiple sampled purchases, what is the median elapsed days from their first to second purchase?",
+    "task_family": "complex",
+    "semantic_template_id": "repeat-buyer-second-purchase-gap",
+    "answer_type": "number",
+    "difficulty": "advanced",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "customer_unique_id identity; first two sampled orders ordered timestamp then ID; continuous days; sample gaps not complete lifetime history."
+    },
+    "reference": {
+      "sql": "WITH x AS (SELECT customer_unique_id,order_purchase_timestamp::TIMESTAMP AS bought,row_number() OVER(PARTITION BY customer_unique_id ORDER BY order_purchase_timestamp,order_id) AS rn FROM source.orders JOIN source.customers USING(customer_id)), g AS (SELECT customer_unique_id,epoch(max(bought)-min(bought))/86400.0 AS days FROM x WHERE rn<=2 GROUP BY 1 HAVING count(*)=2) SELECT median(days) FROM g"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O099",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "validation",
+    "question": "How many sampled orders contain items from at least two translated English categories and at least two sellers?",
+    "task_family": "complex",
+    "semantic_template_id": "translated-category-multiple-seller-orders",
+    "answer_type": "number",
+    "difficulty": "advanced",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Order grain; distinct translated categories ignore NULL; seller count includes all item lines; count each qualifying order once."
+    },
+    "reference": {
+      "sql": "SELECT count(*) FROM (SELECT order_id FROM source.items JOIN source.products USING(product_id) LEFT JOIN source.categories USING(product_category_name) GROUP BY 1 HAVING count(DISTINCT product_category_name_english)>=2 AND count(DISTINCT seller_id)>=2)"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O100",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "validation",
+    "question": "For orders purchased before 1 January 2010, report the order count and sum of recorded payments. Keep an absent sum as NULL.",
+    "task_family": "edge",
+    "semantic_template_id": "empty-cohort-aggregate-semantics",
+    "answer_type": "table",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Order count over empty cohort is0; SUM is NULL, not zero; no synthesized payment values."
+    },
+    "reference": {
+      "sql": "WITH p AS (SELECT order_id, sum(payment_value::DECIMAL(18,2)) AS paid, count(*) AS payment_rows FROM source.payments GROUP BY order_id) SELECT count(*),sum(paid) FROM source.orders LEFT JOIN p USING(order_id) WHERE order_purchase_timestamp<'2010-01-01'"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0.000001",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O101",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "validation",
+    "question": "How many delivered orders have a customer delivery timestamp but no recorded carrier handoff timestamp?",
+    "task_family": "edge",
+    "semantic_template_id": "delivered-missing-carrier-date",
+    "answer_type": "number",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Order grain; timestamp presence only; do not substitute invalid negative duration for missingness."
+    },
+    "reference": {
+      "sql": "SELECT count(*) FROM source.orders WHERE order_status='delivered' AND order_delivered_customer_date IS NOT NULL AND order_delivered_carrier_date IS NULL"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O102",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "validation",
+    "question": "How many products have at least one missing or nonpositive recorded length, height or width?",
+    "task_family": "edge",
+    "semantic_template_id": "nonpositive-dimension-product-audit",
+    "answer_type": "number",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Product dimension grain; NULL or<=0 in any dimension; count product once; centimeters."
+    },
+    "reference": {
+      "sql": "SELECT count(*) FROM source.products WHERE coalesce(product_length_cm::DOUBLE,0)<=0 OR coalesce(product_height_cm::DOUBLE,0)<=0 OR coalesce(product_width_cm::DOUBLE,0)<=0"
+    },
+    "grading_rule": {
+      "kind": "rows",
+      "ordered": true,
+      "absolute_tolerance": "0",
+      "null_equals_zero": false
+    },
+    "review_status": "AUTO_VERIFIED"
+  },
+  {
+    "task_id": "O103",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "validation",
+    "question": "Customers who leave low reviews seem to receive deliveries later. Does that prove low ratings cause slow delivery?",
+    "task_family": "reasoning",
+    "semantic_template_id": "review-causal-selection",
+    "answer_type": "text",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Reject reverse causal conclusion from association | Explain reviews follow or relate to delivery experience and selection/confounding can matter | Distinguish descriptive association from an intervention effect | State that observational snapshot alone cannot identify that causal direction"
+    },
+    "reference": {},
+    "grading_rule": {
+      "kind": "human_rubric",
+      "criteria": [
+        "Reject reverse causal conclusion from association",
+        "Explain reviews follow or relate to delivery experience and selection/confounding can matter",
+        "Distinguish descriptive association from an intervention effect",
+        "State that observational snapshot alone cannot identify that causal direction"
+      ]
+    },
+    "review_status": "PENDING_HUMAN_REVIEW"
+  },
+  {
+    "task_id": "O104",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "validation",
+    "question": "Could we compare seller service by treating every order without a delivery timestamp as a late delivery?",
+    "task_family": "reasoning",
+    "semantic_template_id": "survivorship-delivery-denominator",
+    "answer_type": "text",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Reject automatic missing-as-late classification | Separate delivered eligible orders from undelivered/canceled orders and missing data | Require an explicit observation horizon and promised-date logic for an alternative overdue metric | State the sample snapshot cannot silently replace the established delivered-only late denominator"
+    },
+    "reference": {},
+    "grading_rule": {
+      "kind": "human_rubric",
+      "criteria": [
+        "Reject automatic missing-as-late classification",
+        "Separate delivered eligible orders from undelivered/canceled orders and missing data",
+        "Require an explicit observation horizon and promised-date logic for an alternative overdue metric",
+        "State the sample snapshot cannot silently replace the established delivered-only late denominator"
+      ]
+    },
+    "review_status": "PENDING_HUMAN_REVIEW"
+  },
+  {
+    "task_id": "O105",
+    "dataset": "olist",
+    "database_id": "olist-15000-v2",
+    "split": "validation",
+    "question": "Our customer_id values almost never repeat. Can we conclude shoppers never return?",
+    "task_family": "reasoning",
+    "semantic_template_id": "customer-id-identity-warning",
+    "answer_type": "text",
+    "difficulty": "intermediate",
+    "business_definition": {
+      "population": "Pinned 15,000-order sample only; all statuses unless explicitly restricted.",
+      "contract": "Explain customer_id is order-linked and customer_unique_id identifies recurring customers | Require repeat analysis at customer_unique_id grain | Explain sampled orders can miss purchases outside the sample | Do not conclude no repeat customers from customer_id uniqueness"
+    },
+    "reference": {},
+    "grading_rule": {
+      "kind": "human_rubric",
+      "criteria": [
+        "Explain customer_id is order-linked and customer_unique_id identifies recurring customers",
+        "Require repeat analysis at customer_unique_id grain",
+        "Explain sampled orders can miss purchases outside the sample",
+        "Do not conclude no repeat customers from customer_id uniqueness"
+      ]
+    },
+    "review_status": "PENDING_HUMAN_REVIEW"
+  }
+]

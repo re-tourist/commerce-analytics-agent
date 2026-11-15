@@ -1,5 +1,12 @@
 # Olist reference review
 
+Phase II adds 100 questions: 88 source-SQL references marked `AUTO_VERIFIED` and 12
+rubric-based references marked `PENDING_HUMAN_REVIEW`. None is independently human-approved.
+All 45 historical questions below retain their formal pending review status. See
+[the current dataset specification](../docs/BENCHMARKS.md) for split ownership, the protected
+candidate Test review packet, and the independent review record required before acceptance.
+`AUTO_VERIFIED` verifies computation and source consistency, not business interpretation.
+
 Automated checks verified that reference SQL executes on the pinned sample and that the two demo totals reconcile to source records. The checks used the logical sample with order ID SHA-256 `93e5d327a4b40f9017d09c0e1648f0142fbc499fac7e2217816d2edde7dce175`.
 
 ## Human review

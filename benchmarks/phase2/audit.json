@@ -1,0 +1,103 @@
+{
+  "all_olist_formal_acceptance": "PENDING_HUMAN_REVIEW",
+  "counts": {
+    "databench": {
+      "development": 152,
+      "test": 60,
+      "validation": 40
+    },
+    "olist": {
+      "development": 85,
+      "test": 40,
+      "validation": 20
+    }
+  },
+  "cross_split_duplicate_candidates": 0,
+  "databench_answer_types": {
+    "development": {
+      "boolean": 37,
+      "category": 24,
+      "list[category]": 21,
+      "list[number]": 22,
+      "number": 48
+    },
+    "test": {
+      "boolean": 15,
+      "category": 15,
+      "list[category]": 7,
+      "list[number]": 8,
+      "number": 15
+    },
+    "validation": {
+      "boolean": 10,
+      "category": 10,
+      "list[category]": 5,
+      "list[number]": 5,
+      "number": 10
+    }
+  },
+  "databench_databases": {
+    "development": 11,
+    "test": 6,
+    "validation": 4
+  },
+  "databench_official_reference_roundtrips": {
+    "development": 152,
+    "test": 60,
+    "validation": 40
+  },
+  "databench_selection_rejections": 1,
+  "difficulty": {
+    "databench": {
+      "advanced": 6,
+      "basic": 68,
+      "intermediate": 178
+    },
+    "olist": {
+      "advanced": 33,
+      "basic": 14,
+      "intermediate": 53,
+      "legacy_unrated": 45
+    }
+  },
+  "legacy_within_development_duplicate_candidates": 54,
+  "limitations": [
+    "Automated lexical/SQL/template checks are not a proof of semantic independence; independent review remains required.",
+    "Official answers/types are preserved, not independently corrected; round-trips only validate scorer compatibility.",
+    "Test builder has seen candidate content; public upstream DataBench answers are reconstructible.",
+    "No independent human approval or true OS/account isolation has been established."
+  ],
+  "new_olist_family_distribution": {
+    "development": {
+      "aggregate": 8,
+      "comparison": 8,
+      "complex": 8,
+      "edge": 6,
+      "ranking": 6,
+      "reasoning": 4
+    },
+    "test": {
+      "aggregate": 6,
+      "comparison": 7,
+      "complex": 9,
+      "edge": 6,
+      "ranking": 7,
+      "reasoning": 5
+    },
+    "validation": {
+      "aggregate": 4,
+      "comparison": 3,
+      "complex": 4,
+      "edge": 3,
+      "ranking": 3,
+      "reasoning": 3
+    }
+  },
+  "new_olist_human_approved": 0,
+  "new_olist_rubric_tasks": 12,
+  "new_olist_source_sql_checks": 88,
+  "new_sql_template_collisions": 0,
+  "new_tasks": 200,
+  "retained_tasks": 197,
+  "unique_ids": 397
+}

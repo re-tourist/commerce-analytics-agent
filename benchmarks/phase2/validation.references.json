@@ -1,0 +1,843 @@
+{
+  "DB:052_Professional:000": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:052_Professional:001": {
+    "answer": "False",
+    "official_type": "boolean"
+  },
+  "DB:052_Professional:003": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:052_Professional:004": {
+    "answer": "0.7826336180787501",
+    "official_type": "number"
+  },
+  "DB:052_Professional:005": {
+    "answer": "1002",
+    "official_type": "number"
+  },
+  "DB:052_Professional:009": {
+    "answer": "Governor",
+    "official_type": "category"
+  },
+  "DB:052_Professional:011": {
+    "answer": "Program Manager",
+    "official_type": "category"
+  },
+  "DB:052_Professional:013": {
+    "answer": "['.Net Architect', 'Android Developer', 'Principal Engineer', 'Game Engineer']",
+    "official_type": "list[category]"
+  },
+  "DB:052_Professional:014": {
+    "answer": "['Director of Athletics', 'Recruiting Coordinator', 'Athletic Coordinator', 'Director of Personnel', 'Skills Trainer']",
+    "official_type": "list[category]"
+  },
+  "DB:052_Professional:017": {
+    "answer": "[0.1652381569664056, 0.2005428064324122, 0.2215546116855247, 0.2506791678499942]",
+    "official_type": "list[number]"
+  },
+  "DB:053_Patents:000": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:053_Patents:003": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:053_Patents:004": {
+    "answer": "3574",
+    "official_type": "number"
+  },
+  "DB:053_Patents:005": {
+    "answer": "14.745974597459746",
+    "official_type": "number"
+  },
+  "DB:053_Patents:006": {
+    "answer": "100",
+    "official_type": "number"
+  },
+  "DB:053_Patents:008": {
+    "answer": "Massachusetts Institute of Technology",
+    "official_type": "category"
+  },
+  "DB:053_Patents:009": {
+    "answer": "B2",
+    "official_type": "category"
+  },
+  "DB:053_Patents:011": {
+    "answer": "member, portion, body, end",
+    "official_type": "category"
+  },
+  "DB:053_Patents:013": {
+    "answer": "['utility', 'design']",
+    "official_type": "list[category]"
+  },
+  "DB:053_Patents:018": {
+    "answer": "[16, 1]",
+    "official_type": "list[number]"
+  },
+  "DB:054_Joe:000": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:054_Joe:002": {
+    "answer": "False",
+    "official_type": "boolean"
+  },
+  "DB:054_Joe:003": {
+    "answer": "True",
+    "official_type": "boolean"
+  },
+  "DB:054_Joe:004": {
+    "answer": "30308047",
+    "official_type": "number"
+  },
+  "DB:054_Joe:006": {
+    "answer": "205169",
+    "official_type": "number"
+  },
+  "DB:054_Joe:008": {
+    "answer": "Joe Biden",
+    "official_type": "category"
+  },
+  "DB:054_Joe:010": {
+    "answer": "Joe Biden",
+    "official_type": "category"
+  },
+  "DB:054_Joe:013": {
+    "answer": "['Joe Biden']",
+    "official_type": "list[category]"
+  },
+  "DB:054_Joe:016": {
+    "answer": "[30308047, 30308047, 30308045]",
+    "official_type": "list[number]"
+  },
+  "DB:054_Joe:019": {
+    "answer": "[205169, 101314]",
+    "official_type": "list[number]"
+  },
+  "DB:055_German:001": {
+    "answer": "False",
+    "official_type": "boolean"
+  },
+  "DB:055_German:003": {
+    "answer": "False",
+    "official_type": "boolean"
+  },
+  "DB:055_German:005": {
+    "answer": "367",
+    "official_type": "number"
+  },
+  "DB:055_German:006": {
+    "answer": "72",
+    "official_type": "number"
+  },
+  "DB:055_German:007": {
+    "answer": "113",
+    "official_type": "number"
+  },
+  "DB:055_German:008": {
+    "answer": "Radio/TV",
+    "official_type": "category"
+  },
+  "DB:055_German:010": {
+    "answer": "Existing Credits Paid Back Duly Till Now",
+    "official_type": "category"
+  },
+  "DB:055_German:011": {
+    "answer": "Less than 100 DM",
+    "official_type": "category"
+  },
+  "DB:055_German:013": {
+    "answer": "['Skilled', 'Skilled', 'Skilled', 'Unskilled - Resident']",
+    "official_type": "list[category]"
+  },
+  "DB:055_German:016": {
+    "answer": "[18424, 15945, 15857]",
+    "official_type": "list[number]"
+  },
+  "O086": {
+    "rows": [
+      [
+        12.0
+      ]
+    ],
+    "sql": "SELECT median(date_diff('day',order_delivered_customer_date::DATE,order_estimated_delivery_date::DATE)) FROM source.orders WHERE order_status='delivered' AND order_delivered_customer_date IS NOT NULL AND order_estimated_delivery_date IS NOT NULL"
+  },
+  "O087": {
+    "rows": [
+      [
+        1020
+      ]
+    ],
+    "sql": "SELECT count(*) FROM (SELECT order_id FROM source.items GROUP BY order_id HAVING count(*)>count(DISTINCT product_id))"
+  },
+  "O088": {
+    "rows": [
+      [
+        24.3644
+      ]
+    ],
+    "sql": "SELECT avg(date_diff('day',order_purchase_timestamp::DATE,order_estimated_delivery_date::DATE)) FROM source.orders WHERE order_estimated_delivery_date::DATE>=order_purchase_timestamp::DATE"
+  },
+  "O089": {
+    "rows": [
+      [
+        4.991773728
+      ]
+    ],
+    "sql": "SELECT sum(payment_value::DECIMAL(18,2)*payment_installments::INT)/sum(payment_value::DECIMAL(18,2)) FROM source.payments WHERE payment_type='credit_card' AND payment_value::DECIMAL(18,2)>0 AND payment_installments::INT>=1"
+  },
+  "O090": {
+    "rows": [
+      [
+        "2018-01",
+        0.97080292
+      ],
+      [
+        "2018-02",
+        0.977339901
+      ],
+      [
+        "2018-03",
+        0.976102941
+      ],
+      [
+        "2018-04",
+        0.988538682
+      ],
+      [
+        "2018-05",
+        0.979749277
+      ],
+      [
+        "2018-06",
+        0.986021505
+      ],
+      [
+        "2018-07",
+        0.98630137
+      ],
+      [
+        "2018-08",
+        0.972505092
+      ],
+      [
+        "2018-09",
+        0.0
+      ],
+      [
+        "2018-10",
+        0.0
+      ]
+    ],
+    "sql": "SELECT left(order_purchase_timestamp,7) AS month,avg((order_delivered_customer_date IS NOT NULL)::INT) FROM source.orders WHERE order_purchase_timestamp>='2018-01-01' AND order_purchase_timestamp<'2019-01-01' GROUP BY 1 ORDER BY 1"
+  },
+  "O091": {
+    "rows": [
+      [
+        "agro_industry_and_commerce",
+        354.218292683,
+        453.8421875
+      ],
+      [
+        "air_conditioning",
+        176.390666667,
+        188.99
+      ],
+      [
+        "art",
+        269.916969697,
+        269.916969697
+      ],
+      [
+        "arts_and_craftmanship",
+        39.9,
+        39.9
+      ],
+      [
+        "audio",
+        150.883387097,
+        155.912833333
+      ],
+      [
+        "auto",
+        144.416211901,
+        156.450896226
+      ],
+      [
+        "baby",
+        136.461851852,
+        145.200788177
+      ],
+      [
+        "bed_bath_table",
+        94.235143907,
+        111.592451051
+      ],
+      [
+        "books_general_interest",
+        84.117325581,
+        92.74474359
+      ],
+      [
+        "books_imported",
+        61.68,
+        68.533333333
+      ],
+      [
+        "books_technical",
+        75.469038462,
+        80.089591837
+      ],
+      [
+        "cds_dvds_musicals",
+        45.0,
+        45.0
+      ],
+      [
+        "christmas_supplies",
+        70.031333333,
+        75.033571429
+      ],
+      [
+        "cine_photo",
+        72.222307692,
+        85.353636364
+      ],
+      [
+        "computers",
+        972.572258065,
+        1116.657037037
+      ],
+      [
+        "computers_accessories",
+        117.117628774,
+        134.703217569
+      ],
+      [
+        "consoles_games",
+        145.417159091,
+        152.341785714
+      ],
+      [
+        "construction_tools_construction",
+        191.157933333,
+        235.030245902
+      ],
+      [
+        "construction_tools_lights",
+        172.592058824,
+        209.576071429
+      ],
+      [
+        "construction_tools_safety",
+        160.927241379,
+        179.495769231
+      ],
+      [
+        "cool_stuff",
+        177.517847458,
+        184.069472759
+      ],
+      [
+        "costruction_tools_garden",
+        142.250833333,
+        155.182727273
+      ],
+      [
+        "costruction_tools_tools",
+        219.821052632,
+        261.0375
+      ],
+      [
+        "diapers_and_hygiene",
+        48.75,
+        48.75
+      ],
+      [
+        "drinks",
+        44.866981132,
+        57.998780488
+      ],
+      [
+        "dvds_blu_ray",
+        45.936,
+        57.42
+      ],
+      [
+        "electronics",
+        60.973849765,
+        64.294207921
+      ],
+      [
+        "fashio_female_clothing",
+        56.936,
+        81.337142857
+      ],
+      [
+        "fashion_bags_accessories",
+        77.826622517,
+        83.051731449
+      ],
+      [
+        "fashion_childrens_clothes",
+        89.99,
+        89.99
+      ],
+      [
+        "fashion_male_clothing",
+        86.432608696,
+        99.3975
+      ],
+      [
+        "fashion_shoes",
+        69.322391304,
+        79.72075
+      ],
+      [
+        "fashion_sport",
+        115.445,
+        115.445
+      ],
+      [
+        "fashion_underwear_beach",
+        57.395652174,
+        60.004545455
+      ],
+      [
+        "fixed_telephony",
+        120.052702703,
+        138.8109375
+      ],
+      [
+        "flowers",
+        20.478,
+        34.13
+      ],
+      [
+        "food",
+        66.757826087,
+        73.115714286
+      ],
+      [
+        "food_drink",
+        46.153421053,
+        53.146363636
+      ],
+      [
+        "furniture_bedroom",
+        168.18,
+        186.866666667
+      ],
+      [
+        "furniture_decor",
+        85.317026144,
+        111.449348986
+      ],
+      [
+        "furniture_living_room",
+        117.664461538,
+        144.305471698
+      ],
+      [
+        "furniture_mattress_and_upholstery",
+        85.2,
+        85.2
+      ],
+      [
+        "garden_tools",
+        121.69426045,
+        145.565057692
+      ],
+      [
+        "health_beauty",
+        129.754648438,
+        143.901184116
+      ],
+      [
+        "home_appliances",
+        112.597099237,
+        113.463230769
+      ],
+      [
+        "home_appliances_2",
+        610.915405405,
+        610.915405405
+      ],
+      [
+        "home_comfort_2",
+        28.566666667,
+        28.566666667
+      ],
+      [
+        "home_confort",
+        130.711290323,
+        144.716071429
+      ],
+      [
+        "home_construction",
+        159.100722892,
+        206.33375
+      ],
+      [
+        "housewares",
+        100.398326848,
+        116.75280543
+      ],
+      [
+        "industry_commerce_and_business",
+        141.972545455,
+        162.676875
+      ],
+      [
+        "kitchen_dining_laundry_garden_furniture",
+        151.761190476,
+        182.113428571
+      ],
+      [
+        "la_cuisine",
+        105.9975,
+        141.33
+      ],
+      [
+        "luggage_accessories",
+        129.299151515,
+        136.758717949
+      ],
+      [
+        "market_place",
+        75.527142857,
+        81.336923077
+      ],
+      [
+        "music",
+        231.1825,
+        231.1825
+      ],
+      [
+        "musical_instruments",
+        299.989591837,
+        316.118064516
+      ],
+      [
+        "office_furniture",
+        159.453979592,
+        190.56695122
+      ],
+      [
+        "party_supplies",
+        120.8,
+        120.8
+      ],
+      [
+        "perfumery",
+        115.829692586,
+        125.349941292
+      ],
+      [
+        "pet_shop",
+        103.24748227,
+        122.851434599
+      ],
+      [
+        "signaling_and_security",
+        118.975434783,
+        182.429
+      ],
+      [
+        "small_appliances",
+        274.689333333,
+        294.31
+      ],
+      [
+        "small_appliances_home_oven_and_coffee",
+        617.31,
+        617.31
+      ],
+      [
+        "sports_leisure",
+        116.627923372,
+        131.774406926
+      ],
+      [
+        "stationery",
+        105.868559322,
+        113.913282675
+      ],
+      [
+        "tablets_printing_image",
+        76.453076923,
+        99.389
+      ],
+      [
+        "telephony",
+        65.363888889,
+        71.066778523
+      ],
+      [
+        "toys",
+        119.241793313,
+        126.143247588
+      ],
+      [
+        "watches_gifts",
+        189.685643897,
+        200.936275208
+      ]
+    ],
+    "sql": "WITH x AS (SELECT t.product_category_name_english AS category,i.order_id,sum(price::DECIMAL(18,2)) AS value,count(*) AS n FROM source.items i JOIN source.products p USING(product_id) JOIN source.categories t USING(product_category_name) GROUP BY 1,2) SELECT category,sum(value)/sum(n),avg(value) FROM x GROUP BY 1 ORDER BY 1"
+  },
+  "O092": {
+    "rows": [
+      [
+        0.144161952,
+        0.135464615,
+        -0.869733716
+      ]
+    ],
+    "sql": "WITH q AS (SELECT extract(quarter FROM order_purchase_timestamp::TIMESTAMP) AS quarter,sum(freight_value::DECIMAL(18,2))/sum(price::DECIMAL(18,2)+freight_value::DECIMAL(18,2)) AS share FROM source.items JOIN source.orders USING(order_id) WHERE order_purchase_timestamp>='2018-01-01' AND order_purchase_timestamp<'2018-07-01' GROUP BY 1) SELECT max(share) FILTER(WHERE quarter=1),max(share) FILTER(WHERE quarter=2),100*(max(share) FILTER(WHERE quarter=2)-max(share) FILTER(WHERE quarter=1)) FROM q"
+  },
+  "O093": {
+    "rows": [
+      [
+        "f27aff266ad97e75d4a24c893b2c311e",
+        5,
+        86.22
+      ],
+      [
+        "1dec4c88c685d5a07bf01dcb0f8bf9f8",
+        7,
+        69.614285714
+      ],
+      [
+        "fe6a9515d655fa7936b8a7c841039f34",
+        8,
+        67.065
+      ],
+      [
+        "af51d485dc5255ba2e18b21b550156e6",
+        11,
+        63.030909091
+      ],
+      [
+        "7814c273ab16783d73a9863ebfa8b141",
+        7,
+        55.865714286
+      ]
+    ],
+    "sql": "SELECT product_id,count(*) AS n,avg(freight_value::DECIMAL(18,2)) AS mean_freight FROM source.items GROUP BY 1 HAVING count(*)>=5 ORDER BY mean_freight DESC,product_id LIMIT 5"
+  },
+  "O094": {
+    "rows": [
+      [
+        "AL",
+        70,
+        0.257142857
+      ],
+      [
+        "PI",
+        66,
+        0.227272727
+      ],
+      [
+        "PE",
+        243,
+        0.160493827
+      ]
+    ],
+    "sql": "SELECT customer_state,count(*) AS n,avg((left(order_delivered_customer_date,10)>left(order_estimated_delivery_date,10))::INT) AS rate FROM source.orders JOIN source.customers USING(customer_id) WHERE order_status='delivered' AND order_delivered_customer_date IS NOT NULL AND order_estimated_delivery_date IS NOT NULL GROUP BY 1 HAVING count(*)>=50 ORDER BY rate DESC,customer_state LIMIT 3"
+  },
+  "O095": {
+    "rows": [
+      [
+        "credit_card",
+        {
+          "decimal": "205914.04"
+        }
+      ],
+      [
+        "boleto",
+        {
+          "decimal": "27286.67"
+        }
+      ],
+      [
+        "debit_card",
+        {
+          "decimal": "15770.70"
+        }
+      ]
+    ],
+    "sql": "SELECT payment_type,sum(payment_value::DECIMAL(18,2)*CASE WHEN order_purchase_timestamp>='2018-01-01' THEN 1 ELSE -1 END) AS delta FROM source.payments JOIN source.orders USING(order_id) WHERE order_purchase_timestamp>='2017-01-01' AND order_purchase_timestamp<'2019-01-01' GROUP BY 1 ORDER BY abs(delta) DESC,payment_type LIMIT 3"
+  },
+  "O096": {
+    "rows": [
+      [
+        "2016-09",
+        1
+      ],
+      [
+        "2016-10",
+        37
+      ],
+      [
+        "2017-01",
+        59
+      ],
+      [
+        "2017-02",
+        114
+      ],
+      [
+        "2017-03",
+        114
+      ],
+      [
+        "2017-04",
+        85
+      ],
+      [
+        "2017-05",
+        106
+      ],
+      [
+        "2017-06",
+        59
+      ],
+      [
+        "2017-07",
+        64
+      ],
+      [
+        "2017-08",
+        83
+      ],
+      [
+        "2017-09",
+        79
+      ],
+      [
+        "2017-10",
+        84
+      ],
+      [
+        "2017-11",
+        126
+      ],
+      [
+        "2017-12",
+        90
+      ],
+      [
+        "2018-01",
+        109
+      ],
+      [
+        "2018-02",
+        79
+      ],
+      [
+        "2018-03",
+        70
+      ],
+      [
+        "2018-04",
+        119
+      ],
+      [
+        "2018-05",
+        113
+      ],
+      [
+        "2018-06",
+        102
+      ],
+      [
+        "2018-07",
+        110
+      ],
+      [
+        "2018-08",
+        110
+      ]
+    ],
+    "sql": "WITH s AS (SELECT seller_id,min(left(order_purchase_timestamp,7)) AS first_month FROM source.items JOIN source.orders USING(order_id) GROUP BY 1) SELECT first_month,count(*) FROM s GROUP BY 1 ORDER BY 1"
+  },
+  "O097": {
+    "rows": [
+      [
+        44
+      ]
+    ],
+    "sql": "WITH p AS (SELECT order_id, sum(payment_value::DECIMAL(18,2)) AS paid, count(*) AS payment_rows FROM source.payments GROUP BY order_id), i AS (SELECT order_id, sum(price::DECIMAL(18,2)) AS merchandise, sum(freight_value::DECIMAL(18,2)) AS freight, count(*) AS item_count, count(DISTINCT seller_id) AS sellers FROM source.items GROUP BY order_id) SELECT count(*) FROM p JOIN i USING(order_id) WHERE abs(paid-merchandise-freight)>0.01"
+  },
+  "O098": {
+    "rows": [
+      [
+        45.780034722
+      ]
+    ],
+    "sql": "WITH x AS (SELECT customer_unique_id,order_purchase_timestamp::TIMESTAMP AS bought,row_number() OVER(PARTITION BY customer_unique_id ORDER BY order_purchase_timestamp,order_id) AS rn FROM source.orders JOIN source.customers USING(customer_id)), g AS (SELECT customer_unique_id,epoch(max(bought)-min(bought))/86400.0 AS days FROM x WHERE rn<=2 GROUP BY 1 HAVING count(*)=2) SELECT median(days) FROM g"
+  },
+  "O099": {
+    "rows": [
+      [
+        75
+      ]
+    ],
+    "sql": "SELECT count(*) FROM (SELECT order_id FROM source.items JOIN source.products USING(product_id) LEFT JOIN source.categories USING(product_category_name) GROUP BY 1 HAVING count(DISTINCT product_category_name_english)>=2 AND count(DISTINCT seller_id)>=2)"
+  },
+  "O100": {
+    "rows": [
+      [
+        0,
+        null
+      ]
+    ],
+    "sql": "WITH p AS (SELECT order_id, sum(payment_value::DECIMAL(18,2)) AS paid, count(*) AS payment_rows FROM source.payments GROUP BY order_id) SELECT count(*),sum(paid) FROM source.orders LEFT JOIN p USING(order_id) WHERE order_purchase_timestamp<'2010-01-01'"
+  },
+  "O101": {
+    "rows": [
+      [
+        0
+      ]
+    ],
+    "sql": "SELECT count(*) FROM source.orders WHERE order_status='delivered' AND order_delivered_customer_date IS NOT NULL AND order_delivered_carrier_date IS NULL"
+  },
+  "O102": {
+    "rows": [
+      [
+        2
+      ]
+    ],
+    "sql": "SELECT count(*) FROM source.products WHERE coalesce(product_length_cm::DOUBLE,0)<=0 OR coalesce(product_height_cm::DOUBLE,0)<=0 OR coalesce(product_width_cm::DOUBLE,0)<=0"
+  },
+  "O103": {
+    "criteria": [
+      "Reject reverse causal conclusion from association",
+      "Explain reviews follow or relate to delivery experience and selection/confounding can matter",
+      "Distinguish descriptive association from an intervention effect",
+      "State that observational snapshot alone cannot identify that causal direction"
+    ]
+  },
+  "O104": {
+    "criteria": [
+      "Reject automatic missing-as-late classification",
+      "Separate delivered eligible orders from undelivered/canceled orders and missing data",
+      "Require an explicit observation horizon and promised-date logic for an alternative overdue metric",
+      "State the sample snapshot cannot silently replace the established delivered-only late denominator"
+    ]
+  },
+  "O105": {
+    "criteria": [
+      "Explain customer_id is order-linked and customer_unique_id identifies recurring customers",
+      "Require repeat analysis at customer_unique_id grain",
+      "Explain sampled orders can miss purchases outside the sample",
+      "Do not conclude no repeat customers from customer_id uniqueness"
+    ]
+  }
+}

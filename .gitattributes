@@ -1,0 +1,2 @@
+# Frozen public artifact hashes must survive Windows/Linux checkouts.
+/benchmarks/phase2/*.json text eol=lf
