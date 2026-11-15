@@ -1,0 +1,325 @@
+{
+  "archive_sha256": "967e41e04fc306fe604e2a693f488995a8b41e5047418f8a5c8e4abd6deca784",
+  "sample_sha256": "93e5d327a4b40f9017d09c0e1648f0142fbc499fac7e2217816d2edde7dce175",
+  "orders": 15000,
+  "source_tables": 8,
+  "seller_rows": 1913,
+  "status": "PENDING_HUMAN_REVIEW",
+  "cases": [
+    {
+      "id": "O001",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "All sampled orders by purchase month",
+      "review": null
+    },
+    {
+      "id": "O002",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Pay each source payment row once, attributed by order purchase month",
+      "review": null
+    },
+    {
+      "id": "O003",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Delivered orders with both dates, compared by calendar date",
+      "review": null
+    },
+    {
+      "id": "O004",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "All sampled orders by purchase month",
+      "review": null
+    },
+    {
+      "id": "O005",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Pay each source payment row once, attributed by order purchase month",
+      "review": null
+    },
+    {
+      "id": "O006",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Delivered orders with both dates, compared by calendar date",
+      "review": null
+    },
+    {
+      "id": "O007",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "All sampled orders by purchase month",
+      "review": null
+    },
+    {
+      "id": "O008",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Pay each source payment row once, attributed by order purchase month",
+      "review": null
+    },
+    {
+      "id": "O009",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Delivered orders with both dates, compared by calendar date",
+      "review": null
+    },
+    {
+      "id": "O010",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "All sampled orders by purchase month",
+      "review": null
+    },
+    {
+      "id": "O011",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Pay each source payment row once, attributed by order purchase month",
+      "review": null
+    },
+    {
+      "id": "O012",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Delivered orders with both dates, compared by calendar date",
+      "review": null
+    },
+    {
+      "id": "O013",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "All sampled orders by purchase month",
+      "review": null
+    },
+    {
+      "id": "O014",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Pay each source payment row once, attributed by order purchase month",
+      "review": null
+    },
+    {
+      "id": "O015",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Delivered orders with both dates, compared by calendar date",
+      "review": null
+    },
+    {
+      "id": "O016",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Order grain and customer state, all statuses",
+      "review": null
+    },
+    {
+      "id": "O017",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Unique seller IDs across all qualifying item rows",
+      "review": null
+    },
+    {
+      "id": "O018",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Order grain and customer state, all statuses",
+      "review": null
+    },
+    {
+      "id": "O019",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Unique seller IDs across all qualifying item rows",
+      "review": null
+    },
+    {
+      "id": "O020",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Order grain and customer state, all statuses",
+      "review": null
+    },
+    {
+      "id": "O021",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Unique seller IDs across all qualifying item rows",
+      "review": null
+    },
+    {
+      "id": "O022",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Order grain and customer state, all statuses",
+      "review": null
+    },
+    {
+      "id": "O023",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Unique seller IDs across all qualifying item rows",
+      "review": null
+    },
+    {
+      "id": "O024",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Sum item price in translated category, excluding freight",
+      "review": null
+    },
+    {
+      "id": "O025",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Sum item price in translated category, excluding freight",
+      "review": null
+    },
+    {
+      "id": "O026",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Sum item price in translated category, excluding freight",
+      "review": null
+    },
+    {
+      "id": "O027",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Sum item price in translated category, excluding freight",
+      "review": null
+    },
+    {
+      "id": "O028",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Signed item-price change, outer union of categories, absolute descending",
+      "review": null
+    },
+    {
+      "id": "O029",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Signed item-price change, outer union of categories, absolute descending",
+      "review": null
+    },
+    {
+      "id": "O030",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Signed item-price change, outer union of categories, absolute descending",
+      "review": null
+    },
+    {
+      "id": "O031",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Signed item-price change, outer union of categories, absolute descending",
+      "review": null
+    },
+    {
+      "id": "O032",
+      "status": "REVIEW_REQUIRED",
+      "reference_sql_checked": true,
+      "evidence": "Count missing dates or negative delivery duration",
+      "review": "Clarify whether a recorded but chronologically invalid delivery is 'no observed duration'"
+    },
+    {
+      "id": "O033",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Delivered status and purchase year",
+      "review": null
+    },
+    {
+      "id": "O034",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Average valid reviews within each order, then weight each eligible order equally",
+      "review": null
+    },
+    {
+      "id": "O035",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Year filter produces no rows on pinned sample",
+      "review": null
+    },
+    {
+      "id": "O036",
+      "status": "AUTO_VERIFIED",
+      "reference_sql_checked": true,
+      "evidence": "Customer-state join produces zero matches",
+      "review": null
+    },
+    {
+      "id": "O037",
+      "status": "REVIEW_REQUIRED",
+      "reference_sql_checked": false,
+      "evidence": "Abstention rubric and source schema available in review packet",
+      "review": "Confirm the unavailable evidence and whether an explicitly scoped proxy is acceptable"
+    },
+    {
+      "id": "O038",
+      "status": "REVIEW_REQUIRED",
+      "reference_sql_checked": false,
+      "evidence": "Abstention rubric and source schema available in review packet",
+      "review": "Confirm the unavailable evidence and whether an explicitly scoped proxy is acceptable"
+    },
+    {
+      "id": "O039",
+      "status": "REVIEW_REQUIRED",
+      "reference_sql_checked": false,
+      "evidence": "Abstention rubric and source schema available in review packet",
+      "review": "Confirm the unavailable evidence and whether an explicitly scoped proxy is acceptable"
+    },
+    {
+      "id": "O040",
+      "status": "REVIEW_REQUIRED",
+      "reference_sql_checked": false,
+      "evidence": "Abstention rubric and source schema available in review packet",
+      "review": "Confirm the unavailable evidence and whether an explicitly scoped proxy is acceptable"
+    },
+    {
+      "id": "O041",
+      "status": "REVIEW_REQUIRED",
+      "reference_sql_checked": false,
+      "evidence": "Citation IDs exist",
+      "review": "Judge whether the cited excerpt fully answers the business question"
+    },
+    {
+      "id": "O042",
+      "status": "REVIEW_REQUIRED",
+      "reference_sql_checked": false,
+      "evidence": "Citation IDs exist",
+      "review": "Judge whether the cited excerpt fully answers the business question"
+    },
+    {
+      "id": "O043",
+      "status": "REVIEW_REQUIRED",
+      "reference_sql_checked": false,
+      "evidence": "Citation IDs exist",
+      "review": "Judge whether the cited excerpt fully answers the business question"
+    },
+    {
+      "id": "O044",
+      "status": "REVIEW_REQUIRED",
+      "reference_sql_checked": false,
+      "evidence": "Citation IDs exist",
+      "review": "Judge whether the cited excerpt fully answers the business question"
+    },
+    {
+      "id": "O045",
+      "status": "REVIEW_REQUIRED",
+      "reference_sql_checked": false,
+      "evidence": "Citation IDs exist",
+      "review": "Judge whether the cited excerpt fully answers the business question"
+    }
+  ]
+}

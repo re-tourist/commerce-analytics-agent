@@ -21,8 +21,11 @@ ABSTENTION_CHECKS = {
 }
 
 
-def render(database: Path) -> str:
+def render(database: Path, audit: dict | None = None) -> str:
     docs = {document.id: document for document in DOCUMENTS}
+    findings = {row["id"]: row for row in audit["cases"]} if audit else {}
+    if audit and (audit["sample_sha256"] != SAMPLE_DIGEST or set(findings) != {case.id for case in cases()}):
+        raise ValueError("Audit does not match the pinned sample or current case IDs")
     with duckdb.connect(str(database.resolve()), read_only=True, config={"enable_external_access": "false"}) as db:
         order_ids = db.execute("SELECT order_id FROM source.orders ORDER BY order_id").fetchall()
         digest = hashlib.sha256("\n".join(row[0] for row in order_ids).encode()).hexdigest()
@@ -54,6 +57,11 @@ def render(database: Path) -> str:
         groups = Counter()
         for case in cases():
             lines.extend(["", f"## {case.id} · {case.family}", "", case.question, ""])
+            if case.id in findings:
+                result = findings[case.id]
+                lines.extend([f"**{result['status']}** · {result['evidence']}", ""])
+                if result["review"]:
+                    lines.extend([f"Reviewer decision · {result['review']}", ""])
             if case.sql:
                 rows = db.execute(case.sql).fetchall()
                 groups["SQL references"] += 1
@@ -78,7 +86,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--db", type=Path, default=Path("data/olist.duckdb"))
     parser.add_argument("--output", type=Path, default=Path("data/olist-reference-review.md"))
+    parser.add_argument("--audit", type=Path, default=Path("reports/olist-reference-audit.json"))
     arguments = parser.parse_args()
-    packet = render(arguments.db)
+    packet = render(arguments.db, json.loads(arguments.audit.read_text(encoding="utf-8")) if arguments.audit.is_file() else None)
     arguments.output.parent.mkdir(parents=True, exist_ok=True)
     arguments.output.write_text(packet, encoding="utf-8")
