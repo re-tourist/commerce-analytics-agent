@@ -25,3 +25,20 @@ python -m streamlit run app/streamlit_app.py
 ```
 
 The harness writes per-task JSONL and aggregate JSON. Keep the raw outputs local because they may include sampled values and benchmark data. Streamlit's Natural language mode shows live tool evidence and the Preconfigured metric mode runs the same analysis tool with selected input parameters. The FastAPI routes are `GET /health`, `POST /ask` and `POST /investigate`. Bind the HTTP service to localhost for the documented setup.
+
+## Three-minute showcase
+
+With Olist built and the local model serving, open the Streamlit URL and use **Natural language** for each example. The sidebar marks the questions as editable examples.
+
+1. **Delivery performance.** Click **Run analysis**. Compare July's 30/936 eligible deliveries with June's 15/917. Read the state contribution chart, query evidence and retrieved definitions. Expand **Executed SQL** to inspect purchase windows and eligible counts.
+2. **Merchandise performance.** Run the July versus June comparison by product category. The item-price totals are R$141,625.90 and R$139,360.38. Inspect signed category contributions. Optionally run **Recorded payment value** to see the separate order-level proxy, R$166,395.04 versus R$162,715.53.
+3. **Inventory evidence limits.** Run the warehouse shortage question. The system should mark it unconfirmed. Open the execution trace to see the selected unsupported route.
+
+Click **Download report** in each run to save the executed report as JSON. The browser check used the real local model and the pinned Olist database. To independently verify the numeric examples from the raw source tables:
+
+```powershell
+$env:COMMERCE_VERIFY_OLIST_DB = (Resolve-Path "data/olist.duckdb").Path
+python -m pytest -q tests/test_showcase_olist.py
+```
+
+The regular CI suite runs without the publisher archive. Set the variable after the documented data build to enable the three real-data checks.
