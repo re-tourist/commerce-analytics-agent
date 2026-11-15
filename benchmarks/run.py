@@ -134,8 +134,8 @@ def summarize(records):
     return summary
 
 
-def run_olist(variant, limit):
-    agent = olist_agent(variant)
+def run_olist(variant, limit, *, agent=None):
+    agent = agent if agent is not None else olist_agent(variant)
     with duckdb.connect(str(olist_data().path), read_only=True, config={"enable_external_access": "false"}) as db:
         references = {case.id: db.execute(case.sql).fetchall() for case in cases() if case.sql}
     for case in cases()[:limit]:
