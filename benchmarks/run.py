@@ -143,16 +143,25 @@ def run_olist(variant, limit):
                       lambda answer: score_olist(case, answer, references.get(case.id)))
 
 
+EXPERIMENTS = {
+    "full_ddl_only": (True, False, False),
+    "full_retry_only": (False, True, False),
+    "full_schema_grounded": (True, True, False),
+    "full_semantic": (True, True, True),
+}
+
+
 def run_databench(variant, limit, split="test"):
     from benchmarks.databench import SUBSET_ROOTS, selected_cases, score
 
     root = SUBSET_ROOTS[split]
     planned = selected_cases(root, split)
-    grounded = variant == "full_schema_grounded"
-    features = VARIANTS["full" if grounded else variant]
+    ddl, retry, semantics = EXPERIMENTS.get(variant, (False, False, False))
+    features = VARIANTS["full" if variant in EXPERIMENTS else variant]
     for table, cases_for_table in planned.items():
         data = ReadOnlyDuckDB(root / "db" / f"{table}.duckdb", ("data_table",))
-        agent = Agent(data, model_from_env(), features, olist=False, schema_grounding=grounded)
+        agent = Agent(data, model_from_env(), features, olist=False, schema_grounding=ddl,
+                      targeted_retry=retry, semantic_guidance=semantics)
         for case in cases_for_table:
             if limit is not None and limit <= 0:
                 return
@@ -164,8 +173,8 @@ def run_databench(variant, limit, split="test"):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("track", choices=("olist", "databench"))
-    parser.add_argument("--variant", choices=VARIANTS, action="append")
-    parser.add_argument("--split", choices=("test", "dev"))
+    parser.add_argument("--variant", choices=(*VARIANTS, *EXPERIMENTS), action="append")
+    parser.add_argument("--split", choices=("test", "dev", "holdout"))
     parser.add_argument("--compare-schema-grounding", action="store_true",
                         help="Run the DataBench full baseline and schema-grounded full candidate")
     parser.add_argument("--limit", type=int)
@@ -175,6 +184,10 @@ def main():
         parser.error("--limit must be positive")
     if args.track != "databench" and (args.split or args.compare_schema_grounding):
         parser.error("split and schema-grounding comparison require DataBench")
+    if args.track == "olist" and any(variant in EXPERIMENTS for variant in (args.variant or ())):
+        parser.error("experimental variants require DataBench")
+    if args.variant and len(args.variant) != len(set(args.variant)):
+        parser.error("each variant can be specified only once")
     if args.compare_schema_grounding and args.variant:
         parser.error("schema-grounding comparison selects both variants itself")
     split = args.split or "test"

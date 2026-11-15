@@ -80,6 +80,24 @@ def test_schema_grounding_retries_with_safe_hints(tmp_path, first_sql, hint):
     assert [step["outcome"] for step in answer.trace if step["step"] == "verify"] == ["failed", "passed"]
 
 
+@pytest.mark.parametrize(("ddl", "retry"), [(True, False), (False, True)])
+def test_ddl_and_retry_are_independent(analytical_data, ddl, retry):
+    planner = ScriptedPlanner(Plan("sql", "SELECT * FROM unavailable"), Plan("sql", "SELECT count(*) FROM orders"))
+    answer = Agent(analytical_data, planner, VARIANTS["full"], olist=False, schema_grounding=ddl,
+                   targeted_retry=retry).run("Count orders")
+    assert answer.evidence.result.rows == [[6]]
+    assert ('CREATE TABLE "orders"' in planner.prompts[0]) == ddl
+    assert ("The subject of the question does not name a table" in planner.prompts[1]) == retry
+
+
+def test_semantic_guidance_uses_question_without_gold_metadata(analytical_data):
+    question = "Are there any orders?"
+    planner = ScriptedPlanner(Plan("sql", "SELECT count(*) > 0 FROM orders"))
+    answer = Agent(analytical_data, planner, VARIANTS["full"], olist=False, semantic_guidance=True).run(question)
+    assert answer.evidence.result.rows == [[True]]
+    assert "Use a SQL boolean for a yes-or-no question" in planner.prompts[0]
+
+
 def test_http_uses_graph_and_metrics(monkeypatch, analytical_data):
     planner = ScriptedPlanner(Plan("sql", "SELECT count(*) FROM orders"))
     agent = Agent(analytical_data, planner, VARIANTS["sql"])
