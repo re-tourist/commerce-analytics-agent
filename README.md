@@ -1,46 +1,52 @@
 # CommerceLens
 
-CommerceLens turns natural-language commerce questions into DuckDB queries and metric investigations. It runs against a reproducible 15,000-order sample of Olist and returns query results, metric definitions, group contributions and an execution trace.
+Ask an e-commerce question and see the calculation, SQL and business definition behind the answer.
+
+![CommerceLens live delivery comparison showing a July 2018 late rate of 3.21%, a June rate of 1.64%, and state contributions](docs/assets/commerce-lens-demo.png)
+
+*Live Streamlit run against a stratified sample of 15,000 Olist orders.*
 
 ## What you can investigate
 
-| Scenario | Evidence from the Olist sample |
-| --- | --- |
-| Compare late delivery rates by customer state | July 2018 had 30 late orders out of 936 eligible orders (3.21%). June had 15 of 917 (1.64%), a change of +1.57 percentage points. |
-| Compare merchandise value by product category | July 2018 recorded R$141,625.90 in item prices, up R$2,265.52 from June. The report breaks down the change by category. |
-| Compare recorded payments by customer state | July 2018 recorded R$166,395.04 in payments, up R$3,679.51 from June. The report uses one payment total per order. |
+- **Delivery performance.** Compare late rates by purchase cohort and see which states contributed to the change, with the late count and eligible denominator.
+- **Commerce performance.** Compare item-price totals by category and recorded payments by state. Each metric uses its own grain and shows signed group contributions.
+- **Evidence limits.** Ask about warehouse inventory and see where the available data runs out. Export the analysis, SQL, business definitions and trace as JSON.
 
-The sample is historical. Merchandise value excludes freight, and recorded payments are a separate order-level proxy. Seller participation and review-score differences support descriptive comparisons.
+```mermaid
+flowchart LR
+    Q["Question"] --> A["LangGraph planner"]
+    A --> K["Business definitions · BM25"]
+    A --> D["Read-only DuckDB · SQL and metrics"]
+    K --> E["Evidence and limits"]
+    D --> E
+    E --> U["Streamlit · JSON report"]
+```
+
+## What the experiments found
+
+| Evaluation | Result |
+| --- | --- |
+| Olist business regression suite, 45 questions | SQL baseline **28/45**, SQL + retrieval **41/45**, full agent **40/45**. Independent human reference review is pending. |
+| DataBench adapted subset, 80 previously exposed test questions | Baseline **29/80**, DDL + targeted retry **43/80**. |
+| Independent DataBench adapted holdout, 48 questions on four other tables | Baseline **3/48**, DDL + targeted retry **15/48**, additional semantic prompt **12/48**. The semantic prompt remains experimental. |
+
+On the adapted holdout, DDL + targeted retry answered 15 questions correctly and completed SQL on 33. Execution and answer accuracy are recorded separately. [Olist and MVP results](reports/acceptance.md) · [DataBench methods and failure analysis](reports/semantic-holdout.md)
 
 ## Run locally
 
-Use Python 3.12. The commands below assume the repository root is your working directory.
+Use Python 3.12 from the repository root:
 
 ```sh
-python -m pip install -e ".[demo,test,benchmark]"
+python -m pip install -e ".[demo]"
 python scripts/fetch_olist.py
 python scripts/build_olist.py
-python -m pytest -q
 python -m streamlit run app/streamlit_app.py
 ```
 
-The **Preconfigured metric** option runs live SQL and calculations on the rebuilt sample. For **Natural language**, start a local OpenAI-compatible model server at `http://127.0.0.1:8080/v1` with model alias `commercelens-local`. Use **Download report** to save the query inputs, calculations, SQL, citations and execution trace. See the [model setup](docs/reproduction.md) for the pinned llama.cpp and Qwen configuration used in the evaluation.
+Select **Preconfigured metric** for a direct calculation on the rebuilt data. To run natural-language questions, start the [local model](docs/reproduction.md#local-model), select **Natural language**, and click **Run analysis**. See the [three-scenario walkthrough](docs/reproduction.md#three-minute-showcase).
 
-```sh
-commercelens ask "Compare late delivery rates by customer state for July 2018 versus June 2018."
-commercelens metric merchandise_value --group category --start 2018-07-01 --end 2018-08-01
-python -m uvicorn commercelens.interfaces.http:app
-```
+The application uses LangGraph, DuckDB, SQLGlot, FastAPI and Streamlit. [Architecture and metrics](docs/architecture.md) · [Evaluation protocol](docs/evaluation.md) · [Independent review](benchmarks/REVIEW.md)
 
-## How it works
+## Limits
 
-The LangGraph workflow gives the model analytical schemas and optional retrieved metric notes. The model proposes a SQL, metric investigation, knowledge or abstention plan. DuckDB runs in read-only mode with external access disabled. The investigation tool calculates totals and group contributions in Python, and verification checks result bounds and reconciliation. The response includes SQL, evidence and the tools that ran.
-
-In the 45-question Olist regression benchmark, the SQL baseline passed 28 cases, SQL + RAG passed 41, and the full agent passed 40. All used the same local Qwen model. See the report for the adapted DataBench subset, error analysis and latency.
-
-- [Architecture and metric contracts](docs/architecture.md)
-- [Reproduction and model setup](docs/reproduction.md)
-- [Evaluation protocol](docs/evaluation.md)
-- [Results and limitations](reports/acceptance.md)
-
-Olist is published under CC BY-NC-SA 4.0. Download the source through the publisher link. [Olist on Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
+The sample is historical. Recorded payments and merchandise value are separate proxies. The dataset supports descriptive comparisons and lacks warehouse inventory and causal attribution evidence. Public benchmark subsets support comparisons under the documented settings. Olist is available from its publisher under CC BY-NC-SA 4.0. [Olist source](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)

@@ -33,6 +33,9 @@ SCENARIOS = {
         Investigation("payment_value", "customer_state", date(2018, 7, 1), date(2018, 8, 1),
                       date(2018, 6, 1), date(2018, 7, 1), 8),
     ),
+    "Inventory evidence limits": (
+        "Which warehouse had the highest inventory shortage in July 2018?", None,
+    ),
 }
 
 
@@ -44,14 +47,19 @@ def value(number: Decimal | None, unit: str) -> str:
     return f"{number:,.2f} {unit}"
 
 
-st.set_page_config(page_title="CommerceLens", layout="wide")
+st.set_page_config(page_title="CommerceLens | Olist analytics", layout="wide")
 st.title("CommerceLens")
-st.caption("Commerce analytics over a stratified sample of 15,000 Olist orders")
-scenario = st.radio("Scenario", tuple(SCENARIOS), horizontal=True)
-example, specification = SCENARIOS[scenario]
-mode = st.radio("Execution", ["Natural language", "Preconfigured metric"], horizontal=True)
+st.caption("Investigate delivery and commerce metrics across 15,000 sampled Olist orders.")
+with st.sidebar:
+    scenario = st.radio("Example question", tuple(SCENARIOS))
+    example, specification = SCENARIOS[scenario]
+    mode = st.radio("Execution mode", ["Natural language", "Preconfigured metric"]
+                    if specification else ["Natural language"], key=f"mode-{scenario}")
+    st.caption("Natural language runs the configured model and the available tools. "
+               "Preconfigured metrics run the calculation directly.")
+st.header(scenario)
 if mode == "Natural language":
-    question = st.text_area("Question", value=example, key=scenario, max_chars=2_000)
+    question = st.text_area("Example question · edit or replace", value=example, key=scenario, max_chars=2_000, height=90)
     run = st.button("Run analysis", type="primary", disabled=not question.strip())
 else:
     st.write(METRICS[specification.metric].definition)
@@ -66,6 +74,8 @@ if run:
                 response = olist_agent().run(question)
                 if response.status == "error":
                     st.error(response.summary)
+                elif response.status == "unsupported":
+                    st.warning(response.summary)
                 elif not response.evidence.calculations:
                     st.write(response.summary)
             else:
@@ -82,11 +92,14 @@ if run:
                 unit = calc["unit"]
                 st.subheader("Calculated results")
                 current, baseline, change = st.columns(3)
-                current.metric("Current", value(calc["current"], unit))
-                baseline.metric("Baseline", value(calc["baseline"], unit))
+                windows = calc["windows"]
+                current_label = f"Current · starts {windows['current'][0]:%d %b %Y}" if windows["current"][0] else "Current"
+                baseline_label = f"Baseline · starts {windows['baseline'][0]:%d %b %Y}" if windows["baseline"] else "Baseline"
+                current.metric(current_label, value(calc["current"], unit), border=True)
+                baseline.metric(baseline_label, value(calc["baseline"], unit), border=True)
                 delta = calc["delta"]
                 change.metric("Change", f"{delta * 100:+.2f} pp" if unit == "share" and delta is not None
-                              else value(delta, unit))
+                              else value(delta, unit), border=True)
                 st.caption(calc["definition"])
                 inputs = []
                 for label, window in calc["windows"].items():
@@ -104,14 +117,16 @@ if run:
                         for row in calc["groups"]
                     ]
                     if delta is not None:
+                        st.subheader("What contributed to the change?")
                         chart_rows = records
                         contribution = "delta_contribution"
                         if unit == "share":
                             contribution = "Change contribution (pp)"
                             chart_rows = [{"group": row["group"], contribution: row["delta_contribution"] * 100}
                                           for row in records]
-                        st.bar_chart(chart_rows, x="group", y=contribution, horizontal=True)
-                    st.dataframe(records, hide_index=True)
+                        st.bar_chart(chart_rows, x="group", y=contribution, horizontal=True, height=240)
+                    with st.expander("Group values and signed contributions"):
+                        st.dataframe(records, hide_index=True)
                     if calc["omitted_groups"]:
                         st.caption(f"{calc['omitted_groups']} additional groups are included in the totals.")
                 st.subheader("Query evidence")
@@ -131,9 +146,11 @@ if run:
                 st.subheader("Unconfirmed")
                 for conclusion in response.unconfirmed:
                     st.text(conclusion)
-            for citation in evidence.citations:
-                with st.expander(citation.title):
-                    st.write(citation.excerpt)
+            if evidence.citations:
+                with st.expander("Retrieved business definitions"):
+                    for citation in evidence.citations:
+                        st.markdown(f"**{citation.title}**")
+                        st.write(citation.excerpt)
             for limit in response.limits:
                 st.caption(limit)
             if evidence.sql:
