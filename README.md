@@ -6,6 +6,10 @@ Ask an e-commerce question and see the calculation, SQL and business definition 
 
 *Live Streamlit run against a stratified sample of 15,000 Olist orders.*
 
+## Project status
+
+**Phase I — Foundation & Feasibility is engineering-complete.** Agent reliability is still in progress, and independent review of the Olist references is pending. See the [roadmap](docs/ROADMAP.md) for Phase I evidence and Phase II goals.
+
 ## What you can investigate
 
 - **Delivery performance.** Compare late rates by purchase cohort and see which states contributed to the change, with the late count and eligible denominator.
@@ -28,9 +32,9 @@ flowchart LR
 | --- | --- |
 | Olist business regression suite, 45 questions | SQL baseline **28/45**, SQL + retrieval **41/45**, full agent **40/45**. Independent human reference review is pending. |
 | DataBench adapted subset, 80 previously exposed test questions | Baseline **29/80**, DDL + targeted retry **43/80**. |
-| Independent DataBench adapted holdout, 48 questions on four other tables | Baseline **3/48**, DDL + targeted retry **15/48**, additional semantic prompt **12/48**. The semantic prompt remains experimental. |
+| DataBench adapted subset, 48 questions on four other tables (now regression) | Baseline **3/48**, DDL + targeted retry **15/48**, additional semantic prompt **12/48**. The semantic prompt remains experimental. |
 
-On the adapted holdout, DDL + targeted retry answered 15 questions correctly and completed SQL on 33. Execution and answer accuracy are recorded separately. [Olist and MVP results](reports/acceptance.md) · [DataBench methods and failure analysis](reports/semantic-holdout.md)
+In the original evaluation of that 48-question subset, DDL + targeted retry answered 15 questions correctly and completed SQL on 33. Execution and answer accuracy are recorded separately. [Olist and MVP results](reports/acceptance.md) · [DataBench methods and failure analysis](reports/semantic-holdout.md)
 
 ## Run locally
 
