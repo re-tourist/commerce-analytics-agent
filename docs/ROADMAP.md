@@ -21,7 +21,11 @@ Engineering baseline from the five integration PRs: [7c319d658767b24513afa646a1c
 
 ## Phase II — Reliability & Generalization
 
-Track this phase in [the Phase II tracking issue #13](https://github.com/re-tourist/commerce-analytics-agent/issues/13). Implementation awaits a separate technical decision.
+Track this phase in [the Phase II tracking issue #13](https://github.com/re-tourist/commerce-analytics-agent/issues/13).
+Dataset construction is delivered as a frozen candidate: [397 tasks, split policy and quality evidence](BENCHMARKS.md).
+Independent Olist review and owner-controlled Test isolation remain open. The release is
+`FROZEN_CANDIDATE_NOT_BLIND`; no new Test model experiments or algorithm changes are included.
+Method selection and reliability implementation remain separate future work.
 
 1. Collect new Olist questions with independently reviewed references. Freeze the cohort and grading before comparing candidates.
 2. Validate Semantic Grounding for dates, units, eligibility and grain. Measure accuracy and paired regressions.

@@ -9,3 +9,8 @@ __pycache__/
 *.duckdb.wal
 .coverage
 /reports/runs/
+
+# Phase II Test content is owner-controlled. Public catalog contains commitments only.
+/benchmarks/phase2/owner/
+/benchmarks/phase2/test.*
+*.private.json

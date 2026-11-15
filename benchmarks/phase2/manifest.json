@@ -1,0 +1,51 @@
+{
+  "counts": {
+    "databench": {
+      "development": 152,
+      "test": 60,
+      "validation": 40
+    },
+    "olist": {
+      "development": 85,
+      "test": 40,
+      "validation": 20
+    }
+  },
+  "date": "2026-11-15",
+  "files": {
+    "audit.json": "346c2ee51dace76e56abac3c7576870afc0b1e2ebeed2471a8f2ea007f1d32de",
+    "development.references.json": "b6db0c39f8c2236cb7fbba777e0de1af96a2c37cca608dd52c10fa07054de803",
+    "duplicate-audit.json": "2a843cff65baad0d6a9e283f65ced89645fafa421fb974905bec1df01eb7f642",
+    "olist-development-validation.json": "317345e30a0f6a1b223627e284dc920ad6b798b7570ba56d8ec8c2f4272d5efc",
+    "sources.json": "50036eaa4b677b38fa120a9da9a47e8b89e21ffc2d0c42786dd9b4cb2706bc88",
+    "tasks.json": "77d66c1c30cd1f1536a7797781c458cbe4be6c759a2c70476f7ac061f48a5225",
+    "validation.references.json": "fa82582e85d9de4a0a24e2a5c786687316cdaed44cbcc5b1dc116e1ae7cab4d4"
+  },
+  "generator": "python -m benchmarks.build_phase2",
+  "historical_files": {
+    "benchmarks/olist_cases.py": "256ba1de4e87a917cb2d1ab4a30b93903aea7889d94a5b8c84d75d8b18f84ea6",
+    "docs/databench-dev-subset.json": "9158ac0a3cad919636125ebbaec20b5cccc821e62c21edfdc293d8e74eab03b4",
+    "docs/databench-holdout.json": "384f5d20ffa2fbd03f0b96d9e1a33e118d556b04fdf09db84be1cc1053764e5f",
+    "docs/databench-subset.json": "a53c611c41037c58de1bd81138dbc229f890c9a19889acb284174e7107b4b9b2",
+    "reports/databench-summary.json": "532bac23729d839b0f1d375572c44b4fe0b1ec965fd898980500bab9c4a5a103",
+    "reports/olist-reference-audit.json": "1be069f17faa9a7c9ab2a06962cf892241a6e0216961542a6fb9c3199b94f69a",
+    "reports/olist-summary.json": "a4a056e461815d237fa40c8448e28edfd694ee3ff0f532312e08c0209eb478a6"
+  },
+  "protected_test_files": {
+    "README.json": "cc8b834142a29d10752ef609da4023159ee1029f5c8fad92ad0e95372006c42a",
+    "olist-test-authoring.json": "2cf21ef5e07514939c903f1de3e9a7e38fb94baf653e26b2cba9846615fc0c3b",
+    "test.references.json": "8fa4fad1e700b2b6bab512d04abf3293b8198f56bf1317b393866410e74d5882",
+    "test.tasks.json": "9e6fe081b40fd37e9f4bee3f610e488ec7f12899aa40e21150288b8e962099ad"
+  },
+  "release": "phase2-candidate-v2",
+  "runtime": {
+    "databench-eval": "4.0.1",
+    "duckdb": "1.5.0",
+    "pyarrow": "23.0.0",
+    "python": "3.12",
+    "sqlglot": "29.0.1"
+  },
+  "schema_version": 1,
+  "seed": 20261115,
+  "status": "FROZEN_CANDIDATE_NOT_BLIND"
+}

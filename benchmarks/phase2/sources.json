@@ -1,0 +1,827 @@
+{
+  "databench-e75d53add267d2f9cfa32efd65ad77f0807adfad": {
+    "databases": {
+      "051_Pokemon": {
+        "file_bytes": {
+          "all.parquet": 33633,
+          "qa.parquet": 6917
+        },
+        "files": {
+          "all.parquet": "4a6dc37d63274142ea3a0beaf0494a009a238421c3f9f3d030cd84db24349bc8",
+          "qa.parquet": "c840caa522bc8843102ad21d06e2c8ee81e7baeb9868616614bbd720c966e14d"
+        },
+        "official_split": "dev",
+        "qa_rows": 20,
+        "question_ids": [
+          "051_Pokemon:001",
+          "051_Pokemon:003",
+          "051_Pokemon:004",
+          "051_Pokemon:005",
+          "051_Pokemon:006",
+          "051_Pokemon:007",
+          "051_Pokemon:008",
+          "051_Pokemon:010",
+          "051_Pokemon:012",
+          "051_Pokemon:013",
+          "051_Pokemon:014",
+          "051_Pokemon:019"
+        ],
+        "rows": 1072,
+        "schema_sha256": "00d81167d94cf0f651efc5a1dca12a42d191e42b8d73bd63aa42b9a461bb00f1",
+        "selection": {
+          "legacy_manifest": "databench-dev-subset.json",
+          "method": "Two preselected official development tables; 12 lowest SHA-256(seed:table:row) per table",
+          "seed": 741
+        },
+        "split": "development"
+      },
+      "052_Professional": {
+        "file_bytes": {
+          "all.parquet": 135231,
+          "qa.parquet": 8730
+        },
+        "files": {
+          "all.parquet": "cf1eb70f0dc21a76199266cc4effb43304b877174c07bebcd393312008d67fce",
+          "qa.parquet": "50de81278aca8857c98a2a17fe419d42a4b201102bbfe33025fadd080b1c86a5"
+        },
+        "official_split": "dev",
+        "qa_rows": 20,
+        "question_ids": [
+          "052_Professional:000",
+          "052_Professional:001",
+          "052_Professional:003",
+          "052_Professional:004",
+          "052_Professional:005",
+          "052_Professional:009",
+          "052_Professional:011",
+          "052_Professional:013",
+          "052_Professional:014",
+          "052_Professional:017"
+        ],
+        "rows": 1227,
+        "schema_sha256": "b80e404c985dc2c82da689ae3250778dee1a22ad5f3d9fced60c3821d303f349",
+        "selection": {
+          "method": "per-type quotas then lowest SHA-256(seed:table:zero-padded-row); reject near duplicates against retained/selected questions",
+          "quotas": {
+            "boolean": 3,
+            "category": 2,
+            "list[category]": 2,
+            "list[number]": 1,
+            "number": 2
+          },
+          "seed": 20261115
+        },
+        "split": "validation"
+      },
+      "053_Patents": {
+        "file_bytes": {
+          "all.parquet": 10112016,
+          "qa.parquet": 7212
+        },
+        "files": {
+          "all.parquet": "72738fffd18c95400821311b7323e3f685c906241e2d867a7582d93b5af6056d",
+          "qa.parquet": "50bbfc2a565365330cbc4d74b30cc8a02e7bf25aa93b8200fbf3f07ba1a6a88d"
+        },
+        "official_split": "dev",
+        "qa_rows": 20,
+        "question_ids": [
+          "053_Patents:000",
+          "053_Patents:003",
+          "053_Patents:004",
+          "053_Patents:005",
+          "053_Patents:006",
+          "053_Patents:008",
+          "053_Patents:009",
+          "053_Patents:011",
+          "053_Patents:013",
+          "053_Patents:018"
+        ],
+        "rows": 9999,
+        "schema_sha256": "b5942ad5b53d4a4a420162963767d5c1a6cd70359fe52ec3255d8f83479b57a4",
+        "selection": {
+          "method": "per-type quotas then lowest SHA-256(seed:table:zero-padded-row); reject near duplicates against retained/selected questions",
+          "quotas": {
+            "boolean": 2,
+            "category": 3,
+            "list[category]": 1,
+            "list[number]": 1,
+            "number": 3
+          },
+          "seed": 20261115
+        },
+        "split": "validation"
+      },
+      "054_Joe": {
+        "file_bytes": {
+          "all.parquet": 131239,
+          "qa.parquet": 7187
+        },
+        "files": {
+          "all.parquet": "faddeef95ed2d5ec1334a1683d77a421450eeb55bc507023db7d8fe2c314cddd",
+          "qa.parquet": "86432369867590f1586d989582d1b78f3631893fe8a0fa218eda52a30c9eff86"
+        },
+        "official_split": "dev",
+        "qa_rows": 20,
+        "question_ids": [
+          "054_Joe:000",
+          "054_Joe:002",
+          "054_Joe:003",
+          "054_Joe:004",
+          "054_Joe:006",
+          "054_Joe:008",
+          "054_Joe:010",
+          "054_Joe:013",
+          "054_Joe:016",
+          "054_Joe:019"
+        ],
+        "rows": 491,
+        "schema_sha256": "44f0172168e300b2f3b9a3ecae91e091698b14415cb26baadb8f44252cdd9ac0",
+        "selection": {
+          "method": "per-type quotas then lowest SHA-256(seed:table:zero-padded-row); reject near duplicates against retained/selected questions",
+          "quotas": {
+            "boolean": 3,
+            "category": 2,
+            "list[category]": 1,
+            "list[number]": 2,
+            "number": 2
+          },
+          "seed": 20261115
+        },
+        "split": "validation"
+      },
+      "055_German": {
+        "file_bytes": {
+          "all.parquet": 20227,
+          "qa.parquet": 6893
+        },
+        "files": {
+          "all.parquet": "f6000296a234e99ddd042fde9cf1aee9cdf7473ed9f875ec94943f4eb655ed64",
+          "qa.parquet": "f802c4869d0d54608f902d2476c344c55c1c09f499235af4b5b814b583c8632a"
+        },
+        "official_split": "dev",
+        "qa_rows": 20,
+        "question_ids": [
+          "055_German:001",
+          "055_German:003",
+          "055_German:005",
+          "055_German:006",
+          "055_German:007",
+          "055_German:008",
+          "055_German:010",
+          "055_German:011",
+          "055_German:013",
+          "055_German:016"
+        ],
+        "rows": 1000,
+        "schema_sha256": "4dc7d48fc37ceb4d82f70f691416e1c5c8b3d95ead2aa48795cd863bc6c1eaf3",
+        "selection": {
+          "method": "per-type quotas then lowest SHA-256(seed:table:zero-padded-row); reject near duplicates against retained/selected questions",
+          "quotas": {
+            "boolean": 2,
+            "category": 3,
+            "list[category]": 1,
+            "list[number]": 1,
+            "number": 3
+          },
+          "seed": 20261115
+        },
+        "split": "validation"
+      },
+      "060_Bakery": {
+        "file_bytes": {
+          "all.parquet": 180342,
+          "qa.parquet": 6727
+        },
+        "files": {
+          "all.parquet": "6eb16eb621ffd77b4b4f802146486bb52dae358c58f2c7e7159871e5a8dfa14a",
+          "qa.parquet": "67c9c8c956ed41bfb0ed15d3611411968049f6f663c19e8e4ea3e6812427d330"
+        },
+        "official_split": "dev",
+        "qa_rows": 20,
+        "question_ids": [
+          "060_Bakery:000",
+          "060_Bakery:002",
+          "060_Bakery:005",
+          "060_Bakery:007",
+          "060_Bakery:008",
+          "060_Bakery:011",
+          "060_Bakery:012",
+          "060_Bakery:013",
+          "060_Bakery:014",
+          "060_Bakery:015",
+          "060_Bakery:017",
+          "060_Bakery:018"
+        ],
+        "rows": 20507,
+        "schema_sha256": "f576379dd26cc3a623fd0451a47fac5a339418a672722798ec2a973da93c2556",
+        "selection": {
+          "legacy_manifest": "databench-dev-subset.json",
+          "method": "Two preselected official development tables; 12 lowest SHA-256(seed:table:row) per table",
+          "seed": 741
+        },
+        "split": "development"
+      },
+      "066_IBM_HR": {
+        "file_bytes": {
+          "all.parquet": 71491,
+          "qa.parquet": 6893
+        },
+        "files": {
+          "all.parquet": "bb78e50bba8119f4aef2c22cdb1aeab4ac19caa0e44e9c775e12ca36f6ef63f5",
+          "qa.parquet": "cf1c4a00388159e3741641bbd10a27f3333cdf43efc99326bd57a56adf3fd574"
+        },
+        "official_split": "test",
+        "qa_rows": 39,
+        "question_ids": [
+          "066_IBM_HR:000",
+          "066_IBM_HR:003",
+          "066_IBM_HR:005",
+          "066_IBM_HR:007",
+          "066_IBM_HR:010",
+          "066_IBM_HR:011",
+          "066_IBM_HR:013",
+          "066_IBM_HR:014",
+          "066_IBM_HR:018",
+          "066_IBM_HR:021",
+          "066_IBM_HR:022",
+          "066_IBM_HR:025",
+          "066_IBM_HR:029",
+          "066_IBM_HR:033",
+          "066_IBM_HR:035",
+          "066_IBM_HR:038"
+        ],
+        "rows": 1470,
+        "schema_sha256": "f88501ce1e853b5e54ec96544454a074c536a309ab1b78e63ae894c74d69922e",
+        "selection": {
+          "legacy_manifest": "databench-subset.json",
+          "method": "Five preselected official test tables; 16 lowest SHA-256(seed:table:row) per table",
+          "seed": 741
+        },
+        "split": "development"
+      },
+      "067_TripAdvisor": {
+        "file_bytes": {
+          "all.parquet": 12504117,
+          "qa.parquet": 6144
+        },
+        "files": {
+          "all.parquet": "3987c0035c5a15b079824aa47b7fc199b000017f0bea81c8cfaac112011030ec",
+          "qa.parquet": "5ff49c6a1bebc1a0166b1854a33ec92c4e0837e834126e546d79cfd7f264468f"
+        },
+        "official_split": "test",
+        "qa_rows": 29,
+        "question_ids": [
+          "067_TripAdvisor:001",
+          "067_TripAdvisor:005",
+          "067_TripAdvisor:014",
+          "067_TripAdvisor:015",
+          "067_TripAdvisor:016",
+          "067_TripAdvisor:017",
+          "067_TripAdvisor:024",
+          "067_TripAdvisor:025",
+          "067_TripAdvisor:027",
+          "067_TripAdvisor:028"
+        ],
+        "rows": 20000,
+        "schema_sha256": "1955c85c69984b76894cae47aa5ee13cb7b67b2f3c5e54297c77b70beb7264ca",
+        "selection": {
+          "method": "per-type quotas then lowest SHA-256(seed:table:zero-padded-row); reject near duplicates against retained/selected questions",
+          "quotas": {
+            "boolean": 2,
+            "category": 1,
+            "list[category]": 2,
+            "list[number]": 2,
+            "number": 3
+          },
+          "seed": 20261115
+        },
+        "split": "test"
+      },
+      "068_WorldBank_Awards": {
+        "file_bytes": {
+          "all.parquet": 24159887,
+          "qa.parquet": 7797
+        },
+        "files": {
+          "all.parquet": "8ebcdf8b03600bf470b0d4957c8cd528a464f03cca15d7b45bd797919f9e84fd",
+          "qa.parquet": "436e3b299c14cf39412084254761bdeeb34d108c48610a5e5ca4069d5975caaa"
+        },
+        "official_split": "test",
+        "qa_rows": 34,
+        "question_ids": [
+          "068_WorldBank_Awards:003",
+          "068_WorldBank_Awards:006",
+          "068_WorldBank_Awards:009",
+          "068_WorldBank_Awards:010",
+          "068_WorldBank_Awards:012",
+          "068_WorldBank_Awards:013",
+          "068_WorldBank_Awards:014",
+          "068_WorldBank_Awards:020",
+          "068_WorldBank_Awards:024",
+          "068_WorldBank_Awards:032"
+        ],
+        "rows": 239461,
+        "schema_sha256": "a4b3f4ebcf40b7531fcbe2dc8dc6cf9113740aa7c90c26878ba96766aa2512db",
+        "selection": {
+          "method": "per-type quotas then lowest SHA-256(seed:table:zero-padded-row); reject near duplicates against retained/selected questions",
+          "quotas": {
+            "boolean": 2,
+            "category": 4,
+            "list[category]": 1,
+            "list[number]": 1,
+            "number": 2
+          },
+          "seed": 20261115
+        },
+        "split": "test"
+      },
+      "069_Taxonomy": {
+        "file_bytes": {
+          "all.parquet": 31670,
+          "qa.parquet": 6390
+        },
+        "files": {
+          "all.parquet": "54ba23879e9ac21e4afcc69f24af5f43358351d18c1273519976c9ed87ed9df3",
+          "qa.parquet": "485ff35ac5e6396000214ada57858f4fbe45eb7987e4ec8f3a45e7ba67c54466"
+        },
+        "official_split": "test",
+        "qa_rows": 35,
+        "question_ids": [
+          "069_Taxonomy:002",
+          "069_Taxonomy:006",
+          "069_Taxonomy:011",
+          "069_Taxonomy:012",
+          "069_Taxonomy:013",
+          "069_Taxonomy:014",
+          "069_Taxonomy:016",
+          "069_Taxonomy:018",
+          "069_Taxonomy:026",
+          "069_Taxonomy:029"
+        ],
+        "rows": 703,
+        "schema_sha256": "50a1510e5ca5dc68ceab09f1bf0053c77d2ccd08662224fe417af541c526829d",
+        "selection": {
+          "method": "per-type quotas then lowest SHA-256(seed:table:zero-padded-row); reject near duplicates against retained/selected questions",
+          "quotas": {
+            "boolean": 2,
+            "category": 4,
+            "list[category]": 1,
+            "list[number]": 1,
+            "number": 2
+          },
+          "seed": 20261115
+        },
+        "split": "test"
+      },
+      "070_OpenFoodFacts": {
+        "file_bytes": {
+          "all.parquet": 595367,
+          "qa.parquet": 6213
+        },
+        "files": {
+          "all.parquet": "985c62e49c039389aee4085c1cfe8cce87d54df8c622c7c53282c18a0517a608",
+          "qa.parquet": "6ea9c4ac2c6d421be638fd6fdef344b1d7728c8e0247667096de269226b73d79"
+        },
+        "official_split": "test",
+        "qa_rows": 29,
+        "question_ids": [
+          "070_OpenFoodFacts:002",
+          "070_OpenFoodFacts:006",
+          "070_OpenFoodFacts:008",
+          "070_OpenFoodFacts:009",
+          "070_OpenFoodFacts:011",
+          "070_OpenFoodFacts:013",
+          "070_OpenFoodFacts:016",
+          "070_OpenFoodFacts:024",
+          "070_OpenFoodFacts:025",
+          "070_OpenFoodFacts:028"
+        ],
+        "rows": 9483,
+        "schema_sha256": "a7012dbebc63ba2bbd0a7f05428239f845c780196105ffe3959c284bc63ce7d7",
+        "selection": {
+          "method": "per-type quotas then lowest SHA-256(seed:table:zero-padded-row); reject near duplicates against retained/selected questions",
+          "quotas": {
+            "boolean": 2,
+            "category": 3,
+            "list[category]": 2,
+            "list[number]": 1,
+            "number": 2
+          },
+          "seed": 20261115
+        },
+        "split": "test"
+      },
+      "071_COL": {
+        "file_bytes": {
+          "all.parquet": 12542,
+          "qa.parquet": 7132
+        },
+        "files": {
+          "all.parquet": "ac682c8bfad5cc25ef1c4fbb9c3810ef91ad833aa5020844ddde378693f26dcd",
+          "qa.parquet": "620e3bfa773a835752450c76d38d547500b7afed1092e61fc5eef4c6efec49d2"
+        },
+        "official_split": "test",
+        "qa_rows": 36,
+        "question_ids": [
+          "071_COL:001",
+          "071_COL:003",
+          "071_COL:005",
+          "071_COL:009",
+          "071_COL:010",
+          "071_COL:013",
+          "071_COL:016",
+          "071_COL:019",
+          "071_COL:020",
+          "071_COL:023",
+          "071_COL:029",
+          "071_COL:030"
+        ],
+        "rows": 121,
+        "schema_sha256": "08657b18f3b354d7db84b81c5ed5cd31164bc7d9d1da148def0cd7c5e764447a",
+        "selection": {
+          "legacy_manifest": "databench-holdout.json",
+          "method": "Four previously unused official test tables; 12 lowest SHA-256(seed:table:row) per table",
+          "seed": 741
+        },
+        "split": "development"
+      },
+      "072_Admissions": {
+        "file_bytes": {
+          "all.parquet": 13070,
+          "qa.parquet": 6772
+        },
+        "files": {
+          "all.parquet": "a32cef359f7265d6994af0909a54065ed9f38b97b927b851a2f6f55239ab2386",
+          "qa.parquet": "2c68748c6d4dd35c7e5d3f6965db3e52a3e4b0f7ed2abe40a49071a349c1ffe2"
+        },
+        "official_split": "test",
+        "qa_rows": 39,
+        "question_ids": [
+          "072_Admissions:000",
+          "072_Admissions:002",
+          "072_Admissions:003",
+          "072_Admissions:004",
+          "072_Admissions:007",
+          "072_Admissions:009",
+          "072_Admissions:010",
+          "072_Admissions:011",
+          "072_Admissions:016",
+          "072_Admissions:017",
+          "072_Admissions:020",
+          "072_Admissions:021",
+          "072_Admissions:023",
+          "072_Admissions:026",
+          "072_Admissions:036",
+          "072_Admissions:038"
+        ],
+        "rows": 500,
+        "schema_sha256": "2890de5b4647f6fe490ccbef7c8a42e89f643ceee5ea67c6e9a35b0556be2dcd",
+        "selection": {
+          "legacy_manifest": "databench-subset.json",
+          "method": "Five preselected official test tables; 16 lowest SHA-256(seed:table:row) per table",
+          "seed": 741
+        },
+        "split": "development"
+      },
+      "073_Med_Cost": {
+        "file_bytes": {
+          "all.parquet": 24777,
+          "qa.parquet": 6031
+        },
+        "files": {
+          "all.parquet": "d59b1f7f885de649b63317aecbaedd35bfca70d6e3bd36c8567884c1011984b6",
+          "qa.parquet": "b38dbfbe33507a7c00ef4d34d7ca4a39482be90214c22dc7b9a0f6a2e3d8454c"
+        },
+        "official_split": "test",
+        "qa_rows": 32,
+        "question_ids": [
+          "073_Med_Cost:000",
+          "073_Med_Cost:001",
+          "073_Med_Cost:002",
+          "073_Med_Cost:003",
+          "073_Med_Cost:005",
+          "073_Med_Cost:010",
+          "073_Med_Cost:014",
+          "073_Med_Cost:015",
+          "073_Med_Cost:017",
+          "073_Med_Cost:018",
+          "073_Med_Cost:021",
+          "073_Med_Cost:022",
+          "073_Med_Cost:026",
+          "073_Med_Cost:029",
+          "073_Med_Cost:030",
+          "073_Med_Cost:031"
+        ],
+        "rows": 1338,
+        "schema_sha256": "6d8ec335f8e3f28d3c46f4ece84c7cb41689d887b2623970e6f88aa9a72de56a",
+        "selection": {
+          "legacy_manifest": "databench-subset.json",
+          "method": "Five preselected official test tables; 16 lowest SHA-256(seed:table:row) per table",
+          "seed": 741
+        },
+        "split": "development"
+      },
+      "074_Lift": {
+        "file_bytes": {
+          "all.parquet": 15601,
+          "qa.parquet": 6556
+        },
+        "files": {
+          "all.parquet": "c5f682127fc9d732acc98f6892007b087e0fff2f6702aa36b28f258e47fb3fe7",
+          "qa.parquet": "6688e7a274b94d389fe77962cbb0a6e08ae4aebc339377d7a94bd2db90c20aad"
+        },
+        "official_split": "test",
+        "qa_rows": 35,
+        "question_ids": [
+          "074_Lift:001",
+          "074_Lift:002",
+          "074_Lift:005",
+          "074_Lift:014",
+          "074_Lift:015",
+          "074_Lift:018",
+          "074_Lift:021",
+          "074_Lift:023",
+          "074_Lift:026",
+          "074_Lift:028",
+          "074_Lift:032",
+          "074_Lift:034"
+        ],
+        "rows": 3000,
+        "schema_sha256": "5be0b4998eacdbe8a9c387a88207c7da9a31d53c839677ac6b60566bc2af9327",
+        "selection": {
+          "legacy_manifest": "databench-holdout.json",
+          "method": "Four previously unused official test tables; 12 lowest SHA-256(seed:table:row) per table",
+          "seed": 741
+        },
+        "split": "development"
+      },
+      "075_Mortality": {
+        "file_bytes": {
+          "all.parquet": 10313,
+          "qa.parquet": 6462
+        },
+        "files": {
+          "all.parquet": "85766b91f1a19bdc1243c84ad1ddf6d2e809b2400ff639af8e6e40ee6dcdaea1",
+          "qa.parquet": "d9c1f3bba0f714f22cc34ec8075af5c5f9ce594019a56442f3e5d51d95d4d579"
+        },
+        "official_split": "test",
+        "qa_rows": 29,
+        "question_ids": [
+          "075_Mortality:000",
+          "075_Mortality:001",
+          "075_Mortality:006",
+          "075_Mortality:008",
+          "075_Mortality:009",
+          "075_Mortality:014",
+          "075_Mortality:016",
+          "075_Mortality:017",
+          "075_Mortality:020",
+          "075_Mortality:025",
+          "075_Mortality:026",
+          "075_Mortality:027"
+        ],
+        "rows": 400,
+        "schema_sha256": "466a675b0afa0a078aab03adc3075b0d276447b04d9540a402d30e2186bc5fb6",
+        "selection": {
+          "legacy_manifest": "databench-holdout.json",
+          "method": "Four previously unused official test tables; 12 lowest SHA-256(seed:table:row) per table",
+          "seed": 741
+        },
+        "split": "development"
+      },
+      "076_NBA": {
+        "file_bytes": {
+          "all.parquet": 389217,
+          "qa.parquet": 6950
+        },
+        "files": {
+          "all.parquet": "326c148a50d90a37b4518c96161f8b069c1a0b52f578fe1f7f085cbd92e31055",
+          "qa.parquet": "cdb8a8f6e2b17f41612c8d8513a8209e9768b425f116214b0c08e2f0e3d0bc4f"
+        },
+        "official_split": "test",
+        "qa_rows": 36,
+        "question_ids": [
+          "076_NBA:000",
+          "076_NBA:002",
+          "076_NBA:003",
+          "076_NBA:005",
+          "076_NBA:012",
+          "076_NBA:014",
+          "076_NBA:016",
+          "076_NBA:017",
+          "076_NBA:019",
+          "076_NBA:021",
+          "076_NBA:022",
+          "076_NBA:023",
+          "076_NBA:024",
+          "076_NBA:028",
+          "076_NBA:031",
+          "076_NBA:034"
+        ],
+        "rows": 8835,
+        "schema_sha256": "91bd2e28505b1d4482001f41502f43c871b7e8100eba2a3f5ea992c4ad6f9815",
+        "selection": {
+          "legacy_manifest": "databench-subset.json",
+          "method": "Five preselected official test tables; 16 lowest SHA-256(seed:table:row) per table",
+          "seed": 741
+        },
+        "split": "development"
+      },
+      "077_Gestational": {
+        "file_bytes": {
+          "all.parquet": 10321,
+          "qa.parquet": 6388
+        },
+        "files": {
+          "all.parquet": "d94071dddf5e2afade2bd94f7b33ef795ca520d8759735eaa64db030b312cb38",
+          "qa.parquet": "4bcd38b024c41df741b57501f38712b40004cd8187e86d6beb1be136a804e339"
+        },
+        "official_split": "test",
+        "qa_rows": 31,
+        "question_ids": [
+          "077_Gestational:000",
+          "077_Gestational:001",
+          "077_Gestational:002",
+          "077_Gestational:008",
+          "077_Gestational:009",
+          "077_Gestational:010",
+          "077_Gestational:013",
+          "077_Gestational:023",
+          "077_Gestational:026",
+          "077_Gestational:029"
+        ],
+        "rows": 1012,
+        "schema_sha256": "1f16b4a33ba2d565aa3ffc0766cb34dd937f03eb3dee8408c1992f06c6a78556",
+        "selection": {
+          "method": "per-type quotas then lowest SHA-256(seed:table:zero-padded-row); reject near duplicates against retained/selected questions",
+          "quotas": {
+            "boolean": 4,
+            "category": 0,
+            "list[category]": 0,
+            "list[number]": 3,
+            "number": 3
+          },
+          "seed": 20261115
+        },
+        "split": "test"
+      },
+      "078_Fires": {
+        "file_bytes": {
+          "all.parquet": 20521,
+          "qa.parquet": 7108
+        },
+        "files": {
+          "all.parquet": "982840e761aa46c8d2b5f652e3b6bc683e9ae94ecb67f5991a0a5caae53dba63",
+          "qa.parquet": "1d194120f89641ecea8f52b23ce046a979d72aeb318b97b63af9442f290efe98"
+        },
+        "official_split": "test",
+        "qa_rows": 39,
+        "question_ids": [
+          "078_Fires:001",
+          "078_Fires:003",
+          "078_Fires:005",
+          "078_Fires:009",
+          "078_Fires:010",
+          "078_Fires:012",
+          "078_Fires:013",
+          "078_Fires:014",
+          "078_Fires:016",
+          "078_Fires:037"
+        ],
+        "rows": 517,
+        "schema_sha256": "4b5edabac83bd81a1d9da4b7edd69905c7cfc616f58b96c27b81a3551b3072e2",
+        "selection": {
+          "method": "per-type quotas then lowest SHA-256(seed:table:zero-padded-row); reject near duplicates against retained/selected questions",
+          "quotas": {
+            "boolean": 3,
+            "category": 3,
+            "list[category]": 1,
+            "list[number]": 0,
+            "number": 3
+          },
+          "seed": 20261115
+        },
+        "split": "test"
+      },
+      "079_Coffee": {
+        "file_bytes": {
+          "all.parquet": 1741476,
+          "qa.parquet": 6946
+        },
+        "files": {
+          "all.parquet": "d6fe74633c143ef54804c29fa54a21fe639e08658c05b9f3f964002b9f3713c7",
+          "qa.parquet": "147e1ddcee40d16f37045b25b8915cacc0f191a88e9ebd60b06c5f84f9c71a52"
+        },
+        "official_split": "test",
+        "qa_rows": 38,
+        "question_ids": [
+          "079_Coffee:002",
+          "079_Coffee:005",
+          "079_Coffee:009",
+          "079_Coffee:010",
+          "079_Coffee:011",
+          "079_Coffee:013",
+          "079_Coffee:015",
+          "079_Coffee:018",
+          "079_Coffee:020",
+          "079_Coffee:021",
+          "079_Coffee:024",
+          "079_Coffee:026",
+          "079_Coffee:027",
+          "079_Coffee:028",
+          "079_Coffee:032",
+          "079_Coffee:035"
+        ],
+        "rows": 149116,
+        "schema_sha256": "b7cbef1a28c5e893b7318996554de83990b42d03a948d1e194eb71c91289d9be",
+        "selection": {
+          "legacy_manifest": "databench-subset.json",
+          "method": "Five preselected official test tables; 16 lowest SHA-256(seed:table:row) per table",
+          "seed": 741
+        },
+        "split": "development"
+      },
+      "080_Books": {
+        "file_bytes": {
+          "all.parquet": 14513,
+          "qa.parquet": 8066
+        },
+        "files": {
+          "all.parquet": "c19a1f36126e483209716373874cd918dd31d4ee429bec2b2563d3b2efb01a3d",
+          "qa.parquet": "976ad92b59e0b36e87faa248ffe3a5c799e5117b1c36c247fa7981c8972e986b"
+        },
+        "official_split": "test",
+        "qa_rows": 41,
+        "question_ids": [
+          "080_Books:002",
+          "080_Books:004",
+          "080_Books:007",
+          "080_Books:012",
+          "080_Books:013",
+          "080_Books:016",
+          "080_Books:019",
+          "080_Books:022",
+          "080_Books:023",
+          "080_Books:026",
+          "080_Books:035",
+          "080_Books:037"
+        ],
+        "rows": 40,
+        "schema_sha256": "6441446675bb380924e237008c82eae821da2ba88938d1a59ff0f40928fda3ac",
+        "selection": {
+          "legacy_manifest": "databench-holdout.json",
+          "method": "Four previously unused official test tables; 12 lowest SHA-256(seed:table:row) per table",
+          "seed": 741
+        },
+        "split": "development"
+      }
+    },
+    "license": "MIT",
+    "revision": "e75d53add267d2f9cfa32efd65ad77f0807adfad",
+    "source": "https://huggingface.co/datasets/cardiffnlp/databench"
+  },
+  "olist-v2-sample741": {
+    "archive_sha256": "967e41e04fc306fe604e2a693f488995a8b41e5047418f8a5c8e4abd6deca784",
+    "license": "CC BY-NC-SA 4.0",
+    "revision": "2",
+    "sample_order_ids_sha256": "93e5d327a4b40f9017d09c0e1648f0142fbc499fac7e2217816d2edde7dce175",
+    "sample_size": 15000,
+    "sampling": "Monthly proportional largest remainder, ties by month; lowest SHA-256(seed:order_id)",
+    "seed": 741,
+    "source": "https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce",
+    "source_tables": {
+      "categories": {
+        "logical_sha256": "88a5ccfdc5d8257c44f4d8ab8e5b972ce4af642c5f1458cb54f8d68824f8fb70",
+        "rows": 70
+      },
+      "customers": {
+        "logical_sha256": "65241bb61474cd74be45c53ca640612073f06c38beb4de35b80b5f860a644b35",
+        "rows": 15000
+      },
+      "items": {
+        "logical_sha256": "ec79b87d62a31b52eba0da35fb8f2ac279673912ab3f2424b45e35d7ba6759e2",
+        "rows": 16894
+      },
+      "orders": {
+        "logical_sha256": "2fd3ea2703371b74245407e6a9518368f42dfe204e1a7a8f7ed5846112c2a12d",
+        "rows": 15000
+      },
+      "payments": {
+        "logical_sha256": "7c39eaedd1dd8e3918c7176c5681a009b0e6242280ae458cd047e9f163308995",
+        "rows": 15704
+      },
+      "products": {
+        "logical_sha256": "b3a86b43525ad16a7af694f6fda96de72e2f7df144a1c9a3aef03e139848af89",
+        "rows": 9122
+      },
+      "reviews": {
+        "logical_sha256": "3e129600d9f37b30f5fe8b02ab236092be12e872ccee8b7212652981dbf92a96",
+        "rows": 14982
+      },
+      "sellers": {
+        "logical_sha256": "72e2f4baf3a41e1885530f870dafee23a1f73af5cea847c558ac7d0182d538ee",
+        "rows": 1913
+      }
+    }
+  }
+}
