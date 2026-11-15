@@ -9,6 +9,14 @@ class ToolError(ValueError):
     """A user-safe failure raised by an application tool."""
 
 
+class SchemaBindingError(ToolError):
+    """A table-policy or query binding failure with a safe diagnostic category."""
+
+    def __init__(self, message: str, phase: Literal["relation", "bind"]):
+        super().__init__(message)
+        self.phase = phase
+
+
 @dataclass(frozen=True)
 class Query:
     columns: list[str]

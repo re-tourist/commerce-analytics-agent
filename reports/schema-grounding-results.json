@@ -1,0 +1,231 @@
+{
+  "experiment_commit": "69833ffc9ad7683d6b356bc7bc6dadb319a68307",
+  "runtime": "llama.cpp b12383",
+  "model": "Qwen2.5-Coder-3B-Instruct Q4_K_M",
+  "gguf_sha256": "724fb256bec1ff062b2f65e4569e871ad2e95ab2a3989723d1769c54294730b7",
+  "temperature": 0,
+  "seed": 741,
+  "results": {
+    "dev": {
+      "summary": {
+        "track": "databench",
+        "limit": null,
+        "variants": {
+          "full": {
+            "tasks": 24,
+            "metrics": {
+              "success": 0.20833333333333334,
+              "sql_correct": 0.20833333333333334,
+              "sql_executed": 0.5,
+              "numerical_correct": 0.3333333333333333,
+              "tool_correct": 1.0,
+              "retrieval_hit": null,
+              "citation_precision": null
+            },
+            "sql_attempts": 24,
+            "eligible_numerical_tasks": 9,
+            "p50_ms": 1419.43,
+            "p95_ms": 2389.02,
+            "failure_counts": {
+              "answer_mismatch": 7,
+              "tool_error": 12
+            },
+            "model_calls_reporting_usage": 36,
+            "input_tokens": 6626,
+            "output_tokens": 981,
+            "metered_api_cost_usd": 0.0
+          },
+          "full_schema_grounded": {
+            "tasks": 24,
+            "metrics": {
+              "success": 0.375,
+              "sql_correct": 0.375,
+              "sql_executed": 1.0,
+              "numerical_correct": 0.5555555555555556,
+              "tool_correct": 1.0,
+              "retrieval_hit": null,
+              "citation_precision": null
+            },
+            "sql_attempts": 24,
+            "eligible_numerical_tasks": 9,
+            "p50_ms": 655.42,
+            "p95_ms": 801.35,
+            "failure_counts": {
+              "answer_mismatch": 15
+            },
+            "model_calls_reporting_usage": 24,
+            "input_tokens": 6262,
+            "output_tokens": 638,
+            "metered_api_cost_usd": 0.0
+          }
+        },
+        "split": "dev"
+      },
+      "paired": {
+        "tasks": 24,
+        "model": "commercelens-local",
+        "outcomes": {
+          "full": {
+            "answer_mismatch": 7,
+            "pass": 5,
+            "relation_policy": 12
+          },
+          "full_schema_grounded": {
+            "answer_mismatch": 15,
+            "pass": 9
+          }
+        },
+        "transitions": {
+          "answer_mismatch -> answer_mismatch": 6,
+          "answer_mismatch -> pass": 1,
+          "pass -> pass": 5,
+          "relation_policy -> answer_mismatch": 9,
+          "relation_policy -> pass": 3
+        },
+        "per_table": {
+          "051_Pokemon": {
+            "tasks": 12,
+            "baseline_pass": 5,
+            "grounded_pass": 6,
+            "baseline_executed": 12,
+            "grounded_executed": 12
+          },
+          "060_Bakery": {
+            "tasks": 12,
+            "baseline_pass": 0,
+            "grounded_pass": 3,
+            "baseline_executed": 0,
+            "grounded_executed": 12
+          }
+        }
+      }
+    },
+    "test": {
+      "summary": {
+        "track": "databench",
+        "limit": null,
+        "variants": {
+          "full": {
+            "tasks": 80,
+            "metrics": {
+              "success": 0.3625,
+              "sql_correct": 0.3625,
+              "sql_executed": 0.625,
+              "numerical_correct": 0.4,
+              "tool_correct": 1.0,
+              "retrieval_hit": null,
+              "citation_precision": null
+            },
+            "sql_attempts": 80,
+            "eligible_numerical_tasks": 40,
+            "p50_ms": 872.11,
+            "p95_ms": 1657.78,
+            "failure_counts": {
+              "tool_error": 30,
+              "answer_mismatch": 21
+            },
+            "model_calls_reporting_usage": 114,
+            "input_tokens": 30121,
+            "output_tokens": 3048,
+            "metered_api_cost_usd": 0.0
+          },
+          "full_schema_grounded": {
+            "tasks": 80,
+            "metrics": {
+              "success": 0.5375,
+              "sql_correct": 0.5375,
+              "sql_executed": 0.95,
+              "numerical_correct": 0.65,
+              "tool_correct": 1.0,
+              "retrieval_hit": null,
+              "citation_precision": null
+            },
+            "sql_attempts": 80,
+            "eligible_numerical_tasks": 40,
+            "p50_ms": 1446.82,
+            "p95_ms": 1980.03,
+            "failure_counts": {
+              "answer_mismatch": 33,
+              "tool_error": 4
+            },
+            "model_calls_reporting_usage": 87,
+            "input_tokens": 31163,
+            "output_tokens": 2363,
+            "metered_api_cost_usd": 0.0
+          }
+        },
+        "split": "test"
+      },
+      "paired": {
+        "tasks": 80,
+        "model": "commercelens-local",
+        "outcomes": {
+          "full": {
+            "answer_mismatch": 21,
+            "binding": 12,
+            "pass": 29,
+            "relation_policy": 17,
+            "sql_parse": 1
+          },
+          "full_schema_grounded": {
+            "answer_mismatch": 33,
+            "binding": 2,
+            "pass": 43,
+            "sql_parse": 2
+          }
+        },
+        "transitions": {
+          "answer_mismatch -> answer_mismatch": 20,
+          "answer_mismatch -> pass": 1,
+          "binding -> answer_mismatch": 5,
+          "binding -> binding": 2,
+          "binding -> pass": 4,
+          "binding -> sql_parse": 1,
+          "pass -> answer_mismatch": 1,
+          "pass -> pass": 28,
+          "relation_policy -> answer_mismatch": 7,
+          "relation_policy -> pass": 9,
+          "relation_policy -> sql_parse": 1,
+          "sql_parse -> pass": 1
+        },
+        "per_table": {
+          "066_IBM_HR": {
+            "tasks": 16,
+            "baseline_pass": 2,
+            "grounded_pass": 8,
+            "baseline_executed": 5,
+            "grounded_executed": 15
+          },
+          "072_Admissions": {
+            "tasks": 16,
+            "baseline_pass": 4,
+            "grounded_pass": 9,
+            "baseline_executed": 4,
+            "grounded_executed": 14
+          },
+          "073_Med_Cost": {
+            "tasks": 16,
+            "baseline_pass": 8,
+            "grounded_pass": 8,
+            "baseline_executed": 16,
+            "grounded_executed": 16
+          },
+          "076_NBA": {
+            "tasks": 16,
+            "baseline_pass": 11,
+            "grounded_pass": 10,
+            "baseline_executed": 16,
+            "grounded_executed": 16
+          },
+          "079_Coffee": {
+            "tasks": 16,
+            "baseline_pass": 4,
+            "grounded_pass": 8,
+            "baseline_executed": 9,
+            "grounded_executed": 15
+          }
+        }
+      }
+    }
+  }
+}

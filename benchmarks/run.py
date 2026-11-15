@@ -143,14 +143,16 @@ def run_olist(variant, limit):
                       lambda answer: score_olist(case, answer, references.get(case.id)))
 
 
-def run_databench(variant, limit):
-    from benchmarks.databench import selected_cases, score
+def run_databench(variant, limit, split="test"):
+    from benchmarks.databench import SUBSET_ROOTS, selected_cases, score
 
-    root = Path("data/databench")
-    planned = selected_cases(root)
+    root = SUBSET_ROOTS[split]
+    planned = selected_cases(root, split)
+    grounded = variant == "full_schema_grounded"
+    features = VARIANTS["full" if grounded else variant]
     for table, cases_for_table in planned.items():
         data = ReadOnlyDuckDB(root / "db" / f"{table}.duckdb", ("data_table",))
-        agent = Agent(data, model_from_env(), VARIANTS[variant], olist=False)
+        agent = Agent(data, model_from_env(), features, olist=False, schema_grounding=grounded)
         for case in cases_for_table:
             if limit is not None and limit <= 0:
                 return
@@ -163,22 +165,38 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("track", choices=("olist", "databench"))
     parser.add_argument("--variant", choices=VARIANTS, action="append")
+    parser.add_argument("--split", choices=("test", "dev"))
+    parser.add_argument("--compare-schema-grounding", action="store_true",
+                        help="Run the DataBench full baseline and schema-grounded full candidate")
     parser.add_argument("--limit", type=int)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if args.limit is not None and args.limit < 1:
         parser.error("--limit must be positive")
+    if args.track != "databench" and (args.split or args.compare_schema_grounding):
+        parser.error("split and schema-grounding comparison require DataBench")
+    if args.compare_schema_grounding and args.variant:
+        parser.error("schema-grounding comparison selects both variants itself")
+    split = args.split or "test"
+    if args.track == "olist":
+        variants = args.variant or tuple(VARIANTS)
+    elif args.compare_schema_grounding:
+        variants = ("full", "full_schema_grounded")
+    else:
+        variants = args.variant or ("full",)
     args.output.mkdir(parents=True, exist_ok=True)
-    run = run_olist if args.track == "olist" else run_databench
     records = []
     with (args.output / "records.jsonl").open("w", encoding="utf-8") as stream:
-        for variant in args.variant or (tuple(VARIANTS) if args.track == "olist" else ("full",)):
-            for record in run(variant, args.limit):
+        for variant in variants:
+            run = run_olist(variant, args.limit) if args.track == "olist" else run_databench(variant, args.limit, split)
+            for record in run:
                 records.append(record)
                 stream.write(json.dumps(record, default=str, ensure_ascii=False) + "\n")
                 stream.flush()
                 print(f"{variant} {record['id']} {'pass' if record['success'] else record['failure_type']}", flush=True)
     summary = {"track": args.track, "limit": args.limit, "variants": summarize(records)}
+    if args.track == "databench":
+        summary["split"] = split
     (args.output / "summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
 
 

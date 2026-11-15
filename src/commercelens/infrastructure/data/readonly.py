@@ -12,7 +12,7 @@ from sqlglot import exp
 from sqlglot.errors import SqlglotError
 from sqlglot.optimizer.scope import traverse_scope
 
-from commercelens.application.contracts import Query, ToolError
+from commercelens.application.contracts import Query, SchemaBindingError, ToolError
 
 
 FUNCTIONS = set("""
@@ -48,7 +48,7 @@ def validate_sql(sql: str, relations: set[str]) -> str:
             if isinstance(source, exp.Table)
         }
         if not physical_tables or physical_tables - relations:
-            raise ToolError("Query must read only from the allowed analytical relations")
+            raise SchemaBindingError("Query must read only from the allowed analytical relations", "relation")
         for node in statement.find_all(exp.Func):
             name = node.name if isinstance(node, exp.Anonymous) else node.sql_name()
             if name.upper() not in FUNCTIONS:
@@ -123,6 +123,8 @@ class ReadOnlyDuckDB:
                 return Query(columns, rows)
             except duckdb.InterruptException as exc:
                 raise ToolError("Query timed out") from exc
+            except duckdb.BinderException as exc:
+                raise SchemaBindingError("Query failed (BinderException)", "bind") from exc
             except duckdb.Error as exc:
                 # Engine exceptions may echo data, file paths or SQL snippets.
                 raise ToolError(f"Query failed ({type(exc).__name__})") from exc
