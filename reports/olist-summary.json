@@ -1,0 +1,100 @@
+{
+  "track": "olist",
+  "limit": null,
+  "variants": {
+    "full": {
+      "tasks": 45,
+      "metrics": {
+        "success": 0.8888888888888888,
+        "sql_correct": 0.84375,
+        "sql_executed": 1.0,
+        "numerical_correct": 0.8571428571428571,
+        "tool_correct": 1.0,
+        "retrieval_hit": 1.0,
+        "citation_precision": 0.36666666666666664
+      },
+      "sql_attempts": 32,
+      "eligible_numerical_tasks": 35,
+      "p50_ms": 1056.14,
+      "p95_ms": 1363.64,
+      "failure_counts": {
+        "answer_mismatch": 5
+      },
+      "model_calls_reporting_usage": 45,
+      "input_tokens": 38771,
+      "output_tokens": 2377,
+      "metered_api_cost_usd": 0.0
+    },
+    "sql": {
+      "tasks": 45,
+      "metrics": {
+        "success": 0.6222222222222222,
+        "sql_correct": 0.7222222222222222,
+        "sql_executed": 0.7777777777777778,
+        "numerical_correct": 0.7142857142857143,
+        "tool_correct": 0.8444444444444444,
+        "retrieval_hit": 0.0,
+        "citation_precision": null
+      },
+      "sql_attempts": 36,
+      "eligible_numerical_tasks": 35,
+      "p50_ms": 1103.73,
+      "p95_ms": 1989.06,
+      "failure_counts": {
+        "answer_mismatch": 2,
+        "tool_error": 9,
+        "routing": 6
+      },
+      "model_calls_reporting_usage": 45,
+      "input_tokens": 22017,
+      "output_tokens": 2775,
+      "metered_api_cost_usd": 0.0
+    },
+    "sql_rag": {
+      "tasks": 45,
+      "metrics": {
+        "success": 0.9111111111111111,
+        "sql_correct": 0.8888888888888888,
+        "sql_executed": 1.0,
+        "numerical_correct": 0.8857142857142857,
+        "tool_correct": 1.0,
+        "retrieval_hit": 1.0,
+        "citation_precision": 0.36666666666666664
+      },
+      "sql_attempts": 36,
+      "eligible_numerical_tasks": 35,
+      "p50_ms": 1043.01,
+      "p95_ms": 1304.11,
+      "failure_counts": {
+        "answer_mismatch": 4
+      },
+      "model_calls_reporting_usage": 45,
+      "input_tokens": 28871,
+      "output_tokens": 2274,
+      "metered_api_cost_usd": 0.0
+    },
+    "sql_rag_skills": {
+      "tasks": 45,
+      "metrics": {
+        "success": 0.8888888888888888,
+        "sql_correct": 0.84375,
+        "sql_executed": 1.0,
+        "numerical_correct": 0.8571428571428571,
+        "tool_correct": 1.0,
+        "retrieval_hit": 1.0,
+        "citation_precision": 0.36666666666666664
+      },
+      "sql_attempts": 32,
+      "eligible_numerical_tasks": 35,
+      "p50_ms": 1076.58,
+      "p95_ms": 1325.95,
+      "failure_counts": {
+        "answer_mismatch": 5
+      },
+      "model_calls_reporting_usage": 45,
+      "input_tokens": 38771,
+      "output_tokens": 2377,
+      "metered_api_cost_usd": 0.0
+    }
+  }
+}

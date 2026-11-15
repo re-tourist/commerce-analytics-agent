@@ -1,0 +1,30 @@
+{
+  "track": "databench",
+  "limit": null,
+  "variants": {
+    "full": {
+      "tasks": 80,
+      "metrics": {
+        "success": 0.3625,
+        "sql_correct": 0.3625,
+        "sql_executed": 0.625,
+        "numerical_correct": 0.4,
+        "tool_correct": 1.0,
+        "retrieval_hit": null,
+        "citation_precision": null
+      },
+      "sql_attempts": 80,
+      "eligible_numerical_tasks": 40,
+      "p50_ms": 793.19,
+      "p95_ms": 1515.33,
+      "failure_counts": {
+        "tool_error": 30,
+        "answer_mismatch": 21
+      },
+      "model_calls_reporting_usage": 114,
+      "input_tokens": 30121,
+      "output_tokens": 3048,
+      "metered_api_cost_usd": 0.0
+    }
+  }
+}

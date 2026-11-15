@@ -1,0 +1,134 @@
+{
+  "source": "https://huggingface.co/datasets/cardiffnlp/databench",
+  "revision": "e75d53add267d2f9cfa32efd65ad77f0807adfad",
+  "track": "SemEval 2025 Task 8 adapted subset (test, full tables)",
+  "seed": 741,
+  "sampling": "Five preselected official test tables; 16 lowest SHA-256(seed:table:row) per table",
+  "tables": {
+    "066_IBM_HR": {
+      "files": {
+        "all.parquet": "bb78e50bba8119f4aef2c22cdb1aeab4ac19caa0e44e9c775e12ca36f6ef63f5",
+        "qa.parquet": "cf1c4a00388159e3741641bbd10a27f3333cdf43efc99326bd57a56adf3fd574"
+      },
+      "rows": 1470,
+      "question_ids": [
+        "066_IBM_HR:000",
+        "066_IBM_HR:003",
+        "066_IBM_HR:005",
+        "066_IBM_HR:007",
+        "066_IBM_HR:010",
+        "066_IBM_HR:011",
+        "066_IBM_HR:013",
+        "066_IBM_HR:014",
+        "066_IBM_HR:018",
+        "066_IBM_HR:021",
+        "066_IBM_HR:022",
+        "066_IBM_HR:025",
+        "066_IBM_HR:029",
+        "066_IBM_HR:033",
+        "066_IBM_HR:035",
+        "066_IBM_HR:038"
+      ]
+    },
+    "072_Admissions": {
+      "files": {
+        "all.parquet": "a32cef359f7265d6994af0909a54065ed9f38b97b927b851a2f6f55239ab2386",
+        "qa.parquet": "2c68748c6d4dd35c7e5d3f6965db3e52a3e4b0f7ed2abe40a49071a349c1ffe2"
+      },
+      "rows": 500,
+      "question_ids": [
+        "072_Admissions:000",
+        "072_Admissions:002",
+        "072_Admissions:003",
+        "072_Admissions:004",
+        "072_Admissions:007",
+        "072_Admissions:009",
+        "072_Admissions:010",
+        "072_Admissions:011",
+        "072_Admissions:016",
+        "072_Admissions:017",
+        "072_Admissions:020",
+        "072_Admissions:021",
+        "072_Admissions:023",
+        "072_Admissions:026",
+        "072_Admissions:036",
+        "072_Admissions:038"
+      ]
+    },
+    "073_Med_Cost": {
+      "files": {
+        "all.parquet": "d59b1f7f885de649b63317aecbaedd35bfca70d6e3bd36c8567884c1011984b6",
+        "qa.parquet": "b38dbfbe33507a7c00ef4d34d7ca4a39482be90214c22dc7b9a0f6a2e3d8454c"
+      },
+      "rows": 1338,
+      "question_ids": [
+        "073_Med_Cost:000",
+        "073_Med_Cost:001",
+        "073_Med_Cost:002",
+        "073_Med_Cost:003",
+        "073_Med_Cost:005",
+        "073_Med_Cost:010",
+        "073_Med_Cost:014",
+        "073_Med_Cost:015",
+        "073_Med_Cost:017",
+        "073_Med_Cost:018",
+        "073_Med_Cost:021",
+        "073_Med_Cost:022",
+        "073_Med_Cost:026",
+        "073_Med_Cost:029",
+        "073_Med_Cost:030",
+        "073_Med_Cost:031"
+      ]
+    },
+    "076_NBA": {
+      "files": {
+        "all.parquet": "326c148a50d90a37b4518c96161f8b069c1a0b52f578fe1f7f085cbd92e31055",
+        "qa.parquet": "cdb8a8f6e2b17f41612c8d8513a8209e9768b425f116214b0c08e2f0e3d0bc4f"
+      },
+      "rows": 8835,
+      "question_ids": [
+        "076_NBA:000",
+        "076_NBA:002",
+        "076_NBA:003",
+        "076_NBA:005",
+        "076_NBA:012",
+        "076_NBA:014",
+        "076_NBA:016",
+        "076_NBA:017",
+        "076_NBA:019",
+        "076_NBA:021",
+        "076_NBA:022",
+        "076_NBA:023",
+        "076_NBA:024",
+        "076_NBA:028",
+        "076_NBA:031",
+        "076_NBA:034"
+      ]
+    },
+    "079_Coffee": {
+      "files": {
+        "all.parquet": "d6fe74633c143ef54804c29fa54a21fe639e08658c05b9f3f964002b9f3713c7",
+        "qa.parquet": "147e1ddcee40d16f37045b25b8915cacc0f191a88e9ebd60b06c5f84f9c71a52"
+      },
+      "rows": 149116,
+      "question_ids": [
+        "079_Coffee:002",
+        "079_Coffee:005",
+        "079_Coffee:009",
+        "079_Coffee:010",
+        "079_Coffee:011",
+        "079_Coffee:013",
+        "079_Coffee:015",
+        "079_Coffee:018",
+        "079_Coffee:020",
+        "079_Coffee:021",
+        "079_Coffee:024",
+        "079_Coffee:026",
+        "079_Coffee:027",
+        "079_Coffee:028",
+        "079_Coffee:032",
+        "079_Coffee:035"
+      ]
+    }
+  }
+}
